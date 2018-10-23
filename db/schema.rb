@@ -18,7 +18,6 @@ ActiveRecord::Schema.define(version: 2018_08_28_052335) do
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "section"
     t.integer "sirabasu_id"
   end
 

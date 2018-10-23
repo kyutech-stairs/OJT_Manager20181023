@@ -40,6 +40,14 @@ class SirabasusController < ApplicationController
     def destroy
       @sirabasu = Sirabasu.find(params[:id])
       @sirabasu.destroy
+      @sirabasu = Sirabasu.all
+      i = 1
+      @sirabasu.each do |sira|
+        sira.number = i
+        sira.save
+        i += 1
+      end
+      #@sirabasu.save
       redirect_to sirabasus_path
     end
 

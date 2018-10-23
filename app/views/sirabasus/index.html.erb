@@ -14,27 +14,27 @@
   </thead>
   <tbody>
     <% @sirabasu.each do |sirabasu| %>
-      <tr>
-        <td>
-          <%= sirabasu.number %>
-        </td>
-        <td>
-          <%= link_to sirabasu.name, sirabasu_path(sirabasu.number) %>
-        </td>
-        <td>
-          <%= sirabasu.content %>
-        </td>
-        <td>
-          <%= link_to "編集", edit_sirabasu_path(sirabasu) %>
-        </td>
-        <td>
-          <%= link_to "削除", sirabasu_path(sirabasu), :method => :delete %>
-        </td>
-      </tr>
-      <% end %>
+    <tr>
+      <td>
+        <%= sirabasu.number %>
+      </td>
+      <td>
+        <%= link_to sirabasu.name, sirabasu_path(sirabasu.number) %>
+      </td>
+      <td>
+        <%= sirabasu.content %>
+      </td>
+      <td>
+        <%= link_to "編集", edit_sirabasu_path(sirabasu) %>
+      </td>
+      <td>
+        <%= link_to "削除", sirabasu_path(sirabasu), :method => :delete %>
+      </td>
+    </tr>
+    <% end %>
   </tbody>
 </table>
 <%= link_to '新しいシラバスの作成', new_sirabasu_path %>
-  <p>
-    <%= link_to '管理トップへ', '/kanri/kanri_top' %>
-  </p>
+<p>
+  <%= link_to '管理トップへ', '/kanri/kanri_top' %>
+</p>
