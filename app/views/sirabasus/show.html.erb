@@ -3,18 +3,24 @@
 <table>
   <thead>
     <tr>
-    <th>章番号</th>
+      <th>章番号</th>
       <th>名前</th>
       <th>内容</th>
     </tr>
   </thead>
   <tbody>
     <%# @sirabasus.each do |sirabasu| %>
-      <tr>
-      <td><%= @sirabasu.number %></td>
-        <td><%= @sirabasu.name %></td>
-        <td><%= @sirabasu.content %></td>
-      </tr>
+    <tr>
+      <td>
+        <%= @sirabasu.number %>
+      </td>
+      <td>
+        <%= @sirabasu.name %>
+      </td>
+      <td>
+        <%= @sirabasu.content %>
+      </td>
+    </tr>
     <%# end %>
   </tbody>
 </table>
@@ -23,18 +29,31 @@
 <table>
   <thead>
     <tr>
-    <th>節番号</th>
+      <th>節番号</th>
       <th>名前</th>
       <th>内容</th>
     </tr>
   </thead>
   <tbody>
     <% @checklist.each do |checklist| %>
-      <tr>
-      <td><%= checklist.number %></td>
-        <td><%= checklist.name %></td>
-        <td><%= checklist.content %></td>
-      </tr>
+    <tr>
+      <td>
+        <%= checklist.number %>
+      </td>
+      <td>
+        <%= checklist.name %>
+      </td>
+      <td>
+        <%= checklist.content %>
+      </td>
+      <td>
+        <%= link_to "編集", edit_sirabasu_checklist_path(checklist) %>
+      </td>
+      <td>
+        <%= link_to "削除", sirabasu_checklist_path(checklist), :method => :delete %>
+      </td>
+    </tr>
     <% end %>
   </tbody>
 </table>
+<%= link_to 'チェックリスト作成', new_sirabasu_checklist_path(@sirabasu) %>
