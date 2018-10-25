@@ -1,0 +1,35 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: 'Roboto','Noto Sans JP';
+    background-color: #EEEFF1;
+}
+
+header {
+    background-color: #90ee90;
+}
+
+.header-logo{
+    display: flex;
+    padding: 20px 40px;
+    font-size: 25px;
+}
+
+footer {
+    width: 100%;
+    margin-top: auto;
+    background-color: #2f5167;
+    color: #ffffff;
+}
+
+.footer-logo{
+    display: flex;
+    font-size: 20px;
+    padding: 40px;
+}
