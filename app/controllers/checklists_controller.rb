@@ -1,25 +1,22 @@
 # frozen_string_literal: true
 
 class ChecklistsController < ApplicationController
-  def choose_sirabasus
-    @sirabasus = Sirabasu.all.order(:number)
-  end
-
   def index
     @checklist = Checklist.all
   end
 
   def new
     @checklist = Checklist.new
+    @new_num = Checklist.count + 1
     #temp = Checklist.where(sirabasu_id: params[:sirabasu_id])
   end
 
   def create
-    @sirabasu = Sirabasu.find_by(number: params[:num])
+    @sirabasu = Sirabasu.find_by(number: params[:sirabasu_id])
     @checklist = @sirabasu.checklists.new(checklist_params)
-    @num = Checklist.count + 1
+    
     if @checklist.save
-      redirect_to sirabasu_checklist_path
+      redirect_to sirabasu_path(@sirabasu.number)
     else
       render 'new'
     end

@@ -9,7 +9,6 @@
     </tr>
   </thead>
   <tbody>
-    <%# @sirabasus.each do |sirabasu| %>
     <tr>
       <td>
         <%= @sirabasu.number %>
@@ -21,7 +20,6 @@
         <%= @sirabasu.content %>
       </td>
     </tr>
-    <%# end %>
   </tbody>
 </table>
 
@@ -47,13 +45,13 @@
         <%= checklist.content %>
       </td>
       <td>
-        <%= link_to "編集", edit_sirabasu_checklist_path(checklist) %>
+        <%= link_to "編集", edit_sirabasu_checklist_path(@sirabasu.number,checklist.number) %>
       </td>
       <td>
-        <%= link_to "削除", sirabasu_checklist_path(checklist), :method => :delete %>
+        <%= link_to "削除", sirabasu_checklist_path(@sirabasu.number,checklist.number), :method => :delete %>
       </td>
     </tr>
     <% end %>
   </tbody>
 </table>
-<%= link_to 'チェックリスト作成', new_sirabasu_checklist_path(@sirabasu) %>
+<%= link_to 'チェックリスト作成', new_sirabasu_checklist_path(@sirabasu.number) %>
