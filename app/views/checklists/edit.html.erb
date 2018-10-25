@@ -1,19 +1,4 @@
-<!DOCTYPE html>
-<html lang="ja">
-
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/stylesheet.css">
-    <link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="stylesheet" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>OJT Manager</title>
-</head>
-
 <body>
-    <header>
-        <div class="header-logo">OJT Manager</div>
-    </header>
     <%= form_for(@checklist) do |form| %>
         <div class="content">
             <div class="background-box">
@@ -39,9 +24,4 @@
         <% end %>
 
             <%= link_to("シラバス",sirabasus_path) %>
-                <footer>
-                    <div class="footer-logo">OJT Manager</div>
-                </footer>
 </body>
-
-</html>
