@@ -1,0 +1,16 @@
+<h1>登録変更</h1>
+
+<%= form_for @kanrisya,:url => {:action => :update} do |f| %>
+<p><%= f.label :name, '名前' %>
+<%= f.text_field :name %></p>
+<p><%= f.label :sex, '性別' %>
+<%= f.select :sex, [["",""], ["女性","女性"], ["男性","男性"]], {} %></p>
+<p><%= f.label :age, '年齢' %>
+<%= f.number_field :age %></p>
+<p><%= f.label :email, 'メールアドレス' %>
+<%= f.email_field :email %></p>
+
+<p><%= f.submit '登録する' %></p>
+<% end %>
+
+<%= link_to 'Back', "/user/index" %>
