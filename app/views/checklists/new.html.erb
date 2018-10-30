@@ -5,8 +5,10 @@
             <div class="content-title-input">
                 <p>
                     <%#= text_field(@checklist.sirabasu_id,:readonly => true,) %>
-                    
 
+                    <%#= label_tag "#{@chapter}" %>
+                    
+                    <%#= form.label :number , "#{@new_num}" %>
                     <%= form.number_field :number ,:readonly => true ,:placeholder =>"章番号" ,:value => "#{@new_num}" %>
                     節のチェックリストを作成
                 </p>

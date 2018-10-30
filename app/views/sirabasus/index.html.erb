@@ -25,10 +25,10 @@
         <%= sirabasu.content %>
       </td>
       <td>
-        <%= link_to "編集", edit_sirabasu_path(sirabasu) %>
+        <%= link_to "編集", edit_sirabasu_path(sirabasu.number) %>
       </td>
       <td>
-        <%= link_to "削除", sirabasu_path(sirabasu), :method => :delete %>
+        <%= link_to "削除", sirabasu_path(sirabasu.number), :method => :delete %>
       </td>
     </tr>
     <% end %>

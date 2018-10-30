@@ -5,7 +5,8 @@
                 <div class="content-title-input">
                     <p>シラバス作成</p>
                     <p>
-                        <%= form.number_field :number ,:readonly => true,:placeholder =>"章番号" ,:value => "#{@new_num}" %>
+                        <%= form.number_field :number,:readonly => true,:placeholder =>"章番号" , :value => "#{@new_num}" %>
+                        章のシラバスを作成
                     </p>
                     <%= form.text_field :name ,:placeholder => "項目名"%>
                 </div>

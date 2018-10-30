@@ -33,12 +33,12 @@ class SirabasusController < ApplicationController
     end
 
     def edit
-      @sirabasu = Sirabasu.find(params[:id])
+      @sirabasu = Sirabasu.find_by(number: params[:id])
     end
 
     # データを削除するためのAction
     def destroy
-      @sirabasu = Sirabasu.find(params[:id])
+      @sirabasu = Sirabasu.find_by(number: params[:id])
       @sirabasu.destroy
       @sirabasu = Sirabasu.all
       i = 1

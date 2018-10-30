@@ -7,42 +7,51 @@ class ChecklistsController < ApplicationController
 
   def new
     @checklist = Checklist.new
-    @new_num = Checklist.count + 1
-    #temp = Checklist.where(sirabasu_id: params[:sirabasu_id])
+    #@new_num = Checklist.count + 1
+    sirabasu = Sirabasu.find_by(number: params[:sirabasu_id])
+    @chapter = sirabasu.number
+    @new_num = sirabasu.checklists.count + 1
   end
 
   def create
-    @sirabasu = Sirabasu.find_by(number: params[:sirabasu_id])
-    @checklist = @sirabasu.checklists.new(checklist_params)
-    
+    sirabasu = Sirabasu.find_by(number: params[:sirabasu_id])
+    @checklist = sirabasu.checklists.new(checklist_params)
+    #@new_num = Checklist.count + 1
+    @new_num = sirabasu.checklists.count + 1
     if @checklist.save
-      redirect_to sirabasu_path(@sirabasu.number)
+      redirect_to sirabasu_path(sirabasu.number)
     else
-      render 'new'
+      render "new"
     end
   end
 
   def edit
-    @checklist = Checklist.find(params[:id])
+    sirabasu = Sirabasu.find_by(number: params[:sirabasu_id])
+    @checklist = sirabasu.checklists.find_by(number: params[:id])
   end
 
   def update
-    @checklist = Checklist.find(params[:id])
-    @checklist.update(checklist_params)
-    redirect_to sirabasu_checklist_path
+    sirabasu = Sirabasu.find_by(number: params[:sirabasu_id])
+    @checklist = sirabasu.checklists.find_by(params[:id])
+    if @checklist.update(checklist_params)
+    redirect_to sirabasu_path(sirabasu.number)
+    else
+      render "edit"
+    end
   end
 
   def destroy
-    @checklist = Checklist.find(params[:id])
+    sirabasu = Sirabasu.find_by(number: params[:sirabasu_id])
+    @checklist = sirabasu.checklists.find_by(number: params[:id])
     @checklist.destroy
-    @checklist = Checklist.all
+    @checklist = sirabasu.checklists
     i = 1
     @checklist.each do |che|
       che.number = i
       che.save
       i += 1
     end
-    redirect_to sirabasus_checklist_path
+    redirect_to sirabasu_path(sirabasu.number)
   end
 
   def checklist_params

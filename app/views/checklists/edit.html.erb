@@ -1,47 +1,24 @@
-<!DOCTYPE html>
-<html lang="ja">
+<%= form_for @checklist,url: sirabasu_checklist_path do |form| %>
+<div class="content">
+    <div class="background-box">
+        <div class="content-area">
 
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/stylesheet.css">
-    <link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="stylesheet" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>OJT Manager</title>
-</head>
-
-<body>
-    <header>
-        <div class="header-logo">OJT Manager</div>
-    </header>
-    <%= form_for(@checklist) do |form| %>
-        <div class="content">
-            <div class="background-box">
-                <div class="content-area">
-
-                    <div class="content-title-input">
-                        <p>チェックリスト編集</p>
-                        <p>
-                            <%= form.number_field :number %>
-                        </p>
-                        <%= form.text_field :name %>
-                    </div>
-                    <div class="text-area">
-                        <%= form.text_area :content, :size => "50×15"%>
-                    </div>
-                    <div class="link-button">
-                        <%= form.submit "変更" %>
-                    </div>
-
-                </div>
+            <div class="content-title-input">
+                <p>チェックリスト編集</p>
+                <%= form.label :name ,'名前' %>
+                <%= form.text_field :name %>
             </div>
+            <%= form .label :name ,'内容'%>
+            <div class="text-area">
+                <%= form.text_area :content, :size => "50×15"%>
+            </div>
+            <div class="link-button">
+                <%= form.submit "保存" %>
+            </div>
+
         </div>
-        <% end %>
+    </div>
+</div>
+<% end %>
 
-            <%= link_to("シラバス",sirabasus_path) %>
-                <footer>
-                    <div class="footer-logo">OJT Manager</div>
-                </footer>
-</body>
-
-</html>
+<%= link_to "チェックリスト一覧へ",sirabasu_path(params[:sirabasu_id]) %>

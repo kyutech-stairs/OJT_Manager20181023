@@ -3,6 +3,9 @@
 <table>
   <thead>
     <tr>
+    <!--
+    <th>id</th>
+    -->
       <th>章番号</th>
       <th>名前</th>
       <th>内容</th>
@@ -10,6 +13,11 @@
   </thead>
   <tbody>
     <tr>
+    <!--
+    <td>
+    <%= @sirabasu.id %>
+    </td>
+    -->
       <td>
         <%= @sirabasu.number %>
       </td>
@@ -27,6 +35,9 @@
 <table>
   <thead>
     <tr>
+    <!--
+    <th>sirabasu_id</th>
+    -->
       <th>節番号</th>
       <th>名前</th>
       <th>内容</th>
@@ -35,6 +46,11 @@
   <tbody>
     <% @checklist.each do |checklist| %>
     <tr>
+    <!--
+    <td>
+<%= checklist.sirabasu_id %>
+    </td>
+    -->
       <td>
         <%= checklist.number %>
       </td>
@@ -55,3 +71,4 @@
   </tbody>
 </table>
 <%= link_to 'チェックリスト作成', new_sirabasu_checklist_path(@sirabasu.number) %>
+<%= link_to 'シラバス一覧へ戻る', sirabasus_path %>
