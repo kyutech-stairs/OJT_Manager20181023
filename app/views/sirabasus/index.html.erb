@@ -14,9 +14,10 @@
   </thead>
   <tbody>
     <% @sirabasu.each do |sirabasu| %>
+    <% if current_kanrisya.cid == sirabasu.cid %>
     <tr>
       <td>
-        <%= sirabasu.number %>
+         <%= sirabasu.number %>
       </td>
       <td>
         <%= link_to sirabasu.name, sirabasu_path(sirabasu.number) %>
@@ -24,17 +25,22 @@
       <td>
         <%= sirabasu.content %>
       </td>
+      <% if current_kanrisya.admin == true %>
       <td>
         <%= link_to "編集", edit_sirabasu_path(sirabasu.number) %>
       </td>
       <td>
         <%= link_to "削除", sirabasu_path(sirabasu.number), :method => :delete %>
       </td>
+      <% end %>
     </tr>
+    <% end %>
     <% end %>
   </tbody>
 </table>
+<% if current_kanrisya.admin == true %>
 <%= link_to '新しいシラバスの作成', new_sirabasu_path %>
+<% end %>
 <p>
-  <%= link_to '管理トップへ', '/kanri/kanri_top' %>
+  <%= link_to 'トップへ', '/ojt_top/top' %>
 </p>

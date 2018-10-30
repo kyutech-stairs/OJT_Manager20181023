@@ -1,0 +1,24 @@
+<% if @kanrisya.cid == current_kanrisya.cid %>
+ <div >
+  <h3 ><%= @kanrisya.name %></h3>
+ </div>
+
+  </aside>
+  <p>社員番号 <%= @kanrisya.crew_number %></p>
+  <% if @kanrisya.age.present? %>
+    <p>年齢<%= @kanrisya.age %></p>
+  <% end %>
+  <p><%= @kanrisya.sex %></p>
+  <p>メールアドレス <%= @kanrisya.email %></p>
+  <p>管理権限 <%= @kanrisya.admin %></p>
+ </div>
+
+ <% if current_kanrisya.admin == true %>
+ <p><%= link_to '編集', edit_user_path(@kanrisya) %></p>
+ <p><%= link_to "削除", user_path(@kanrisya), :method => :delete %></p>
+ <% end %>
+<% else %>
+あなたの会社の社員ではありません。
+<% end %>
+
+<%= link_to '一覧へ', "/user/index" %>

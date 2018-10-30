@@ -1,104 +1,68 @@
-*{
-    margin: 0;
-    padding: 0;
-}
+// .content{
+//     height: 100vh;
+// }
 
-body{
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    font-family: 'Noto Sans Japanese';
-    background-color: #EEEFF1;
-}
+// .background-box{
+//     width: 50%;
+//     margin: 5% auto;
+//     padding: 50px 0;
+//     border-radius: 20px;
+//     background-color: #ffffff;
+// }
 
-header{
-    background-color: #90ee90;
-}
+// .content-area{
+//     width: 90%;
+//     margin: 0 auto;
+// }
 
-.header-logo{
-    display: flex;
-    padding: 20px 40px;
-    font-size: 25px;
-}
+// .content-title{
+//     display: flex;
+//     justify-content: space-between;
+// }
+// .content-title p{
+//     font-size: 35px;
+// }
 
-.content{
-    /* height: 100vh; */
-}
+// .content-title-input p{
+//     font-size: 35px;
+// }
+// .content-title-input input{
+//     font-family: 'Noto Sans Japanese';
+//     font-size: 20px;
+// }
 
-.background-box{
-    width: 50%;
-    margin: 5% auto;
-    padding: 50px 0;
-    border-radius: 20px;
-    background-color: #ffffff;
-}
-
-.content-area{
-    width: 90%;
-    margin: 0 auto;
-}
-
-.content-title{
-    display: flex;
-    justify-content: space-between;
-}
-.content-title p{
-    font-size: 35px;
-}
-
-.content-title-input p{
-    font-size: 35px;
-}
-.content-title-input input{
-    font-family: 'Noto Sans Japanese';
-    font-size: 20px;
-}
-
-.link-button {
-    text-decoration: none;
-    display: block;
-    font-size: 18px;
-    width: 200px;
-    padding: 0.2em;
-    text-align: center;
-    border: 3px solid #90ee90;
-    background-color: #90ee90;
-    border-radius: 3px;
-    transition: .3s;
-}
-.link-button :hover{
-    border: 3px solid #ec407a;
-    background-color: #ec407a;
-    color: white;
-}
+// .link-button {
+//     text-decoration: none;
+//     display: block;
+//     font-size: 18px;
+//     width: 200px;
+//     padding: 0.2em;
+//     text-align: center;
+//     border: 3px solid #90ee90;
+//     background-color: #90ee90;
+//     border-radius: 3px;
+//     transition: .3s;
+// }
+// .link-button :hover{
+//     border: 3px solid #ec407a;
+//     background-color: #ec407a;
+//     color: white;
+// }
 
 
-#checklisturl{
-    width: 100%;
-    font-family: 'Noto Sans Japanese';
-    font-size: 20px;
-}
+// #checklisturl{
+//     width: 100%;
+//     font-family: 'Noto Sans Japanese';
+//     font-size: 20px;
+// }
 
-.text-area{
-    margin: 25px 0;
-    font-size: 20px;
-}
+// .text-area{
+//     margin: 25px 0;
+//     font-size: 20px;
+// }
 
-textarea{
-    font-family: 'Noto Sans Japanese';
-    font-size: 100%;
-    width: 100%;
-}
-
-footer{
-    width: 100%;
-    margin-top: auto;
-    background-color: #2f5167;
-    color: #ffffff;
-}
-
-.footer-logo{
-    display: flex;
-    font-size: 20px;
-    padding: 40px;
-}
+// textarea{
+//     font-family: 'Noto Sans Japanese';
+//     font-size: 100%;
+//     width: 100%;
+// }

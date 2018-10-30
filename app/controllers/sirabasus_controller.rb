@@ -6,13 +6,18 @@ class SirabasusController < ApplicationController
 
     def show
       @sirabasu = Sirabasu.find_by(number: params[:id])
+      @kanrisya = Kanrisya.find_by(id: @sirabasu.userid)
       @checklist = @sirabasu.checklists.all
     end
 
 
     def new
-      @sirabasu = Sirabasu.new
-      @new_num = Sirabasu.count + 1
+      if current_kanrisya.admin == true
+       @sirabasu = Sirabasu.new
+       @new_num = Sirabasu.count + 1
+      else
+        redirect_to "/user/not"
+      end
     end
 
     def create
@@ -33,25 +38,37 @@ class SirabasusController < ApplicationController
     end
 
     def edit
-      @sirabasu = Sirabasu.find_by(number: params[:id])
+      if current_kanrisya.admin == true
+        @sirabasu = Sirabasu.find_by(number: params[:id])
+     else
+       redirect_to "/user/not"
+     end
     end
 
     # データを削除するためのAction
     def destroy
-      @sirabasu = Sirabasu.find_by(number: params[:id])
-      @sirabasu.destroy
-      @sirabasu = Sirabasu.all
-      i = 1
-      @sirabasu.each do |sira|
-        sira.number = i
-        sira.save
-        i += 1
+      if current_kanrisya.admin == true
+       @sirabasu = Sirabasu.find_by(number: params[:id])
+       @sirabasu.destroy
+       @sirabasu = Sirabasu.all
+       i = 1
+       @sirabasu.each do |sira|
+         sira.number = i
+         sira.save
+         i += 1
+       end
+       #@sirabasu.save
+       redirect_to sirabasus_path
+      else
+        redirect_to "/user/not"
       end
-      #@sirabasu.save
-      redirect_to sirabasus_path
     end
 
     def sirabasu_params
-      params.require(:sirabasu).permit(:number,:name,:content)
+      params.require(:sirabasu).permit(:number,:name,:content,:userid,:cid)
+    end
+
+    def user_params
+      params.require(:kanrisya).permit(:id,:name,:cid)
     end
 end

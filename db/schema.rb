@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_28_052335) do
+ActiveRecord::Schema.define(version: 2018_10_28_163513) do
 
   create_table "checklists", force: :cascade do |t|
     t.integer "number"
@@ -50,6 +50,8 @@ ActiveRecord::Schema.define(version: 2018_08_28_052335) do
     t.integer "age"
     t.string "sex"
     t.string "crew_number"
+    t.boolean "admin", default: false, null: false
+    t.integer "cid"
     t.index ["email"], name: "index_kanrisyas_on_email", unique: true
     t.index ["reset_password_token"], name: "index_kanrisyas_on_reset_password_token", unique: true
   end
@@ -70,6 +72,8 @@ ActiveRecord::Schema.define(version: 2018_08_28_052335) do
     t.integer "number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "userid"
+    t.integer "cid"
   end
 
 end

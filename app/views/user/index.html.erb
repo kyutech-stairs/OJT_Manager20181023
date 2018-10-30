@@ -1,0 +1,53 @@
+<h1>
+  クルー確認ページ
+</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>従業員一覧</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @kanrisya.each do |kanrisya| %>
+      <tr>
+        <td>
+          <% if kanrisya.cid == current_kanrisya.cid %>
+           <% if kanrisya.admin == false %>
+            <%=link_to kanrisya.name ,user_path(kanrisya)%>
+           <% end %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>管理者一覧</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @kanrisya.each do |kanrisya| %>
+      <tr>
+        <td>
+          <% if kanrisya.cid == current_kanrisya.cid %>
+           <% if kanrisya.admin == true %>
+            <%=link_to kanrisya.name ,user_path(kanrisya)%>
+           <% end %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% if current_kanrisya.admin == true %>
+<p><%= link_to '新しい社員登録', '/user/new' %></p>
+<% end %>
+
+<p>
+  <%= link_to 'Back', '/ojt_top/top' %>
+</p>
