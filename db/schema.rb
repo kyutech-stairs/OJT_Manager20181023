@@ -10,11 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_28_163513) do
+ActiveRecord::Schema.define(version: 2018_11_01_062426) do
 
   create_table "checklists", force: :cascade do |t|
     t.integer "number"
-    t.string "name"
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

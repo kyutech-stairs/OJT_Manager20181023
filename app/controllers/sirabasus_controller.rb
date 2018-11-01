@@ -7,7 +7,6 @@ class SirabasusController < ApplicationController
     def show
       @sirabasu = Sirabasu.find_by(number: params[:id])
       #@kanrisya = Kanrisya.find_by(id: @sirabasu.userid)
-      #編集：吉井
       @kanrisya = Kanrisya.find(@sirabasu.userid)
       @checklist = @sirabasu.checklists.all
     end
