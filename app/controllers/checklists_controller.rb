@@ -6,11 +6,15 @@ class ChecklistsController < ApplicationController
   end
 
   def new
+    if current_kanrisya.admin == true
     @checklist = Checklist.new
     #@new_num = Checklist.count + 1
     sirabasu = Sirabasu.find_by(number: params[:sirabasu_id])
     @chapter = sirabasu.number
     @new_num = sirabasu.checklists.count + 1
+    else
+     redirect_to "/user/not"
+    end
   end
 
   def create
@@ -26,8 +30,12 @@ class ChecklistsController < ApplicationController
   end
 
   def edit
-    sirabasu = Sirabasu.find_by(number: params[:sirabasu_id])
-    @checklist = sirabasu.checklists.find_by(number: params[:id])
+    if current_kanrisya.admin == true
+     sirabasu = Sirabasu.find_by(number: params[:sirabasu_id])
+     @checklist = sirabasu.checklists.find_by(number: params[:id])
+   else
+     redirect_to "/user/not"
+   end
   end
 
   def update
@@ -55,6 +63,6 @@ class ChecklistsController < ApplicationController
   end
 
   def checklist_params
-    params.require(:checklist).permit(:number, :content)
+    params.require(:checklist).permit(:number, :content, :cid, :userid)
   end
 end

@@ -25,7 +25,7 @@ class SirabasusController < ApplicationController
       @sirabasu = Sirabasu.new(sirabasu_params)
       @new_num = Sirabasu.count + 1
       if @sirabasu.save
-     redirect_to("/sirabasus")
+      redirect_to("/sirabasus")
       else
       render "new"
       end

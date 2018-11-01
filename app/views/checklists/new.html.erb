@@ -7,7 +7,7 @@
                     <%#= text_field(@checklist.sirabasu_id,:readonly => true,) %>
 
                     <%#= label_tag "#{@chapter}" %>
-                    
+
                     <%#= form.label :number , "#{@new_num}" %>
                     <%= form.number_field :number ,:readonly => true ,:placeholder =>"章番号" ,:value => "#{@new_num}" %>
                     節のチェックリストを作成
@@ -23,4 +23,6 @@
         </div>
     </div>
 </div>
+<%= form.hidden_field :cid, value: current_kanrisya.cid %>
+<%= form.hidden_field :userid, value: current_kanrisya.id %>
 <% end %>

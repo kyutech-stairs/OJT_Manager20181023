@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_01_062426) do
+ActiveRecord::Schema.define(version: 2018_11_01_093804) do
 
   create_table "checklists", force: :cascade do |t|
     t.integer "number"
@@ -18,6 +18,8 @@ ActiveRecord::Schema.define(version: 2018_11_01_062426) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "sirabasu_id"
+    t.integer "cid"
+    t.integer "userid"
   end
 
   create_table "crews", force: :cascade do |t|
