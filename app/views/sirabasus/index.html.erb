@@ -4,9 +4,11 @@
 
 <h2>作成したシラバス</h2>
 
-<table>
+<table border="1">
   <thead>
     <tr>
+    <th>userid</th>
+    <th>cid</th>
       <th>章番号</th>
       <th>名前</th>
       <th>内容</th>
@@ -16,6 +18,13 @@
     <% @sirabasu.each do |sirabasu| %>
     <% if current_kanrisya.cid == sirabasu.cid %>
     <tr>
+
+    <td>
+<%=sirabasu.userid%>
+    </td>
+    <td>
+<%= sirabasu.cid %>
+    </td>
       <td>
          <%= sirabasu.number %>
       </td>
