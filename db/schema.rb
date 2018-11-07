@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_05_122155) do
+ActiveRecord::Schema.define(version: 2018_11_07_142631) do
 
   create_table "checklists", force: :cascade do |t|
     t.integer "number"
@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(version: 2018_11_05_122155) do
     t.datetime "updated_at", null: false
     t.integer "userid"
     t.integer "cid"
+    t.string "image"
   end
 
 end
