@@ -28,10 +28,12 @@
     <%# end %>
   </tbody>
 </table>
-<!--
+
 <h2>画像</h2>
-<%#= image_tag @sirabasu.image.url %>
--->
+<%= @image.each do |image| %>
+<%= image.image_path %>
+<%= image_tag image.image_path.url %>
+<% end %>
 <h2>チェックリスト</h2>
 <table>
   <thead>

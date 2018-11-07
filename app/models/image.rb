@@ -1,3 +1,3 @@
 class Image < ApplicationRecord
-    belongs_to :sirabasu
+    belongs_to :sirabasu, optional: true
 end

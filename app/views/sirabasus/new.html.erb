@@ -13,7 +13,9 @@
             <div class="text-area">
                 <%= form.text_area :content, :class =>"text-area", :size =>"80×15"%>
             </div>
-            
+            <%= form.fields_for :images do |i| %>
+            <%= i.file_field :image_path %>
+            <% end %>
             <%= form.hidden_field :cid, value: current_kanrisya.cid %>
             <%= form.hidden_field :userid, value: current_kanrisya.id %>
 
