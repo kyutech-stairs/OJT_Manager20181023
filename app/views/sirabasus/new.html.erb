@@ -1,4 +1,5 @@
-<%= form_for(@sirabasu) do |form| %>
+<%#= form_for(@sirabasu) do |form| %>
+<%= form_with(model: @sirabasu_form, url: sirabasus_path) do |form| %>
 <div class="content">
     <div class="background-box">
         <div class="content-area">
@@ -13,9 +14,10 @@
             <div class="text-area">
                 <%= form.text_area :content, :class =>"text-area", :size =>"80×15"%>
             </div>
-            <%= form.fields_for :images do |i| %>
-            <%= i.file_field :image_path %>
-            <% end %>
+            <%#= form.fields_for :images do |i| %>
+            <%#= i.file_field :image_path %>
+            <%# end %>
+            <%= form.file_field :image_path %>
             <%= form.hidden_field :cid, value: current_kanrisya.cid %>
             <%= form.hidden_field :userid, value: current_kanrisya.id %>
 

@@ -1,4 +1,17 @@
-# frozen_string_literal: true
+class SirabasuForm
+  include ActiveModel::Model
+
+  attr_accessor :number, :name, :content, :userid, :cid, :image_path
+  validates :name, :content, presence: true
+
+  def save
+      #return false if invalid?
+
+      sirabasu = Sirabasu.new(name: name, content: content, number: number, userid: userid, cid: cid)
+      sirabasu.images.new(image_path: image_path)
+      sirabasu.save
+  end
+end
 
 class SirabasusController < ApplicationController
   def index
@@ -28,7 +41,7 @@ class SirabasusController < ApplicationController
 
   def create
     # @sirabasu = Sirabasu.new(sirabasu_params)
-    @sirabasu_form = Sirabasu.new(sirabasu_prams)
+    @sirabasu_form = SirabasuForm.new(sirabasu_params)
     @new_num = Sirabasu.where(cid: current_kanrisya.cid).count + 1
     # if @sirabasu.save
     if @sirabasu_form.save
