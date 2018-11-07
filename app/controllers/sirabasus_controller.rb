@@ -75,7 +75,7 @@ class SirabasusController < ApplicationController
   end
 
   def sirabasu_params
-    params.require(:sirabasu).permit(:number, :name, :content, :userid, :cid, sirabasus_attributes: [:image_path])
+    params.require(:sirabasu).permit(:number, :name, :content, :userid, :cid, images_attributes: [:image_path])
   end
 
   def user_params
