@@ -16,8 +16,9 @@ class SirabasusController < ApplicationController
 
   def new
     if current_kanrisya.admin == true
-      @sirabasu = Sirabasu.new
-      @sirabasu.images.build
+      # @sirabasu = Sirabasu.new
+      # @sirabasu.images.build
+      @sirabasu_form = SirabasuForm.new
       @new_num = Sirabasu.where(cid: current_kanrisya.cid).count + 1
 
     else
@@ -26,9 +27,11 @@ class SirabasusController < ApplicationController
   end
 
   def create
-    @sirabasu = Sirabasu.new(sirabasu_params)
+    # @sirabasu = Sirabasu.new(sirabasu_params)
+    @sirabasu_form = Sirabasu.new(sirabasu_prams)
     @new_num = Sirabasu.where(cid: current_kanrisya.cid).count + 1
-    if @sirabasu.save
+    # if @sirabasu.save
+    if @sirabasu_form.save
         redirect_to('/sirabasus')
     else
       render 'new'
@@ -75,7 +78,8 @@ class SirabasusController < ApplicationController
   end
 
   def sirabasu_params
-    params.require(:sirabasu).permit(:number, :name, :content, :userid, :cid, sirabasus_attributes: [:image_path])
+    # params.require(:sirabasu).permit(:number, :name, :content, :userid, :cid, sirabasus_attributes: [:image_path])
+    params.require(:sirabasu_form).permit(:number, :name, :content, :userid, :cid, :image_path)
   end
 
   def user_params
