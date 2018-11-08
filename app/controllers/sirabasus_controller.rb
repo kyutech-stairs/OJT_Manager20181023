@@ -72,7 +72,6 @@ class SirabasusController < ApplicationController
 
   def edit
     if current_kanrisya.admin == true
-      params[:id]
       @sirabasu = Sirabasu.find_by(number: params[:id], cid: current_kanrisya.cid)
     else
       redirect_to '/user/not'

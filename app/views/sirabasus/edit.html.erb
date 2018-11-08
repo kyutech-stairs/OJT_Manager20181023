@@ -7,10 +7,12 @@
                 <%= form.label :name ,'名前' %>
                 <%= form.text_field :name %>
             </div>
-            <%= form .label :name ,'内容'%>
+            <%= form.label :name ,'内容'%>
             <div class="text-area">
                 <%= form.text_area :content, :size => "50×15"%>
             </div>
+            <%= form.file_field :image_path, multiple: true%>
+            <%#%= form.check_box :remove_image_path %>削除
             <div class="link-button">
                 <%= form.submit "保存" %>
             </div>
