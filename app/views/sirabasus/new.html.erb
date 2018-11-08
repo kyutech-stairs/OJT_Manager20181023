@@ -1,26 +1,29 @@
 <%= form_for(@sirabasu) do |form| %>
-    <div class="content">
-        <div class="background-box">
-            <div class="content-area">
-                <div class="content-title-input">
-                    <p>シラバス作成</p>
-                    <p>
-                        <%= form.number_field :number ,:readonly => true,:placeholder =>"章番号" ,:value => "#{@new_num}" %>
-                    </p>
-                    <%= form.text_field :name ,:placeholder => "項目名"%>
-                </div>
-                <div class="text-area">
-                    <%= form.text_area :content, :class =>"text-area", :size =>"80×15"%>
-                </div>
+<div class="first-box">
+  <div class="content-box">
+    <h1>シラバス作成</h1>
 
-                <%= form.hidden_field :cid, value: current_kanrisya.cid %>
-                <%= form.hidden_field :userid, value: current_kanrisya.id %>
-
-                <div class="link-button">
-                    <%= form.submit "登録", :class =>"link-button"%>
-                </div>
-            </div>
-        </div>
+    <div class="field">
+      <%= form.label :section_number, "章番号" %><br />
+      <%= form.number_field :number ,:readonly => true,:placeholder =>"章番号" ,:value => "#{@new_num}",:class => "input-box" %>
     </div>
+    <div class="field">
+      <%= form.label :section_name, "タイトル" %><br />
+      <%= form.text_field :name ,:placeholder => "タイトル", :class => "input-box"%>
+    </div>
+
+    <div class="field">
+      <%= form.label :section_name, "内容" %><br />
+      <%= form.text_area :content, :class =>"text-area" %>
+    </div>
+
+    <%= form.hidden_field :cid, value: current_kanrisya.cid %>
+    <%= form.hidden_field :userid, value: current_kanrisya.id %>
+
+    <div>
+      <%= form.submit "登録", :class =>"link-button"%>
+    </div>
+  </div>
+</div>
 <% end %>
-    <%= link_to 'Back', "/sirabasus" %>
+<%= link_to 'Back', "/sirabasus" %>
