@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <h1>
  管理者トップページ
 </h1>
@@ -18,3 +19,24 @@
 </p>
 
 <p><%= link_to('Logout', destroy_kanrisya_session_path, :method => :delete) %></p>
+=======
+<h1>
+ 管理者トップページ
+</h1>
+
+<p> ログインしている管理ユーザー →<%= link_to current_kanrisya.name,'/kanri/kanri_user' %></p>
+
+<p>
+  <%= link_to 'シラバス', '/sirabasus' %>
+</p>
+<!--
+<p>
+  <%= link_to 'チェックリスト作成', '/checklists/choose_sirabasus' %>
+</p>
+-->
+<p>
+  <%= link_to 'クルー確認', '/user/index' %>
+</p>
+
+<p><%= link_to('Logout', destroy_kanrisya_session_path, :method => :delete) %></p>
+>>>>>>> cbcaeacdfe968fe14055748442303ce6dc884606

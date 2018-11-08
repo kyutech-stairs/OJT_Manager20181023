@@ -1,22 +1,28 @@
 <%= form_for @checklist, url: sirabasu_checklists_path do |form| %>
-    <div class="content">
-        <div class="background-box">
-            <div class="content-area">
-                <div class="content-title-input">
-                    <p>
-                        <%= form.number_field :number ,:readonly => true ,:placeholder =>"章番号" ,:value => "#{@num}" %>
-                            章のチェックリストを作成
-                    </p>
-                    <%= form.text_field :name ,:placeholder => "項目名" %>
-                </div>
-                <div class="text-area">
-                    <%= form.text_area :content, :class => "text-area", :size => "50×15"%>
-                </div>
-                <div class="link-button">
-                    <%= form.submit "登録" ,:class => "link-button"%>
-                </div>
+<div class="content">
+    <div class="background-box">
+        <div class="content-area">
+            <div class="content-title-input">
+                <p>
+                    <%#= text_field(@checklist.sirabasu_id,:readonly => true,) %>
 
+                    <%#= label_tag "#{@chapter}" %>
+
+                    <%#= form.label :number , "#{@new_num}" %>
+                    <%= form.number_field :number ,:readonly => true ,:placeholder =>"章番号" ,:value => "#{@new_num}" %>
+                    節のチェックリストを作成
+                </p>
             </div>
+            <div class="text-area">
+                <%= form.text_area :content, :class => "text-area", :size => "50×15"%>
+            </div>
+            <div class="link-button">
+                <%= form.submit "登録" ,:class => "link-button"%>
+            </div>
+
         </div>
     </div>
+</div>
+<%= form.hidden_field :cid, value: current_kanrisya.cid %>
+<%= form.hidden_field :userid, value: current_kanrisya.id %>
 <% end %>

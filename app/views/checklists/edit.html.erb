@@ -1,27 +1,22 @@
-<body>
-    <%= form_for(@checklist) do |form| %>
-        <div class="content">
-            <div class="background-box">
-                <div class="content-area">
+<%= form_for @checklist,url: sirabasu_checklist_path do |form| %>
+<div class="content">
+    <div class="background-box">
+        <div class="content-area">
 
-                    <div class="content-title-input">
-                        <p>チェックリスト編集</p>
-                        <p>
-                            <%= form.number_field :number %>
-                        </p>
-                        <%= form.text_field :name %>
-                    </div>
-                    <div class="text-area">
-                        <%= form.text_area :content, :size => "50×15"%>
-                    </div>
-                    <div class="link-button">
-                        <%= form.submit "変更" %>
-                    </div>
-
-                </div>
+            <div class="content-title-input">
+                <p>チェックリスト編集</p>
+                <%= form.label :name ,'内容' %>
             </div>
-        </div>
-        <% end %>
+            <div class="text-area">
+                <%= form.text_area :content, :size => "50×15"%>
+            </div>
+            <div class="link-button">
+                <%= form.submit "保存" %>
+            </div>
 
-            <%= link_to("シラバス",sirabasus_path) %>
-</body>
+        </div>
+    </div>
+</div>
+<% end %>
+
+<%= link_to "チェックリスト一覧へ",sirabasu_path(params[:sirabasu_id]) %>

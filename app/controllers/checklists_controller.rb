@@ -1,54 +1,68 @@
 # frozen_string_literal: true
 
 class ChecklistsController < ApplicationController
-  def choose_sirabasus
-    @sirabasus = Sirabasu.all.order(:number)
-  end
-
-  def index
-    @checklist = Checklist.all
-  end
+  # def index
+  #   @checklist = Checklist.all
+  # end
 
   def new
+    if current_kanrisya.admin == true
     @checklist = Checklist.new
-    #temp = Checklist.where(sirabasu_id: params[:sirabasu_id])
+    #@new_num = Checklist.count + 1
+    sirabasu = Sirabasu.find_by(number: params[:sirabasu_id],cid: current_kanrisya.cid)
+    @chapter = sirabasu.number
+    @new_num = sirabasu.checklists.count + 1
+    else
+     redirect_to "/user/not"
+    end
   end
 
   def create
-    @sirabasu = Sirabasu.find_by(number: params[:num])
-    @checklist = @sirabasu.checklists.new(checklist_params)
-    @num = Checklist.count + 1
+    sirabasu = Sirabasu.find_by(number: params[:sirabasu_id],cid: current_kanrisya.cid)
+    @checklist = sirabasu.checklists.new(checklist_params)
+    #@new_num = Checklist.count + 1
+    @new_num = sirabasu.checklists.count + 1
     if @checklist.save
-      redirect_to sirabasu_checklist_path
+      redirect_to sirabasu_path(sirabasu.number)
     else
-      render 'new'
+      render "new"
     end
   end
 
   def edit
-    @checklist = Checklist.find(params[:id])
+    if current_kanrisya.admin == true
+     sirabasu = Sirabasu.find_by(number: params[:sirabasu_id],cid: current_kanrisya.cid)
+     @checklist = sirabasu.checklists.find_by(number: params[:id])
+   else
+     redirect_to "/user/not"
+   end
   end
 
   def update
-    @checklist = Checklist.find(params[:id])
-    @checklist.update(checklist_params)
-    redirect_to sirabasu_checklist_path
+    sirabasu = Sirabasu.find_by(number: params[:sirabasu_id],cid: current_kanrisya.cid)
+    @checklist = sirabasu.checklists.find_by(params[:id])
+    if @checklist.update(checklist_params)
+    redirect_to sirabasu_path(sirabasu.number)
+    else
+      render "edit"
+    end
   end
 
   def destroy
-    @checklist = Checklist.find(params[:id])
+    sirabasu = Sirabasu.find_by(number: params[:sirabasu_id],cid: current_kanrisya.cid)
+    @checklist = sirabasu.checklists.find_by(number: params[:id])
     @checklist.destroy
-    @checklist = Checklist.all
+    @checklist = sirabasu.checklists
     i = 1
     @checklist.each do |che|
       che.number = i
       che.save
       i += 1
     end
-    redirect_to sirabasus_checklist_path
+    redirect_to sirabasu_path(sirabasu.number)
   end
 
   def checklist_params
-    params.require(:checklist).permit(:number, :name, :content)
+    params.require(:checklist).permit(:number, :content, :cid, :userid)
   end
 end

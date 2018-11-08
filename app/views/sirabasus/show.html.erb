@@ -28,36 +28,45 @@
     <%# end %>
   </tbody>
 </table>
-
+<!--
+<h2>画像</h2>
+<%#= image_tag @sirabasu.image.url %>
+-->
 <h2>チェックリスト</h2>
 <table>
   <thead>
     <tr>
       <th>節番号</th>
-      <th>名前</th>
       <th>内容</th>
+      <% if current_kanrisya.admin == false %>
+      <th>チェックリスト</th>
+      <% end %>
     </tr>
   </thead>
   <tbody>
     <% @checklist.each do |checklist| %>
+    <% if current_kanrisya.cid == checklist.cid %>
     <tr>
       <td>
         <%= checklist.number %>
       </td>
       <td>
-        <%= checklist.name %>
-      </td>
-      <td>
         <%= checklist.content %>
       </td>
-      <td>
-        <%= link_to "編集", edit_sirabasu_checklist_path(checklist) %>
-      </td>
-      <td>
-        <%= link_to "削除", sirabasu_checklist_path(checklist), :method => :delete %>
-      </td>
+      <% if current_kanrisya.admin == true %>
+       <td>
+         <%= link_to "編集", edit_sirabasu_checklist_path(@sirabasu.number,checklist.number) %>
+       </td>
+       <td>
+         <%= link_to "削除", sirabasu_checklist_path(@sirabasu.number,checklist.number), :method => :delete %>
+       </td>
+      <% end %>
     </tr>
+    <% end %>
     <% end %>
   </tbody>
 </table>
-<%= link_to 'チェックリスト作成', new_sirabasu_checklist_path(@sirabasu) %>
+<% if current_kanrisya.admin == true %>
+<%= link_to 'チェックリスト作成', new_sirabasu_checklist_path(@sirabasu.number) %>
+<% end %>
+<%= link_to 'シラバス一覧へ戻る', sirabasus_path %>

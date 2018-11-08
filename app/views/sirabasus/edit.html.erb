@@ -1,9 +1,11 @@
-<%= form_for(@sirabasu) do |form| %>
-    <%= form.label :name, "名前" %>
-        <%= form.text_field :name %>
-            <%= form.label :content, "内容" %>
-                <%= form.text_area :content %>
-                    <%= form.submit "編集" %>
-                        <% end %>
+                <%= form.text_area :content, :size => "50×15"%>
+            </div>
+            <div class="link-button">
+                <%= form.submit "保存" %>
+            </div>
+        </div>
+    </div>
+</div>
+<% end %>
 
-                            <%= link_to 'Back', "/sirabasus" %>
+<%= link_to 'シラバス一覧へ', sirabasus_path %>
