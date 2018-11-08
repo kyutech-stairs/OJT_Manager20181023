@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+#シラバスと画像を保存するための操作をもつ
 class SirabasuForm
   include ActiveModel::Model
 
@@ -5,15 +7,17 @@ class SirabasuForm
   validates :name, :content, presence: true
 
   def save(sirabasu_params)
-      #return false if invalid?
+    # return false if invalid?
 
-      sirabasu = Sirabasu.new(name: name, content: content, number: number, userid: userid, cid: cid)
-      
+    sirabasu = Sirabasu.new(name: name, content: content, number: number, userid: userid, cid: cid)
+
+    unless sirabasu_params[:image_path].nil?
       sirabasu_params[:image_path].each do |path|
         sirabasu.images.new(image_path: path)
       end
-      # sirabasu.images.new(image_path: image_path)
-      sirabasu.save
+    end
+    # sirabasu.images.new(image_path: image_path)
+    sirabasu.save
   end
 end
 
@@ -49,7 +53,7 @@ class SirabasusController < ApplicationController
     @new_num = Sirabasu.where(cid: current_kanrisya.cid).count + 1
     # if @sirabasu.save
     if @sirabasu_form.save(sirabasu_params)
-        redirect_to('/sirabasus')
+      redirect_to('/sirabasus')
     else
       render 'new'
     end
@@ -96,7 +100,7 @@ class SirabasusController < ApplicationController
 
   def sirabasu_params
     # params.require(:sirabasu).permit(:number, :name, :content, :userid, :cid, sirabasus_attributes: [:image_path])
-    params.require(:sirabasu_form).permit(:number, :name, :content, :userid, :cid, {image_path: []})
+    params.require(:sirabasu_form).permit(:number, :name, :content, :userid, :cid, image_path: [])
   end
 
   def user_params
