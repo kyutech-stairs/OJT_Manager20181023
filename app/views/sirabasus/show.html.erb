@@ -30,10 +30,9 @@
 </table>
 
 <h2>画像</h2>
-<%= image_tag @image[0].image_path.url %>
-<%#= @image.each do |image| %>
-<%#= image_tag image.image_path.url %>
-<%# end %>
+<% @images.each do |image| %>
+<%= image_tag image.image_path.url %>
+<% end %>
 <h2>チェックリスト</h2>
 <table>
   <thead>

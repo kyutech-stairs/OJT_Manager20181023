@@ -17,7 +17,7 @@
             <%#= form.fields_for :images do |i| %>
             <%#= i.file_field :image_path %>
             <%# end %>
-            <%= form.file_field :image_path %>
+            <%= form.file_field :image_path, multiple: true%>
             <%= form.hidden_field :cid, value: current_kanrisya.cid %>
             <%= form.hidden_field :userid, value: current_kanrisya.id %>
 

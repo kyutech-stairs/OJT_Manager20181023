@@ -4,11 +4,15 @@ class SirabasuForm
   attr_accessor :number, :name, :content, :userid, :cid, :image_path
   validates :name, :content, presence: true
 
-  def save
+  def save(sirabasu_params)
       #return false if invalid?
 
       sirabasu = Sirabasu.new(name: name, content: content, number: number, userid: userid, cid: cid)
-      sirabasu.images.new(image_path: image_path)
+      
+      sirabasu_params[:image_path].each do |path|
+        sirabasu.images.new(image_path: path)
+      end
+      # sirabasu.images.new(image_path: image_path)
       sirabasu.save
   end
 end
@@ -21,7 +25,7 @@ class SirabasusController < ApplicationController
 
   def show
     @sirabasu = Sirabasu.find_by(number: params[:id], cid: current_kanrisya.cid)
-    @image = @sirabasu.images.all
+    @images = @sirabasu.images.all
     # @kanrisya = Kanrisya.find_by(id: @sirabasu.userid)
     @kanrisya = Kanrisya.find(@sirabasu.userid)
     @checklist = @sirabasu.checklists.all
@@ -44,7 +48,7 @@ class SirabasusController < ApplicationController
     @sirabasu_form = SirabasuForm.new(sirabasu_params)
     @new_num = Sirabasu.where(cid: current_kanrisya.cid).count + 1
     # if @sirabasu.save
-    if @sirabasu_form.save
+    if @sirabasu_form.save(sirabasu_params)
         redirect_to('/sirabasus')
     else
       render 'new'
@@ -92,7 +96,7 @@ class SirabasusController < ApplicationController
 
   def sirabasu_params
     # params.require(:sirabasu).permit(:number, :name, :content, :userid, :cid, sirabasus_attributes: [:image_path])
-    params.require(:sirabasu_form).permit(:number, :name, :content, :userid, :cid, :image_path)
+    params.require(:sirabasu_form).permit(:number, :name, :content, :userid, :cid, {image_path: []})
   end
 
   def user_params
