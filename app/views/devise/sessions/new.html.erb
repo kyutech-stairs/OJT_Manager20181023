@@ -1,14 +1,20 @@
-<h2>OJT_Manajer ログイン</h2>
+<div class="login-menu">
+<div class="message">
+<h1>OJTから始まる<br> 仕事の効率化をあなたに。</h1>
+<h2>by Kawano Keita</h2>
+</div>
+<div class=first-layer>
+  <h1>ログインする</h1>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", :class=> "input-box" %>
   </div>
 
   <div class="field">
     <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
+    <%= f.password_field :password, autocomplete: "off", :class=> "input-box" %>
   </div>
 
   <% if devise_mapping.rememberable? -%>
@@ -19,8 +25,10 @@
   <% end -%>
 
   <div class="actions">
-    <%= f.submit "Log in" %>
+    <%= f.submit "LOGIN", :class=> "link-button"%>
   </div>
-<% end %>
+  <% end %>
 
-<%= render "devise/shared/links" %>
+  <%= render "devise/shared/links" %>
+</div>
+</div>
