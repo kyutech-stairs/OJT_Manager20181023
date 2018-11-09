@@ -3,6 +3,15 @@
     <div class="background-box">
         <div class="content-area">
             <div class="content-title-input">
+            
+            <% if @sirabasu_form.errors.any? %>
+            <ul>
+                <% @sirabasu_form.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+                <% end %>
+                </ul>
+                <% end %>
+                
                 <p>シラバス作成</p>
                 <p>
                     <%= form.number_field :number,:readonly => true,:placeholder =>"章番号" , :value => "#{@new_num}" %>

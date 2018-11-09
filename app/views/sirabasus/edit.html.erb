@@ -1,4 +1,5 @@
-<%= form_for(@sirabasu) do |form| %>
+<%= form_with(model: @sirabasu_form, url: sirabasu_path) do |form| %>
+<%#= form_for(@sirabasu) do |form| %>
 <div class="content">
     <div class="background-box">
         <div class="content-area">
@@ -12,7 +13,7 @@
                 <%= form.text_area :content, :size => "50×15"%>
             </div>
             <%= form.file_field :image_path, multiple: true%>
-            <%#%= form.check_box :remove_image_path %>削除
+            <%#%= form.check_box :remove_image_path %>
             <div class="link-button">
                 <%= form.submit "保存" %>
             </div>

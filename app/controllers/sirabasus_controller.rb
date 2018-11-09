@@ -1,24 +1,46 @@
 # frozen_string_literal: true
 #シラバスと画像を保存するための操作をもつ
 class SirabasuForm
+  include Virtus.model
   include ActiveModel::Model
 
   attr_accessor :number, :name, :content, :userid, :cid, :image_path
+# attribute number: Integer
+# attribute name: String
+
   validates :name, :content, presence: true
+
+  def initialize(attr = {})
+    # puts '初期化'
+  #   unless attr["number"].nil?
+  #     puts 'numberでfind'
+  #     @sirabasu = Sirabasu.find_by(number: attr["number"])
+  #     puts '見つけた' #コンソール表示用（なくてもよい）
+  #     puts @sirabasu.id #コンソール表示用（なくてもよい）
+  #     puts @sirabasu.name #コンソール表示用（なくてもよい）
+  #     puts @sirabasu.content #コンソール表示用（なくてもよい）
+  #     self[:name] = attr[:name].nil? ? @sirabasu.name : attr[:name]
+  #     self[:content] = attr[:name].nil? ? @sirabasu.content : attr[:name]
+  #   end
+  end
 
   def save(sirabasu_params)
     # return false if invalid?
 
     sirabasu = Sirabasu.new(name: name, content: content, number: number, userid: userid, cid: cid)
-
+# sirabasu.save
     unless sirabasu_params[:image_path].nil?
       sirabasu_params[:image_path].each do |path|
         sirabasu.images.new(image_path: path)
       end
     end
-    # sirabasu.images.new(image_path: image_path)
     sirabasu.save
   end
+
+  # def update(sirabasu_params)
+
+  #   @sirabasu.update(name: name, content: content, number: number, userid: userid, cid: cid)
+  # end
 end
 
 class SirabasusController < ApplicationController
@@ -59,23 +81,26 @@ class SirabasusController < ApplicationController
     end
   end
 
+  def edit
+    if current_kanrisya.admin == true
+      # @sirabasu = Sirabasu.find_by(number: params[:id], cid: current_kanrisya.cid)
+      @sirabasu_form = SirabasuForm.new("number" => params[:id])
+    else
+      redirect_to '/user/not'
+   end
+  end
+
   # データを更新するためのAction
   def update
     # ここちょっとよくわからないですね（by 吉井）
-    @sirabasu = Sirabasu.find_by(id: params[:id], cid: current_kanrisya.cid)
-    if @sirabasu.update(sirabasu_params)
+    # @sirabasu = Sirabasu.find_by(id: params[:id], cid: current_kanrisya.cid)
+    @sirabasu_form = SirabasuForm.new(sirabasu_params.merge("number" => params[:id]))
+    # if @sirabasu.update(sirabasu_params)
+    if @sirabasu_form.update(sirabasu_params)
       redirect_to action: 'index'
     else
       render 'edit'
     end
-  end
-
-  def edit
-    if current_kanrisya.admin == true
-      @sirabasu = Sirabasu.find_by(number: params[:id], cid: current_kanrisya.cid)
-    else
-      redirect_to '/user/not'
-   end
   end
 
   # データを削除するためのAction
