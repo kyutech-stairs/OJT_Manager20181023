@@ -1,5 +1,5 @@
 class OjtTopController < ApplicationController
-  
+
   def kanri
   end
 
@@ -8,4 +8,5 @@ class OjtTopController < ApplicationController
   def top
 
   end
+
 end

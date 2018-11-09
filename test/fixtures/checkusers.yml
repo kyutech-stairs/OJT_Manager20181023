@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  kanrisya_id: 1
+  checklist_id: 1
+  check_ok: false
+
+two:
+  kanrisya_id: 1
+  checklist_id: 1
+  check_ok: false

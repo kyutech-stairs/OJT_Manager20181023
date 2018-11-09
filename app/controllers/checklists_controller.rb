@@ -23,6 +23,16 @@ class ChecklistsController < ApplicationController
     #@new_num = Checklist.count + 1
     @new_num = sirabasu.checklists.count + 1
     if @checklist.save
+      #中間テーブルへの保存開始
+      kanrisya = Kanrisya.where(cid: @checklist.cid).where(admin: false)
+      kanrisya.each do |i|
+      @checkuser = Checkuser.new(
+        kanrisya_id: i.id,
+        checklist_id: @checklist.id
+      )
+      @checkuser.save
+      end
+      #中間テーブルへの保存ここまで
       redirect_to sirabasu_path(sirabasu.number)
     else
       render "new"
