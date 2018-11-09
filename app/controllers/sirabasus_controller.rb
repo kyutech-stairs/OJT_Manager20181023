@@ -1,11 +1,11 @@
 class SirabasusController < ApplicationController
     def index
-      @sirabasu = Sirabasu.all.order(:number)
+      @sirabasu = Sirabasu.where(cid: current_kanrisya.cid).order(:number)
       #@checklist = Checklist.all.order(:number)
     end
 
     def show
-      @sirabasu = Sirabasu.find_by(number: params[:id])
+      @sirabasu = Sirabasu.find_by(number: params[:id],cid: current_kanrisya.cid)
       #@kanrisya = Kanrisya.find_by(id: @sirabasu.userid)
       @kanrisya = Kanrisya.find(@sirabasu.userid)
       @checklist = @sirabasu.checklists.all
@@ -17,7 +17,8 @@ class SirabasusController < ApplicationController
     def new
       if current_kanrisya.admin == true
        @sirabasu = Sirabasu.new
-       @new_num = Sirabasu.count + 1
+       @new_num = Sirabasu.where(cid: current_kanrisya.cid).count + 1
+       
       else
         redirect_to "/user/not"
       end
@@ -25,7 +26,7 @@ class SirabasusController < ApplicationController
 
     def create
       @sirabasu = Sirabasu.new(sirabasu_params)
-      @new_num = Sirabasu.count + 1
+      @new_num = Sirabasu.where(cid: current_kanrisya.cid).count + 1
       if @sirabasu.save
       redirect_to("/sirabasus")
       else
@@ -35,14 +36,19 @@ class SirabasusController < ApplicationController
 
     # データを更新するためのAction
     def update
-      @sirabasu = Sirabasu.find(params[:id])
-      @sirabasu.update(sirabasu_params)
+      #ここちょっとよくわからないですね（by 吉井）
+      @sirabasu = Sirabasu.find_by(id: params[:id],cid: current_kanrisya.cid)
+      if @sirabasu.update(sirabasu_params)
       redirect_to :action => "index"
+      else
+        render "edit"
+      end
     end
 
     def edit
       if current_kanrisya.admin == true
-        @sirabasu = Sirabasu.find_by(number: params[:id])
+        params[:id]
+        @sirabasu = Sirabasu.find_by(number: params[:id],cid: current_kanrisya.cid)
      else
        redirect_to "/user/not"
      end
@@ -51,9 +57,9 @@ class SirabasusController < ApplicationController
     # データを削除するためのAction
     def destroy
       if current_kanrisya.admin == true
-       @sirabasu = Sirabasu.find_by(number: params[:id])
+       @sirabasu = Sirabasu.find_by(number: params[:id],cid: current_kanrisya.cid)
        @sirabasu.destroy
-       @sirabasu = Sirabasu.all
+       @sirabasu = Sirabasu.where(cid: current_kanrisya.cid)
        i = 1
        @sirabasu.each do |sira|
          sira.number = i

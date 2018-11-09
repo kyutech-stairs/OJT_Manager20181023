@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
 class ChecklistsController < ApplicationController
-  def index
-    @checklist = Checklist.all
-  end
+  # def index
+  #   @checklist = Checklist.all
+  # end
 
   def new
     if current_kanrisya.admin == true
     @checklist = Checklist.new
     #@new_num = Checklist.count + 1
-    sirabasu = Sirabasu.find_by(number: params[:sirabasu_id])
+    sirabasu = Sirabasu.find_by(number: params[:sirabasu_id],cid: current_kanrisya.cid)
     @chapter = sirabasu.number
     @new_num = sirabasu.checklists.count + 1
     else
@@ -18,7 +18,7 @@ class ChecklistsController < ApplicationController
   end
 
   def create
-    sirabasu = Sirabasu.find_by(number: params[:sirabasu_id])
+    sirabasu = Sirabasu.find_by(number: params[:sirabasu_id],cid: current_kanrisya.cid)
     @checklist = sirabasu.checklists.new(checklist_params)
     #@new_num = Checklist.count + 1
     @new_num = sirabasu.checklists.count + 1
@@ -41,7 +41,7 @@ class ChecklistsController < ApplicationController
 
   def edit
     if current_kanrisya.admin == true
-     sirabasu = Sirabasu.find_by(number: params[:sirabasu_id])
+     sirabasu = Sirabasu.find_by(number: params[:sirabasu_id],cid: current_kanrisya.cid)
      @checklist = sirabasu.checklists.find_by(number: params[:id])
    else
      redirect_to "/user/not"
@@ -49,7 +49,7 @@ class ChecklistsController < ApplicationController
   end
 
   def update
-    sirabasu = Sirabasu.find_by(number: params[:sirabasu_id])
+    sirabasu = Sirabasu.find_by(number: params[:sirabasu_id],cid: current_kanrisya.cid)
     @checklist = sirabasu.checklists.find_by(params[:id])
     if @checklist.update(checklist_params)
     redirect_to sirabasu_path(sirabasu.number)
@@ -59,7 +59,7 @@ class ChecklistsController < ApplicationController
   end
 
   def destroy
-    sirabasu = Sirabasu.find_by(number: params[:sirabasu_id])
+    sirabasu = Sirabasu.find_by(number: params[:sirabasu_id],cid: current_kanrisya.cid)
     @checklist = sirabasu.checklists.find_by(number: params[:id])
     @checklist.destroy
     @checklist = sirabasu.checklists
