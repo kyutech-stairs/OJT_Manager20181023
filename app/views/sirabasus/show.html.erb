@@ -1,5 +1,15 @@
-<h2>シラバス</h2>
+<div class="first-box">
+  <div class="content-box">
+    <h1>シラバス</h1>
+    <h2><%= @sirabasu.number %>. <%= @sirabasu.name %></h2>
 
+    <div class="field">
+      <%= simple_format(@sirabasu.content) %>
+    </div>
+
+    <div class="field">
+      <%= link_to "編集", edit_sirabasu_path(@sirabasu.number), :class => "link-button" %>
+    </div>
 <table>
   <thead>
     <tr>
@@ -32,7 +42,12 @@
 <h2>画像</h2>
 <%#= image_tag @sirabasu.image.url %>
 -->
-<h2>チェックリスト</h2>
+  </div>
+</div>
+
+<div class="first-box">
+  <div class="content-box">
+    <h1>チェックリスト</h1>
 <table>
   <thead>
     <tr>
@@ -70,3 +85,5 @@
 <%= link_to 'チェックリスト作成', new_sirabasu_checklist_path(@sirabasu.number) %>
 <% end %>
 <%= link_to 'シラバス一覧へ戻る', sirabasus_path %>
+  </div>
+</div>
