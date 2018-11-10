@@ -9,8 +9,10 @@ class SirabasusController < ApplicationController
       #@kanrisya = Kanrisya.find_by(id: @sirabasu.userid)
       @kanrisya = Kanrisya.find(@sirabasu.userid)
       @checklist = @sirabasu.checklists.all
+    #@checklist.each do |i|
+       @checkuser = Checkuser.where(kanrisya_id: current_kanrisya).where(checklist_id: @checklist)
+      #end
     end
-
 
     def new
       if current_kanrisya.admin == true
@@ -76,6 +78,6 @@ class SirabasusController < ApplicationController
     end
 
     def user_params
-      params.require(:kanrisya).permit(:id,:name,:cid)
+      params.require(:kanrisya).permit(:id,:name,:cid, check:[])
     end
 end
