@@ -37,8 +37,8 @@ class UserController < ApplicationController
    end
   end
 
-  def show_check
-    
+  def checkuser
+
   end
 
   def hei

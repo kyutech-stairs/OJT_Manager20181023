@@ -5,6 +5,16 @@ class ChecklistsController < ApplicationController
   #   @checklist = Checklist.all
   # end
 
+  def checkuser
+   @sirabasu = Sirabasu.find(params[:sirabasu_id])
+   @checklist = @sirabasu.checklists.all
+   @kanrisya = Kanrisya.find(params[:kanrisya_id])
+   @checkuser = []
+   @checklist.each do |checklist|
+    @checkuser[checklist.number] = Checkuser.find_by(checklist_id: checklist.id,kanrisya_id: @kanrisya.id)
+   end
+  end
+
   def new
     if current_kanrisya.admin == true
     @checklist = Checklist.new
