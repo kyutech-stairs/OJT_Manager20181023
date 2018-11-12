@@ -17,12 +17,21 @@
   <body>
     <header>
       <div class="header-logo">OJT Manager</div>
+      <div class="header-link">
+        <%= link_to 'トップページ', '/ojt_top/top' %>　&emsp;
+        <%= link_to 'シラバス一覧', '/sirabasus/' %>　&emsp;
+        <%= link_to '従業員一覧', '/user/index' %>　&emsp;　&emsp;　&emsp;
+        <%= link_to 'ログアウト', '/ojt_top/top' %>
+      </div>
     </header>
 
     <%= yield %>
 
     <footer>
       <div class="footer-logo">OJT Manager</div>
+      <div class="footer-link">
+
+      </div>
     </footer>
   </body>
 </html>
