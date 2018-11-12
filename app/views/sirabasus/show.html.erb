@@ -7,9 +7,11 @@
       <%= simple_format(@sirabasu.content) %>
     </div>
 
-    <div class="field">
-      <%= link_to "編集", edit_sirabasu_path(@sirabasu.number), :class => "link-button" %>
-    </div>
+    <% if current_kanrisya.admin == true %>
+      <div class="field">
+        <%= link_to "編集", edit_sirabasu_path(@sirabasu.number), :class => "link-button" %>
+      </div>
+    <% end %>
 <table>
   <thead>
     <tr>
@@ -48,81 +50,7 @@
 <div class="first-box">
   <div class="content-box">
     <h1>チェックリスト</h1>
-<table>
-  <thead>
-    <tr>
-      <th>節番号</th>
-      <th>内容</th>
-      <% if current_kanrisya.admin == false %>
-      <th>チェックリスト</th>
-      <% end %>
-    </tr>
-  </thead>
-  <tbody>
-    <% @checklist.each do |checklist| %>
-    <% if current_kanrisya.cid == checklist.cid %>
-    <tr>
-      <td>
-        <%= checklist.number %>
-      </td>
-      <td>
-        <%= checklist.content %>
-      </td>
-      <% if current_kanrisya.admin == true %>
-       <td>
-         <%= link_to "編集", edit_sirabasu_checklist_path(@sirabasu.number,checklist.number) %>
-       </td>
-       <td>
-         <%= link_to "削除", sirabasu_checklist_path(@sirabasu.number,checklist.number), :method => :delete %>
-       </td>
-      <% end %>
-    </tr>
-    <% end %>
-    <% end %>
-  </tbody>
-</table>
-<% if current_kanrisya.admin == true %>
-<%= link_to 'チェックリスト作成', new_sirabasu_checklist_path(@sirabasu.number) %>
-<% end %>
-<%= link_to 'シラバス一覧へ戻る', sirabasus_path %>
-  </div>
-</div>
-<h2>シラバス</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>章番号</th>
-      <th>名前</th>
-      <th>内容</th>
-      <th>作成者</th>
-    </tr>
-  </thead>
-  <tbody>
-    <%# @sirabasus.each do |sirabasu| %>
-    <tr>
-      <td>
-        <%= @sirabasu.number %>
-      </td>
-      <td>
-        <%= @sirabasu.name %>
-      </td>
-      <td>
-        <%= @sirabasu.content %>
-      </td>
-      <td>
-        <%= @kanrisya.name %>
-      </td>
-    </tr>
-    <%# end %>
-  </tbody>
-</table>
-<!--
-<h2>画像</h2>
-<%#= image_tag @sirabasu.image.url %>
--->
-<h2>チェックリスト</h2>
-<%=form_tag({ controller: 'checkusers', action: 'checkup' },{ method: "post"}) do %>
+    <%=form_tag({ controller: 'checkusers', action: 'checkup' },{ method: "post"}) do %>
 <table>
   <thead>
     <tr>
@@ -171,7 +99,9 @@
 <%= link_to 'チェックリスト作成', new_sirabasu_checklist_path(@sirabasu.number) %>
 <% else %>
 <%= hidden_field_tag :AAAA, @sirabasu.number %>
-<%= submit_tag 'チェックの更新' %>
+<%= submit_tag 'チェックの更新', :class=> "link-button"%>
 <% end %>
 <% end %>
 <%= link_to 'シラバス一覧へ戻る', sirabasus_path %>
+  </div>
+</div>
