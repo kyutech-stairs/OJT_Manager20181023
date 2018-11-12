@@ -1,6 +1,6 @@
-<h1>
-  シラバス一覧ページ
-</h1>
+<div class="first-box">
+  <div class="content-box">
+    <h1>シラバス一覧ページ</h1>
 
 <h2>作成したシラバス</h2>
 
@@ -13,7 +13,7 @@
       -->
       <th>章番号</th>
       <th>名前</th>
-      <th>内容</th>
+      <!--<th>内容</th>-->
       <th>編集</th>
       <th>削除</th>
     </tr>
@@ -33,11 +33,13 @@
         <%= sirabasu.number %>
       </td>
       <td>
-         <%= link_to sirabasu.name, sirabasu_path(sirabasu.number) %>
+        <%= link_to sirabasu.name, sirabasu_path(sirabasu.number) %>
       </td>
+      <!--
       <td>
         <%= sirabasu.content %>
       </td>
+      -->
       <% if current_kanrisya.admin == true %>
       <td>
         <%= link_to "編集", edit_sirabasu_path(sirabasu.number) %>
@@ -56,3 +58,5 @@
 <p>
   <%= link_to 'トップへ', '/ojt_top/top' %>
 </p>
+  </div>
+</div>

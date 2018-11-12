@@ -52,6 +52,7 @@ textarea {
     padding: 5px;
 
     &:focus {
+        border: solid 2px;
         border-color: #283593;
         outline: none;
     }
@@ -66,8 +67,8 @@ textarea {
 .message {
     color: #000000;
     h1 {
-        font-size: 3rem;
-        font-weight: 400;
+        font-size: 2.7rem;
+        font-weight: 900;
     }
 }
 
@@ -77,8 +78,12 @@ textarea {
     padding: 30px 50px;
     background-color: #ffffff;
     border-radius: 10px;
-    width: 50%;
+    width: 45%;
     box-shadow: 0px 2px 5px rgba($color: #000000, $alpha: 0.25);
+
+    .input-box {
+        width: 80%;
+    }
 }
 
 .input-box {
@@ -89,6 +94,7 @@ textarea {
     height: 5vh;
 
     &:focus {
+        border: solid 2px;
         border-color: #283593;
         outline: none;
     }
@@ -119,14 +125,16 @@ textarea {
 }
 
 .link-button {
+    box-sizing: border-box;
+    text-decoration: none;
     display: inline-block;
     width: 200px;
     background-color: #283593;
     color: #ffffff;
+    text-align: center;
     border: none;
     border-radius: 10px;
     padding: 5px 0px;
     font-size: 1.5rem;
-    height: 60px;
     box-shadow: 0px 5px 8px rgba($color: #000000, $alpha: 0.3);
 }
