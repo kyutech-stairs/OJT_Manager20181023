@@ -1,62 +1,28 @@
 <div class="first-box">
   <div class="content-box">
-    <h1>シラバス一覧ページ</h1>
+    <h1>シラバス</h1>
 
-<h2>作成したシラバス</h2>
+    <div class="lists">
+      <p>一覧<p>
+      <table>
+        <tbody>
+          <% @sirabasu.each do |sirabasu| %>
+          <tr>
+            <td><%= sirabasu.number %>. </td>
+            <td><%= link_to sirabasu.name, sirabasu_path(sirabasu.number) %></td>
+            <% if current_kanrisya.admin == true %>
+              <td><%= link_to "編集", edit_sirabasu_path(sirabasu.number) %></td>
+              <td><%= link_to "削除", sirabasu_path(sirabasu.number), :method => :delete %></td>
+            <% end %>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
 
-<table>
-  <thead>
-    <tr>
-      <!--
-      <th>userid</th>
-      <th>cid</th>
-      -->
-      <th>章番号</th>
-      <th>名前</th>
-      <!--<th>内容</th>-->
-      <th>編集</th>
-      <th>削除</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @sirabasu.each do |sirabasu| %>
-    <tr>
-      <!--
-      <td>
-        <%=sirabasu.userid%>
-      </td>
-      <td>
-        <%= sirabasu.cid %>
-      </td>
-      -->
-      <td>
-        <%= sirabasu.number %>
-      </td>
-      <td>
-        <%= link_to sirabasu.name, sirabasu_path(sirabasu.number) %>
-      </td>
-      <!--
-      <td>
-        <%= sirabasu.content %>
-      </td>
-      -->
-      <% if current_kanrisya.admin == true %>
-      <td>
-        <%= link_to "編集", edit_sirabasu_path(sirabasu.number) %>
-      </td>
-      <td>
-        <%= link_to "削除", sirabasu_path(sirabasu.number), :method => :delete %>
-      </td>
-      <% end %>
-    </tr>
+    <% if current_kanrisya.admin == true %>
+      <%= link_to '新規作成', new_sirabasu_path, :class=> "link-button" %>
     <% end %>
-  </tbody>
-</table>
-<% if current_kanrisya.admin == true %>
-<%= link_to '新しいシラバスの作成', new_sirabasu_path %>
-<% end %>
-<p>
-  <%= link_to 'トップへ', '/ojt_top/top' %>
-</p>
+    <p><%= link_to 'トップへ', '/ojt_top/top' %></p>
   </div>
 </div>

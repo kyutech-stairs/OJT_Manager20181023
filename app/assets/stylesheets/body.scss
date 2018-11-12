@@ -35,6 +35,15 @@ footer {
     padding: 40px;
 }
 
+a {
+    text-decoration: none;
+    color: #1a0dab;
+
+    &:visited {
+        color: #1a0dab;
+    }
+}
+
 button, input, select, textarea {
     font-family: inherit;
     font-size: 100%;
@@ -49,6 +58,7 @@ textarea {
     box-sizing: border-box;
     border: solid 1px;
     border-radius: 10px;
+    border-color: #777777;
     padding: 5px;
 
     &:focus {
@@ -91,6 +101,7 @@ textarea {
     border: solid 1px;
     border-radius: 10px;
     padding: 0px 5px;
+    border-color: #777777;
     height: 5vh;
 
     &:focus {
@@ -119,6 +130,19 @@ textarea {
     margin: 0 auto;
 }
 
+.lists {
+    table {
+        border-collapse: collapse;
+        font-size: 1.5rem;
+    }
+
+    td {
+        border-width: 1px 0px;
+        border-style: solid;
+        border-color: #777777;
+    }
+}
+
 .field {
     margin: 15px 0px;
     font-size: 1.25rem;
@@ -137,4 +161,8 @@ textarea {
     padding: 5px 0px;
     font-size: 1.5rem;
     box-shadow: 0px 5px 8px rgba($color: #000000, $alpha: 0.3);
+
+    &:visited {
+        color: #ffffff;
+    }
 }
