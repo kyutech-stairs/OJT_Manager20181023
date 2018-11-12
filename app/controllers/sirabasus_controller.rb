@@ -10,8 +10,8 @@ class SirabasuForm
 
   validates :name, :content, presence: true
 
-  def initialize(attr = {})
-    # puts '初期化'
+  # def initialize(attr = {})
+  #   puts '初期化'
   #   unless attr["number"].nil?
   #     puts 'numberでfind'
   #     @sirabasu = Sirabasu.find_by(number: attr["number"])
@@ -22,22 +22,22 @@ class SirabasuForm
   #     self[:name] = attr[:name].nil? ? @sirabasu.name : attr[:name]
   #     self[:content] = attr[:name].nil? ? @sirabasu.content : attr[:name]
   #   end
-  end
+  # end
 
-  def save(sirabasu_params)
+  def save(sirabasu_form_params)
     # return false if invalid?
 
     sirabasu = Sirabasu.new(name: name, content: content, number: number, userid: userid, cid: cid)
 # sirabasu.save
-    unless sirabasu_params[:image_path].nil?
-      sirabasu_params[:image_path].each do |path|
+    unless sirabasu_form_params[:image_path].nil?
+      sirabasu_form_params[:image_path].each do |path|
         sirabasu.images.new(image_path: path)
       end
     end
     sirabasu.save
   end
 
-  # def update(sirabasu_params)
+  # def update(sirabasu_form_params)
 
   #   @sirabasu.update(name: name, content: content, number: number, userid: userid, cid: cid)
   # end
@@ -70,11 +70,11 @@ class SirabasusController < ApplicationController
   end
 
   def create
-    # @sirabasu = Sirabasu.new(sirabasu_params)
-    @sirabasu_form = SirabasuForm.new(sirabasu_params)
+    # @sirabasu = Sirabasu.new(sirabasu_form_params)
+    @sirabasu_form = SirabasuForm.new(sirabasu_form_params)
     @new_num = Sirabasu.where(cid: current_kanrisya.cid).count + 1
     # if @sirabasu.save
-    if @sirabasu_form.save(sirabasu_params)
+    if @sirabasu_form.save(sirabasu_form_params)
       redirect_to('/sirabasus')
     else
       render 'new'
@@ -83,8 +83,8 @@ class SirabasusController < ApplicationController
 
   def edit
     if current_kanrisya.admin == true
-      # @sirabasu = Sirabasu.find_by(number: params[:id], cid: current_kanrisya.cid)
-      @sirabasu_form = SirabasuForm.new("number" => params[:id])
+      @sirabasu = Sirabasu.find_by(number: params[:id], cid: current_kanrisya.cid)
+      # @sirabasu_form = SirabasuForm.new("number" => params[:id])
     else
       redirect_to '/user/not'
    end
@@ -93,10 +93,10 @@ class SirabasusController < ApplicationController
   # データを更新するためのAction
   def update
     # ここちょっとよくわからないですね（by 吉井）
-    # @sirabasu = Sirabasu.find_by(id: params[:id], cid: current_kanrisya.cid)
-    @sirabasu_form = SirabasuForm.new(sirabasu_params.merge("number" => params[:id]))
-    # if @sirabasu.update(sirabasu_params)
-    if @sirabasu_form.update(sirabasu_params)
+    @sirabasu = Sirabasu.find_by(id: params[:id], cid: current_kanrisya.cid)
+    # @sirabasu_form = SirabasuForm.new(sirabasu_form_params.merge("number" => params[:id]))
+    # if @sirabasu.update(sirabasu_form_params)
+    if @sirabasu_form.update(sirabasu_form_params)
       redirect_to action: 'index'
     else
       render 'edit'
@@ -122,7 +122,7 @@ class SirabasusController < ApplicationController
     end
   end
 
-  def sirabasu_params
+  def sirabasu_form_params
     # params.require(:sirabasu).permit(:number, :name, :content, :userid, :cid, sirabasus_attributes: [:image_path])
     params.require(:sirabasu_form).permit(:number, :name, :content, :userid, :cid, image_path: [])
   end
