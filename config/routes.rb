@@ -61,6 +61,8 @@ Rails.application.routes.draw do
   end
 
   post 'checkusers/checkup'
+  get 'checkusers/check'
+  get 'checklists/checkuser'
 
   get 'kanrisyas/new'
 

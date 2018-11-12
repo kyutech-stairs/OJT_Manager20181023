@@ -8,9 +8,37 @@ class UserController < ApplicationController
   def show
      @kanrisya = Kanrisya.find(params[:id])
    if @kanrisya.admin == false
-    @checkuser = Checkuser.where(kanrisya_id: params[:id]).where(check_ok: true)
+    #そのユーザーに関連するチェック判定全て
+    @checkuser = Checkuser.where(kanrisya_id: params[:id])
+    #そのユーザーがチェックしたもの全て
+    @checkuser_ok = Checkuser.where(kanrisya_id: params[:id]).where(check_ok: true)
+    #チェックした総数
+    @check_ok_count = @checkuser_ok.count
+    #そのユーザーに関係あるチェッく数
     @check_count = @checkuser.count
+    #全チェックの進捗%
+    @check_parcent = ((@check_ok_count/@check_count.to_f).round(2)*100).to_i
+    #ユーザーに関連するシラバスの情報
+    @sirabasu = Sirabasu.where(cid: @kanrisya.cid)
+    i = 0
+    @sirabasu_check_ok_parcent = []
+    while i < @sirabasu.count do
+     #シラバスに関係するチェックリストの取得
+     @sirabasu_check = @sirabasu[i].checklists.all
+     #チェックリストに関連するチェック判定の取得
+     @sirabasu_check_ok = 0
+     @sirabasu_check.each do |sirabasu_check|
+      sirabasu_check_ok = Checkuser.where(checklist_id: sirabasu_check.id).where(kanrisya_id: @kanrisya.id).where(check_ok: true)
+      @sirabasu_check_ok = @sirabasu_check_ok + sirabasu_check_ok.count
+     end
+     @sirabasu_check_ok_parcent[i] = ((@sirabasu_check_ok/(@sirabasu_check.count).to_f).round(2)*100).to_i
+     i = i + 1
+    end
    end
+  end
+
+  def checkuser
+
   end
 
   def hei

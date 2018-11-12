@@ -11,7 +11,14 @@
   <p><%= @kanrisya.sex %></p>
   <p>メールアドレス <%= @kanrisya.email %></p>
   <p>管理権限 <%= @kanrisya.admin %></p>
-  <p>チェック数 <%= @check_count %></p>
+  <% if @kanrisya.admin == false %>
+  <p>総チェック数 <%= @check_ok_count %></p>
+  <p>総チェック割合 <%= @check_parcent %>%</p>
+  <h4>シラバスごとの進捗</h4>
+  <% @sirabasu.each do |sirabasu| %>
+   <p><%= sirabasu.number %> <%=link_to sirabasu.name, checklists_checkuser_path(:sirabasu_id => sirabasu.id,:kanrisya_id => @kanrisya.id)%> <%= @sirabasu_check_ok_parcent[sirabasu.number-1] %>%</p>
+  <% end %>
+  <% end %>
  </div>
 
  <% if current_kanrisya.admin == true %>
