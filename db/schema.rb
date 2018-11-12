@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_05_122155) do
+ActiveRecord::Schema.define(version: 2018_11_06_022324) do
 
   create_table "checklists", force: :cascade do |t|
     t.integer "number"
@@ -20,6 +20,15 @@ ActiveRecord::Schema.define(version: 2018_11_05_122155) do
     t.integer "sirabasu_id"
     t.integer "cid"
     t.integer "userid"
+  end
+
+  create_table "checkusers", force: :cascade do |t|
+    t.integer "kanrisya_id"
+    t.integer "checklist_id"
+    t.boolean "check_ok", default: false, null: false
+    t.boolean "boolean", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "crews", force: :cascade do |t|
@@ -60,6 +69,7 @@ ActiveRecord::Schema.define(version: 2018_11_05_122155) do
     t.string "crew_number"
     t.boolean "admin", default: false, null: false
     t.integer "cid"
+    t.text "check"
     t.index ["email"], name: "index_kanrisyas_on_email", unique: true
     t.index ["reset_password_token"], name: "index_kanrisyas_on_reset_password_token", unique: true
   end

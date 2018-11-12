@@ -127,7 +127,7 @@ class SirabasusController < ApplicationController
     params.require(:sirabasu_form).permit(:number, :name, :content, :userid, :cid, image_path: [])
   end
 
-  def user_params
-    params.require(:kanrisya).permit(:id, :name, :cid)
-  end
+    def user_params
+      params.require(:kanrisya).permit(:id,:name,:cid, check:[])
+    end
 end

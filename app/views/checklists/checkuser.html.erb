@@ -1,0 +1,10 @@
+<h4><%= @sirabasu.name %></h4>
+<% @checklist.each do |checklist| %>
+ <p><%= checklist.content %>
+   <% if @checkuser[checklist.number].check_ok == true %>
+   〇
+   <% else %>
+   ✖
+ 　<% end %></p>
+<% end %>
+<%= link_to 'back', user_path(@kanrisya) %>

@@ -55,15 +55,22 @@ Rails.application.routes.draw do
   get 'kanri/kanri_user'
 
   resources :sirabasus do
-    resources :checklists
+    resources :checklists do
+      resources :checkusers
+    end
   end
 
-
+  post 'checkusers/checkup'
+  get 'checkusers/check'
+  get 'checklists/checkuser'
 
   get 'kanrisyas/new'
 
   resources :crews
-  resources :user
+  resources :user do
+    resources :checkusers
+  end
+
   get 'crews/index'
 
   get 'user/user_top'

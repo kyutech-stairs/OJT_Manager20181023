@@ -7,6 +7,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    color: #444444;
     font-family: 'Roboto','Noto Sans JP';
     background-color: #EEEFF1;
 }
@@ -32,4 +33,100 @@ footer {
     display: flex;
     font-size: 20px;
     padding: 40px;
+}
+
+button, input, select, textarea {
+    font-family: inherit;
+    font-size: 100%;
+    //-webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 25vh;
+    box-sizing: border-box;
+    border: solid 1px;
+    border-radius: 10px;
+    padding: 5px;
+
+    &:focus {
+        border-color: #283593;
+        outline: none;
+    }
+}
+
+.login-menu {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.message {
+    color: #000000;
+    h1 {
+        font-size: 3rem;
+        font-weight: 400;
+    }
+}
+
+.first-layer {
+    box-sizing: border-box;
+    margin: 5% 0;
+    padding: 30px 50px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    width: 50%;
+    box-shadow: 0px 2px 5px rgba($color: #000000, $alpha: 0.25);
+}
+
+.input-box {
+    box-sizing: border-box;
+    border: solid 1px;
+    border-radius: 10px;
+    padding: 0px 5px;
+    height: 5vh;
+
+    &:focus {
+        border-color: #283593;
+        outline: none;
+    }
+}
+
+.first-box {
+    margin: 5% auto;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    background-color: #ffffff;
+    border-radius: 10px;
+    width: 70%;
+    box-shadow: 0px 2px 5px rgba($color: #000000, $alpha: 0.25);
+
+    h1 {
+        font-size: 2rem;
+    }
+}
+
+.content-box {
+    width: 85%;
+    margin: 0 auto;
+}
+
+.field {
+    margin: 15px 0px;
+    font-size: 1.25rem;
+}
+
+.link-button {
+    display: inline-block;
+    width: 200px;
+    background-color: #283593;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    padding: 5px 0px;
+    font-size: 1.5rem;
+    height: 60px;
+    box-shadow: 0px 5px 8px rgba($color: #000000, $alpha: 0.3);
 }

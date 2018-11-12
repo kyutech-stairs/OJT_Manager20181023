@@ -4,4 +4,9 @@ class Kanrisya < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+  serialize :check
+
+  has_many :checkusers, dependent: :destroy
+  has_many :checklists, through: :checkusers
+  accepts_nested_attributes_for :checkusers
 end

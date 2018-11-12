@@ -33,13 +33,14 @@
 <%= image_tag image.image_path.url %>
 <% end %>
 <h2>チェックリスト</h2>
+<%=form_tag({ controller: 'checkusers', action: 'checkup' },{ method: "post"}) do %>
 <table>
   <thead>
     <tr>
       <th>節番号</th>
       <th>内容</th>
       <% if current_kanrisya.admin == false %>
-      <th>チェックリスト</th>
+      <th>チェックボックス</th>
       <% end %>
     </tr>
   </thead>
@@ -61,6 +62,17 @@
          <%= link_to "削除", sirabasu_checklist_path(@sirabasu.number,checklist.number), :method => :delete %>
        </td>
       <% end %>
+
+      <% if current_kanrisya.admin == false %>
+       <% @checkuser.each do |checkuser| %>
+        <% if checkuser.checklist_id == checklist.id %>
+        <%= hidden_field_tag 'checklist_id[]' ,checklist.id%>
+        <%= hidden_field_tag 'check_id[]' %>
+        <td>  <%= check_box_tag 'check_id[]' ,checklist.id,checkuser.check_ok %></td>
+      <% end %>
+      <% end %>
+      <% end %>
+
     </tr>
     <% end %>
     <% end %>
@@ -68,5 +80,9 @@
 </table>
 <% if current_kanrisya.admin == true %>
 <%= link_to 'チェックリスト作成', new_sirabasu_checklist_path(@sirabasu.number) %>
+<% else %>
+<%= hidden_field_tag :AAAA, @sirabasu.number %>
+<%= submit_tag 'チェックの更新' %>
+<% end %>
 <% end %>
 <%= link_to 'シラバス一覧へ戻る', sirabasus_path %>
