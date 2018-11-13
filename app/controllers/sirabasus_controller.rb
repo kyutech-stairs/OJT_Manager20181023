@@ -37,6 +37,7 @@ class SirabasusController < ApplicationController
   def edit
     if current_kanrisya.admin == true
       @sirabasu = Sirabasu.find_by(number: params[:id], cid: current_kanrisya.cid)
+      @checklist_num = 1
     else
       redirect_to '/user/not'
    end
@@ -46,6 +47,7 @@ class SirabasusController < ApplicationController
   def update
     # ここちょっとよくわからないですね（by 吉井）
     @sirabasu = Sirabasu.find_by(number: params[:id], cid: current_kanrisya.cid)
+    @checklist_num = 1
     if @sirabasu.update(sirabasu_params)
       redirect_to action: 'index'
     else
@@ -72,7 +74,7 @@ class SirabasusController < ApplicationController
   end
 
   def sirabasu_params
-    params.require(:sirabasu).permit(:number, :name, :content, :userid, :cid, images_attributes: [:image_path])
+    params.require(:sirabasu).permit(:number, :name, :content, :userid, :cid, images_attributes: [:image_path], checklists_attributes: [:id, :sirabasu_id, :number, :content, :user_id, :cid, :_destroy])
   end
 
     def user_params

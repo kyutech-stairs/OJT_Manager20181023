@@ -1,27 +1,37 @@
-<%= form_for @sirabasu,url: sirabasu_path do |form| %>
+<%= form_for @sirabasu,url: sirabasu_path do |f| %>
 <div class="first-box">
-  <div class="content-box">
-    <h1>シラバス作成</h1>
+    <div class="content-box">
+        <h1>シラバス編集</h1>
 
-    <div class="field">
-      <%= form.label :section_number, "章番号" %><br />
-      <%= form.number_field :number ,:readonly => true,:placeholder =>"章番号" ,:value => "#{@sirabasu.number}",:class => "input-box" %>
-    </div>
+        <div class="field">
+            <%= f.label :section_number, "章番号" %><br />
+            <%= f.number_field :number ,:readonly => true,:value => "#{@sirabasu.number}",:class => "input-box" %>
+        </div>
 
-    <div class="field">
-      <%= form.label :section_name, "タイトル" %><br />
-      <%= form.text_field :name ,:placeholder => "タイトル", :class => "input-box"%>
-    </div>
+        <div class="field">
+            <%= f.label :section_name, "タイトル" %><br />
+            <%= f.text_field :name ,:placeholder => "タイトル", :class => "input-box"%>
+        </div>
 
-    <div class="field">
-      <%= form.label :section_name, "内容" %><br />
-      <%= form.text_area :content, :class => "text-area"%>
+        <div class="field">
+            <%= f.label :section_name, "内容" %><br />
+            <%= f.text_area :content, :class => "text-area"%>
+        </div>
+        <%= f.nested_fields_for :checklists do |che| %>
+        <%= che.number_field :number ,:readonly => true %>
+        <div class="field">
+            <%= che.label :section_name, "チェックリスト" %><br />
+            <%= che.text_area :content, :class => "text-area", :size => "50×15"%>
+        </div>
+        <%= che.hidden_field :cid, value: current_kanrisya.cid %>
+        <%= che.hidden_field :userid, value: current_kanrisya.id %>
+        <%= che.remove_nested_fields_link 'Delete', role: 'button' %>
+        <% end %>
+        <%= f.add_nested_fields_link :checklists, 'Add', role: 'button' %>
+        <div class="field">
+            <%= f.submit "保存", :class=> "link-button"%>
+        </div>
     </div>
-
-    <div class="field">
-      <%= form.submit "保存", :class=> "link-button"%>
-    </div>
-  </div>
 </div>
 <% end %>
 
