@@ -45,7 +45,7 @@ class SirabasusController < ApplicationController
   # データを更新するためのAction
   def update
     # ここちょっとよくわからないですね（by 吉井）
-    @sirabasu = Sirabasu.find_by(id: params[:id], cid: current_kanrisya.cid)
+    @sirabasu = Sirabasu.find_by(number: params[:id], cid: current_kanrisya.cid)
     if @sirabasu.update(sirabasu_params)
       redirect_to action: 'index'
     else
