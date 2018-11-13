@@ -1,88 +1,108 @@
-<h2>シラバス</h2>
+<div class="first-box">
+  <div class="content-box">
+    <h1>シラバス</h1>
+    <h2>
+      <%= @sirabasu.number %>.
+      <%= @sirabasu.name %>
+    </h2>
 
-<table>
-  <thead>
-    <tr>
-      <th>章番号</th>
-      <th>名前</th>
-      <th>内容</th>
-      <th>作成者</th>
-    </tr>
-  </thead>
-  <tbody>
-    <%# @sirabasus.each do |sirabasu| %>
-    <tr>
-      <td>
-        <%= @sirabasu.number %>
-      </td>
-      <td>
-        <%= @sirabasu.name %>
-      </td>
-      <td>
-        <%= @sirabasu.content %>
-      </td>
-      <td>
-        <%= @kanrisya.name %>
-      </td>
-    </tr>
-    <%# end %>
-  </tbody>
-</table>
+    <div class="field">
+      <%= simple_format(@sirabasu.content) %>
+    </div>
 
-<% @images.each do |image| %>
-<%= image_tag image.image_path.url %>
-<% end %>
-<h2>チェックリスト</h2>
-<%=form_tag({ controller: 'checkusers', action: 'checkup' },{ method: "post"}) do %>
-<table>
-  <thead>
-    <tr>
-      <th>節番号</th>
-      <th>内容</th>
-      <% if current_kanrisya.admin == false %>
-      <th>チェックボックス</th>
-      <% end %>
-    </tr>
-  </thead>
-  <tbody>
-    <% @checklist.each do |checklist| %>
-    <% if current_kanrisya.cid == checklist.cid %>
-    <tr>
-      <td>
-        <%= checklist.number %>
-      </td>
-      <td>
-        <%= checklist.content %>
-      </td>
-      <% if current_kanrisya.admin == true %>
-       <td>
-         <%= link_to "編集", edit_sirabasu_checklist_path(@sirabasu.number,checklist.number) %>
-       </td>
-       <td>
-         <%= link_to "削除", sirabasu_checklist_path(@sirabasu.number,checklist.number), :method => :delete %>
-       </td>
-      <% end %>
+    <% if current_kanrisya.admin == true %>
+    <div class="field">
+      <%= link_to "編集", edit_sirabasu_path(@sirabasu.number), :class => "link-button" %>
+    </div>
+    <% end %>
+    <table>
+      <thead>
+        <tr>
+          <th>章番号</th>
+          <th>名前</th>
+          <th>内容</th>
+          <th>作成者</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%# @sirabasus.each do |sirabasu| %>
+        <tr>
+          <td>
+            <%= @sirabasu.number %>
+          </td>
+          <td>
+            <%= @sirabasu.name %>
+          </td>
+          <td>
+            <%= @sirabasu.content %>
+          </td>
+          <td>
+            <%= @kanrisya.name %>
+          </td>
+        </tr>
+        <%# end %>
+      </tbody>
+    </table>
+  </div>
+</div>
 
-      <% if current_kanrisya.admin == false %>
-       <% @checkuser.each do |checkuser| %>
-        <% if checkuser.checklist_id == checklist.id %>
-        <%= hidden_field_tag 'checklist_id[]' ,checklist.id%>
-        <%= hidden_field_tag 'check_id[]' %>
-        <td>  <%= check_box_tag 'check_id[]' ,checklist.id,checkuser.check_ok %></td>
-      <% end %>
-      <% end %>
-      <% end %>
+<div class="first-box">
+  <div class="content-box">
+    <h1>チェックリスト</h1>
+    <%=form_tag({ controller: 'checkusers', action: 'checkup' },{ method: "post"}) do %>
+    <table>
+      <thead>
+        <tr>
+          <th>節番号</th>
+          <th>内容</th>
+          <% if current_kanrisya.admin == false %>
+          <th>チェックボックス</th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <% @checklist.each do |checklist| %>
+        <% if current_kanrisya.cid == checklist.cid %>
+        <tr>
+          <td>
+            <%= checklist.number %>
+          </td>
+          <td>
+            <%= checklist.content %>
+          </td>
+          <% if current_kanrisya.admin == true %>
+          <td>
+            <%= link_to "編集", edit_sirabasu_checklist_path(@sirabasu.number,checklist.number) %>
+          </td>
+          <td>
+            <%= link_to "削除", sirabasu_checklist_path(@sirabasu.number,checklist.number), :method => :delete %>
+          </td>
+          <% end %>
 
-    </tr>
+          <% if current_kanrisya.admin == false %>
+          <% @checkuser.each do |checkuser| %>
+          <% if checkuser.checklist_id == checklist.id %>
+          <%= hidden_field_tag 'checklist_id[]' ,checklist.id%>
+          <%= hidden_field_tag 'check_id[]' %>
+          <td>
+            <%= check_box_tag 'check_id[]' ,checklist.id,checkuser.check_ok %>
+          </td>
+          <% end %>
+          <% end %>
+          <% end %>
+
+        </tr>
+        <% end %>
+        <% end %>
+      </tbody>
+    </table>
+    <% if current_kanrisya.admin == true %>
+    <%= link_to 'チェックリスト作成', new_sirabasu_checklist_path(@sirabasu.number) %>
+    <% else %>
+    <%= hidden_field_tag :AAAA, @sirabasu.number %>
+    <%= submit_tag 'チェックの更新', :class=> "link-button"%>
     <% end %>
     <% end %>
-  </tbody>
-</table>
-<% if current_kanrisya.admin == true %>
-<%= link_to 'チェックリスト作成', new_sirabasu_checklist_path(@sirabasu.number) %>
-<% else %>
-<%= hidden_field_tag :AAAA, @sirabasu.number %>
-<%= submit_tag 'チェックの更新' %>
-<% end %>
-<% end %>
-<%= link_to 'シラバス一覧へ戻る', sirabasus_path %>
+    <%= link_to 'シラバス一覧へ戻る', sirabasus_path %>
+  </div>
+</div>

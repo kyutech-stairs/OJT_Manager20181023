@@ -1,10 +1,6 @@
 # frozen_string_literal: true
 
 class ChecklistsController < ApplicationController
-  # def index
-  #   @checklist = Checklist.all
-  # end
-
   def checkuser
    @sirabasu = Sirabasu.find(params[:sirabasu_id])
    @checklist = @sirabasu.checklists.all

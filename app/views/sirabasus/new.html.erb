@@ -1,25 +1,28 @@
-<%= form_with(model: @sirabasu_form, url: sirabasus_path) do |form| %>
-<div class="content">
+<%= form_for(@sirabasu) do |form| %>
+<div class="first-box">
+  <div class="content-box">
+    <h1>シラバス作成</h1>
 
-  <div class="field">
-    <%= form.label :section_number, "章番号" %><br />
-    <%= form.number_field :number ,:readonly => true,:placeholder =>"章番号" ,:value => "#{@new_num}",:class => "input-box" %>
-  </div>
-  <div class="field">
-    <%= form.label :section_name, "タイトル" %><br />
-    <%= form.text_field :name ,:placeholder => "タイトル", :class => "input-box"%>
-  </div>
+    <div class="field">
+      <%= form.label :section_number, "章番号" %><br />
+      <%= form.number_field :number ,:readonly => true,:placeholder =>"章番号" ,:value => "#{@new_num}",:class => "input-box" %>
+    </div>
+    <div class="field">
+      <%= form.label :section_name, "タイトル" %><br />
+      <%= form.text_field :name ,:placeholder => "タイトル", :class => "input-box"%>
+    </div>
 
-  <div class="field">
-    <%= form.label :section_name, "内容" %><br />
-    <%= form.text_area :content, :class =>"text-area" %>
-  </div>
-  <%= form.file_field :image_path, multiple: true%>
-  <%= form.hidden_field :cid, value: current_kanrisya.cid %>
-  <%= form.hidden_field :userid, value: current_kanrisya.id %>
+    <div class="field">
+      <%= form.label :section_name, "内容" %><br />
+      <%= form.text_area :content, :class =>"text-area" %>
+    </div>
+<%= form.file_field :image_path, multiple: true %>
+    <%= form.hidden_field :cid, value: current_kanrisya.cid %>
+    <%= form.hidden_field :userid, value: current_kanrisya.id %>
 
-  <div>
-    <%= form.submit "登録", :class =>"link-button"%>
+    <div class="field">
+      <%= form.submit "登録", :class =>"link-button"%>
+    </div>
   </div>
 </div>
 <% end %>
