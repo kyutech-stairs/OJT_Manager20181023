@@ -61,3 +61,5 @@ gem 'carrierwave', '~> 1.0'
 gem 'virtus'
 
 gem 'nested_form_fields'
+
+gem 'jquery-rails'
