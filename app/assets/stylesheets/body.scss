@@ -25,8 +25,20 @@ header {
 }
 
 .header-link{
+    display: flex;
     padding: 20px 40px;
     font-size: 1rem;
+}
+
+.header-link-left {
+    display: flex;
+    p {
+      margin: 0rem 0.7rem;
+    }
+  }
+
+.header-link-right{
+    margin-left: 2.5rem;
 }
 
 footer {
