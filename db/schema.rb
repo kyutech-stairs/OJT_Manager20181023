@@ -43,6 +43,13 @@ ActiveRecord::Schema.define(version: 2018_11_06_022324) do
     t.string "password_digest"
   end
 
+  create_table "images", force: :cascade do |t|
+    t.string "image_path"
+    t.integer "sirabasu_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "kanrisyas", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false

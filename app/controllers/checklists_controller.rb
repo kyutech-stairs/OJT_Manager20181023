@@ -1,10 +1,6 @@
 # frozen_string_literal: true
 
 class ChecklistsController < ApplicationController
-  # def index
-  #   @checklist = Checklist.all
-  # end
-
   def checkuser
    @sirabasu = Sirabasu.find(params[:sirabasu_id])
    @checklist = @sirabasu.checklists.all
@@ -17,20 +13,20 @@ class ChecklistsController < ApplicationController
 
   def new
     if current_kanrisya.admin == true
-    @checklist = Checklist.new
-    #@new_num = Checklist.count + 1
-    sirabasu = Sirabasu.find_by(number: params[:sirabasu_id],cid: current_kanrisya.cid)
-    @chapter = sirabasu.number
-    @new_num = sirabasu.checklists.count + 1
+      @checklist = Checklist.new
+      # @new_num = Checklist.count + 1
+      sirabasu = Sirabasu.find_by(number: params[:sirabasu_id], cid: current_kanrisya.cid)
+      @chapter = sirabasu.number
+      @new_num = sirabasu.checklists.count + 1
     else
-     redirect_to "/user/not"
+      redirect_to '/user/not'
     end
   end
 
   def create
-    sirabasu = Sirabasu.find_by(number: params[:sirabasu_id],cid: current_kanrisya.cid)
+    sirabasu = Sirabasu.find_by(number: params[:sirabasu_id], cid: current_kanrisya.cid)
     @checklist = sirabasu.checklists.new(checklist_params)
-    #@new_num = Checklist.count + 1
+    # @new_num = Checklist.count + 1
     @new_num = sirabasu.checklists.count + 1
     if @checklist.save
       #中間テーブルへの保存開始
@@ -45,31 +41,31 @@ class ChecklistsController < ApplicationController
       #中間テーブルへの保存ここまで
       redirect_to sirabasu_path(sirabasu.number)
     else
-      render "new"
+      render 'new'
     end
   end
 
   def edit
     if current_kanrisya.admin == true
-     sirabasu = Sirabasu.find_by(number: params[:sirabasu_id],cid: current_kanrisya.cid)
-     @checklist = sirabasu.checklists.find_by(number: params[:id])
-   else
-     redirect_to "/user/not"
+      sirabasu = Sirabasu.find_by(number: params[:sirabasu_id], cid: current_kanrisya.cid)
+      @checklist = sirabasu.checklists.find_by(number: params[:id])
+    else
+      redirect_to '/user/not'
    end
   end
 
   def update
-    sirabasu = Sirabasu.find_by(number: params[:sirabasu_id],cid: current_kanrisya.cid)
+    sirabasu = Sirabasu.find_by(number: params[:sirabasu_id], cid: current_kanrisya.cid)
     @checklist = sirabasu.checklists.find_by(params[:id])
     if @checklist.update(checklist_params)
-    redirect_to sirabasu_path(sirabasu.number)
+      redirect_to sirabasu_path(sirabasu.number)
     else
-      render "edit"
+      render 'edit'
     end
   end
 
   def destroy
-    sirabasu = Sirabasu.find_by(number: params[:sirabasu_id],cid: current_kanrisya.cid)
+    sirabasu = Sirabasu.find_by(number: params[:sirabasu_id], cid: current_kanrisya.cid)
     @checklist = sirabasu.checklists.find_by(number: params[:id])
     @checklist.destroy
     @checklist = sirabasu.checklists

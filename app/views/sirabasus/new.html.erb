@@ -16,7 +16,7 @@
       <%= form.label :section_name, "内容" %><br />
       <%= form.text_area :content, :class =>"text-area" %>
     </div>
-
+<%= form.file_field :image_path, multiple: true %>
     <%= form.hidden_field :cid, value: current_kanrisya.cid %>
     <%= form.hidden_field :userid, value: current_kanrisya.id %>
 
