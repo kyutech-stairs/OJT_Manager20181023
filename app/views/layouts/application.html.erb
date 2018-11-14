@@ -17,12 +17,29 @@
   <body>
     <header>
       <div class="header-logo">OJT Manager</div>
+      <% if kanrisya_signed_in? %>
+        <div class="header-link">
+          <div class="header-link-left">
+            <p><%= link_to 'トップページ', '/ojt_top/top' %></p>
+            <p><%= link_to 'シラバス一覧', '/sirabasus/' %></p>
+            <p><%= link_to '従業員一覧', '/user/index' %></p>
+          </div>
+          <div class="header-link-right">
+            <%= link_to('ログアウト', destroy_kanrisya_session_path, :method => :delete) %>
+          </div>
+        </div>
+      <% end %>
     </header>
 
-    <%= yield %>
+    <div class="contents">
+      <%= yield %>
+    </div>
 
     <footer>
       <div class="footer-logo">OJT Manager</div>
+      <div class="footer-link">
+
+      </div>
     </footer>
   </body>
 </html>
