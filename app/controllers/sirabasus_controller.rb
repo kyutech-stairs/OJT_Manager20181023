@@ -38,7 +38,7 @@ class SirabasusController < ApplicationController
   def edit
     if current_kanrisya.admin == true
       @sirabasu = Sirabasu.find_by(number: params[:id], cid: current_kanrisya.cid)
-      @sirabasu.checklists.build
+      # @sirabasu.checklists.build
       @checklist_num = 1
     else
       redirect_to '/user/not'
