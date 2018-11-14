@@ -9,9 +9,12 @@ class SirabasusController < ApplicationController
   def show
     @sirabasu = Sirabasu.find_by(number: params[:id], cid: current_kanrisya.cid)
     @images = @sirabasu.images.all
-    # @kanrisya = Kanrisya.find_by(id: @sirabasu.userid)
+    #シラバスを作った管理者が見つかる
     @kanrisya = Kanrisya.find(@sirabasu.userid)
+    # 今選択しているシラバスに紐付くチェックリストを抽出
     @checklist = @sirabasu.checklists.all
+    # 今ログインしている従業員に紐づくレコードを抽出
+    @checkuser = Kanrisya.find(current_kanrisya.id).checkusers.all
   end
 
   def new
