@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class SirabasusController < ApplicationController
   def index
     @sirabasu = Sirabasu.where(cid: current_kanrisya.cid).order(:number)
@@ -16,7 +17,7 @@ class SirabasusController < ApplicationController
   def new
     if current_kanrisya.admin == true
       @sirabasu = Sirabasu.new
-      @sirabasu.images.build
+      # @sirabasu.images.build
       @new_num = Sirabasu.where(cid: current_kanrisya.cid).count + 1
 
     else
@@ -37,6 +38,7 @@ class SirabasusController < ApplicationController
   def edit
     if current_kanrisya.admin == true
       @sirabasu = Sirabasu.find_by(number: params[:id], cid: current_kanrisya.cid)
+      @sirabasu.checklists.build
       @checklist_num = 1
     else
       redirect_to '/user/not'
@@ -48,7 +50,24 @@ class SirabasusController < ApplicationController
     # ここちょっとよくわからないですね（by 吉井）
     @sirabasu = Sirabasu.find_by(number: params[:id], cid: current_kanrisya.cid)
     @checklist_num = 1
+    # シラバスの更新、チェックリストの作成・更新
     if @sirabasu.update(sirabasu_params)
+      num = 1
+      # numberカラムの振り分け
+      @sirabasu.checklists.each do |che|
+        che.update_attributes(number: num)
+        # 管理者でなく、cidの一致するユーザすべて
+        kanrisya = Kanrisya.where(cid: che.cid).where(admin: false)
+
+        kanrisya.each do |i|
+          # レコードの重複を避ける
+          next if Checkuser.find_by(checklist_id: che.id, kanrisya_id: i.id)
+          che.checkusers.create(
+            kanrisya_id: i.id
+          )
+        end
+        num += 1
+      end
       redirect_to action: 'index'
     else
       render 'edit'
@@ -74,10 +93,10 @@ class SirabasusController < ApplicationController
   end
 
   def sirabasu_params
-    params.require(:sirabasu).permit(:number, :name, :content, :userid, :cid, images_attributes: [:image_path], checklists_attributes: [:id, :sirabasu_id, :number, :content, :user_id, :cid, :_destroy])
+    params.require(:sirabasu).permit(:number, :name, :content, :userid, :cid, images_attributes: [:image_path], checklists_attributes: [:id, :sirabasu_id, :number, :content, :userid, :cid, :_destroy])
   end
 
-    def user_params
-      params.require(:kanrisya).permit(:id,:name,:cid, check:[])
-    end
+  def user_params
+    params.require(:kanrisya).permit(:id, :name, :cid, check: [])
+  end
 end
