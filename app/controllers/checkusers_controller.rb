@@ -2,11 +2,14 @@ class CheckusersController < ApplicationController
   def checkup
     @dekita = Checkuser.where("checklist_id in (?)", params[:check_id]).where(kanrisya_id: current_kanrisya.id)
     @checkuser = Checkuser.where("checklist_id in (?)", params[:checklist_id]).where(kanrisya_id: current_kanrisya.id)
+    user = Kanrisya.find(current_kanrisya.id)
     @checkuser.update(check_ok: false)
     @checkuser.each do |c|
       @dekita.each do |d|
       if c.id == d.id
-       c.update(check_ok: true)
+       if c.update(check_ok: true)
+         user.update(check_time: Time.now)
+       end
       end
     end
     end
