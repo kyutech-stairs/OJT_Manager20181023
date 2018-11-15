@@ -4,9 +4,16 @@
 
     <p> ログインしている管理ユーザー →<%= link_to current_kanrisya.name,'/user/hei' %></p>
 
-    <p><%= link_to 'シラバス', '/sirabasus' %></p>
+    <h4>最近チェック更新を行ったユーザー</h4>
+    <% @checkuser.each do |checkuser| %>
+    <% if @user[checkuser.id].cid == current_kanrisya.cid &&  @user[checkuser.id].check_time.present?%>
+    <p><%=link_to @user[checkuser.id].name, user_path(@user[checkuser.id])%></p>
+    <% end %>
+    <% end %>
 
-    <p><%= link_to 'クルー確認', '/user/index' %></p>
+    <h4><%= link_to 'シラバス', '/sirabasus' %></h4>
+
+    <h4><%= link_to 'クルー確認', '/user/index' %></h4>
 
     <p><%= link_to('Logout', destroy_kanrisya_session_path, :method => :delete) %></p>
   </div>
