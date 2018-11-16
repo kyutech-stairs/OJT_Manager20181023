@@ -15,6 +15,8 @@
 <%= f.password_field :password %></p>
 <p><%= f.label :password_confirmation, 'パスワード（もう１度ご入力ください）' %>
 <%= f.password_field :password_confirmation %></p>
+<p><%= f.label :image, 'プロフィール画像' %>
+<%= f.file_field :image %></p>
 <p><%= f.label :admin, '管理権限を与える場合はチェックを入れてください' %>
 <%= f.check_box :admin, { }, true, false %>
 </p>

@@ -6,6 +6,8 @@ class Kanrisya < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   serialize :check
 
+  mount_uploader :image, ImageUploader
+  
   has_many :checkusers, dependent: :destroy
   has_many :checklists, through: :checkusers
   accepts_nested_attributes_for :checkusers

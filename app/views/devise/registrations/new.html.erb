@@ -39,6 +39,11 @@
   </div>
 
   <div class="field">
+    <%= f.label :image, 'プロフィール画像' %>
+    <%= f.file_field :image %>
+  </div>
+
+  <div class="field">
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off", :class => "input-box" %>
   </div>
