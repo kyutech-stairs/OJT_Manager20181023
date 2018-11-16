@@ -9,6 +9,11 @@
 <%= f.number_field :age %></p>
 <p><%= f.label :email, 'メールアドレス' %>
 <%= f.email_field :email %></p>
+<p><%= f.label :image, 'プロフィール画像' %></p>
+<% if  @kanrisya.image.present?%>
+  <%= image_tag @kanrisya.image.url, :size =>'200x200' %>
+<% end %>
+<p><%= f.file_field :image %></p>
 
 <p><%= f.submit '登録する' %></p>
 <% end %>

@@ -96,7 +96,7 @@ class UserController < ApplicationController
   end
 
   def kanrisya_params
-  params.require(:kanrisya).permit(:name, :email, :password, :password_confirmation, :crew_number, :age, :sex, :admin, :cid, check:[])
+  params.require(:kanrisya).permit(:name, :email, :password, :password_confirmation, :crew_number, :age, :sex, :admin, :cid, :image)
   end
 
   def user_top
