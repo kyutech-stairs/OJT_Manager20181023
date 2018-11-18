@@ -2,8 +2,19 @@
 
 class SirabasusController < ApplicationController
   def index
-    @sirabasu = Sirabasu.where(cid: current_kanrisya.cid).order(:number)
-    # @checklist = Checklist.all.order(:number)
+    if current_kanrisya.admin == true
+      @sirabasu = Sirabasu.where(cid: current_kanrisya.cid).order(:number)
+    else
+      @sirabasu = []
+      stat = true
+      Sirabasu.where(cid: current_kanrisya.cid).order(:number).each do |s|
+        # 1つめはかならず表示
+        if s.number == 1 || stat
+          @sirabasu.push(s)
+        end
+        stat = is_this_sirabasu_done(s) # これがtrueなら、次のシラバスを表示
+      end
+    end
   end
 
   def show
@@ -101,5 +112,16 @@ class SirabasusController < ApplicationController
 
   def user_params
     params.require(:kanrisya).permit(:id, :name, :cid, check: [])
+  end
+
+  # そのシラバスは進捗100%ですか？
+  def is_this_sirabasu_done(sirabasu)
+    che = sirabasu.checklists.all
+    che.each do |c|
+      unless Checkuser.find_by(kanrisya_id: current_kanrisya.id,checklist_id: c.id).check_ok
+        return false
+      end
+    end
+    return true
   end
 end
