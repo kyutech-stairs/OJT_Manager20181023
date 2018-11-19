@@ -5,10 +5,17 @@ class ChecklistsController < ApplicationController
    @sirabasu = Sirabasu.find(params[:sirabasu_id])
    @checklist = @sirabasu.checklists.all
    @kanrisya = Kanrisya.find(params[:kanrisya_id])
+   @sirabasuuser = Sirabasuuser.find_by(sirabasu_id: @sirabasu.id,kanrisya_id: @kanrisya.id)
    @checkuser = []
+   i = 0
    @checklist.each do |checklist|
     @checkuser[checklist.number] = Checkuser.find_by(checklist_id: checklist.id,kanrisya_id: @kanrisya.id)
+    if @checkuser[checklist.number].check_ok == true
+      i = i + 1
+    end
    end
+     @check_parcent = ((i/@checklist.count.to_f).round(2)*100).to_i
+     @s = Sirabasuuser.find_by(sirabasu_id: @sirabasu.id,kanrisya_id: current_kanrisya.id)
   end
 
   def new
