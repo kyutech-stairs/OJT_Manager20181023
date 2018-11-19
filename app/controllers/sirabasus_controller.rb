@@ -110,6 +110,27 @@ class SirabasusController < ApplicationController
     redirect_to user_path(params[:BBBB])
   end
 
+  def publishing_config
+    @sirabasu = Sirabasu.where(cid: current_kanrisya.cid).order(:number)
+    @now = Sirabasu.find_by(number: params[:id], cid: current_kanrisya.cid)
+    @num = @now.number
+    @conf = @now.publishing_configs.all
+  end
+
+  def publishing_config_update
+    @now = Sirabasu.find_by(number: params[:id], cid: current_kanrisya.cid)
+    @now_c = @now.publishing_configs.all
+    # unless @now_c.empty?
+      @now_c.destroy_all
+    # end
+    params[:sirabasu_id].each do |p|
+      unless p.empty?
+        @now.publishing_configs.create(required_sirabasu: p)
+      end
+    end
+    redirect_to '/sirabasus'
+  end
+
   def sirabasu_params
     params.require(:sirabasu).permit(:number, :name, :content, :userid, :cid, {image: []}, images_attributes: [:image_path], checklists_attributes: [:id, :sirabasu_id, :number, :content, :userid, :cid, :_destroy])
   end

@@ -76,6 +76,13 @@ ActiveRecord::Schema.define(version: 2018_11_19_121059) do
     t.index ["reset_password_token"], name: "index_kanrisyas_on_reset_password_token", unique: true
   end
 
+  create_table "publishing_configs", force: :cascade do |t|
+    t.integer "sirabasu_id"
+    t.integer "required_sirabasu"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "sessions", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
