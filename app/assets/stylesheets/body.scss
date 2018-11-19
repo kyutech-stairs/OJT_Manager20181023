@@ -84,18 +84,22 @@ button, input, select, textarea {
 
 textarea {
     resize: none;
-    min-height: 25vh;
     box-sizing: border-box;
     border: solid 1px;
     border-radius: 10px;
     border-color: #777777;
     padding: 5px;
+    width: 100%;
 
     &:focus {
         border: solid 2px;
         border-color: #283593;
         outline: none;
     }
+}
+
+.text-area {
+    min-height: 25vh;
 }
 
 .login-menu {
@@ -186,12 +190,16 @@ textarea {
     background-color: #283593;
     color: #ffffff;
     text-align: center;
+    align-items: center;
     border: none;
     border-radius: 10px;
     padding: 5px 0px;
     font-size: 1.5rem;
     box-shadow: 0px 5px 8px rgba($color: #000000, $alpha: 0.3);
 
+    a {
+        color: #ffffff;
+    }
     &:visited {
         color: #ffffff;
     }
@@ -228,4 +236,8 @@ textarea {
     p {
       font-size: 1.5rem;
     }
+}
+
+.checklist {
+    font-size: 2rem;
 }
