@@ -1,12 +1,16 @@
-<% if @kanrisya.cid == current_kanrisya.cid %>
- <div >
-  <h3 ><%= @kanrisya.name %></h3>
+<div class="first-box">
+  <div class="content-box">
+  <h1>プロフィール</h1>
+  <% if @kanrisya.cid == current_kanrisya.cid %>
+  
+  <div class="field">
+  <h3><%= @kanrisya.name %></h3>
   <% if  @kanrisya.image.present?%>
     <%= image_tag @kanrisya.image.url, :size =>'200x200' %>
   <% end %>
  </div>
 
-  </aside>
+  <div>
   <p>社員番号 <%= @kanrisya.crew_number %></p>
   <% if @kanrisya.age.present? %>
     <p>年齢<%= @kanrisya.age %></p>
@@ -33,3 +37,5 @@
 <% end %>
 
 <%= link_to '一覧へ', "/user/index" %>
+  </div>
+</div>

@@ -31,7 +31,7 @@
         <div class="fields">
             <%#= che.number_field :number ,:readonly => true, :value %>
             <%= che.hidden_field :number , :value => "#{@checklist_num}"%>
-            <%= che.text_area :content, :class => "text-area", :size => "50×15"%>
+            <%= che.text_area :content, :class => "text-area" %>
             <%= che.hidden_field :cid, value: current_kanrisya.cid %>
             <%= che.hidden_field :userid, value: current_kanrisya.id %>
             <%= che.remove_nested_fields_link '削除', class: 'btn btn-danger', role: 'button' %>

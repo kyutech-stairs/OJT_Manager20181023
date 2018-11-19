@@ -83,7 +83,7 @@ button, input, select, textarea {
 }
 
 textarea {
-    resize: vertical;
+    resize: none;
     min-height: 25vh;
     box-sizing: border-box;
     border: solid 1px;
