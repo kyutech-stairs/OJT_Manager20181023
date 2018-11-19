@@ -59,6 +59,7 @@ Rails.application.routes.draw do
       resources :checkusers
     end
   end
+  post "sirabasus/image_destroy"
 
   post 'checkusers/checkup'
   get 'checkusers/check'

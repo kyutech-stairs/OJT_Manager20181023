@@ -42,8 +42,10 @@
       </tbody>
     </table>
     <% if @sirabasu.image?%>
+    <% i = 1 %>
     <% @sirabasu.image.each do |image|%>
-    <%=image_tag image.url , :size =>'130x130'%>
+    <%=image_tag image.url , :size =>'130x130'%>画像<%= i%>
+    <% i = i + 1 %>
     <% end %>
     <% end %>
   </div>
