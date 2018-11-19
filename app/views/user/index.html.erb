@@ -10,15 +10,15 @@
   </thead>
   <tbody>
     <% @kanrisya.each do |kanrisya| %>
+    <% if kanrisya.cid == current_kanrisya.cid %>
+     <% if kanrisya.admin == false %>
       <tr>
         <td>
-          <% if kanrisya.cid == current_kanrisya.cid %>
-           <% if kanrisya.admin == false %>
             <%=link_to kanrisya.name ,user_path(kanrisya)%>
-           <% end %>
-          <% end %>
         </td>
       </tr>
+      <% end %>
+     <% end %>
     <% end %>
   </tbody>
 </table>

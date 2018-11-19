@@ -55,6 +55,8 @@ Rails.application.routes.draw do
   get 'kanri/kanri_user'
 
   resources :sirabasus do
+    resources :images do
+    end
     resources :checklists do
       resources :checkusers
     end
