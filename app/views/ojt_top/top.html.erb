@@ -2,22 +2,33 @@
   <div class="content-box">
     <h1>トップページ</h1>
 
-    <p> ログインしている管理ユーザー →<%= link_to current_kanrisya.name,user_path(current_kanrisya) %></p>
+    <p> ログインユーザー<%= link_to current_kanrisya.name,user_path(current_kanrisya) %></p>
 
-    <h4>最近チェック更新を行ったユーザー</h4>
-    <% @checkuser.each do |checkuser| %>
-    <% if @user[checkuser.id].cid == current_kanrisya.cid &&  @user[checkuser.id].check_time.present?%>
-    <p><%=link_to @user[checkuser.id].name, user_path(@user[checkuser.id])%></p>
-    <% if  @user[checkuser.id].image.present?%>
-      <%= image_tag @user[checkuser.id].image.url, :size =>'130x130' %>
-    <% end %>
-    <% end %>
-    <% end %>
+    <h4>直近のチェックリスト完了者</h4>
 
-    <h4><%= link_to 'シラバス', '/sirabasus' %></h4>
-
-    <h4><%= link_to 'クルー確認', '/user/index' %></h4>
-
-    <p><%= link_to('Logout', destroy_kanrisya_session_path, :method => :delete) %></p>
+    <div class="card">
+      <% @checkuser.each do |checkuser| %>
+      <% if @user[checkuser.id].cid == current_kanrisya.cid &&  @user[checkuser.id].check_time.present?%>
+      <div class="card-box">
+        <div class="card-flex">
+          <div class="card-photo">
+            <% if  @user[checkuser.id].image.present?%>
+              <%= image_tag @user[checkuser.id].image.url, :size =>'100x100' %>
+            <% end %>
+          </div>
+          <div class="card-num">
+            <p>10%</p>
+          </div>
+        </div>
+        <div class="card-name">
+          <p><%=link_to @user[checkuser.id].name, user_path(@user[checkuser.id])%></p>
+        </div>
+        <div class="card-belongs">
+          <p>Kyutech</p>
+        </div>
+      </div>
+      <% end %>
+      <% end %>
+    </div>
   </div>
 </div>
