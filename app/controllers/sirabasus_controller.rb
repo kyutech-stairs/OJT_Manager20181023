@@ -31,6 +31,16 @@ class SirabasusController < ApplicationController
     @sirabasu = Sirabasu.new(sirabasu_params)
     @new_num = Sirabasu.where(cid: current_kanrisya.cid).count + 1
     if @sirabasu.save
+        #中間テーブルへの保存開始
+        kanrisya = Kanrisya.where(cid: @sirabasu.cid).where(admin: false)
+        kanrisya.each do |i|
+        @sirabasuuser = Sirabasuuser.new(
+          kanrisya_id: i.id,
+          sirabasu_id: @sirabasu.id
+        )
+        @sirabasuuser.save
+        #中間テーブルへの保存ここまで
+        end
       redirect_to('/sirabasus')
     else
       render 'new'
@@ -92,6 +102,12 @@ class SirabasusController < ApplicationController
     else
       redirect_to '/user/not'
     end
+  end
+
+  def sirabasu_complete
+    @sirabasuuser = Sirabasuuser.find(params[:id])
+    @sirabasuuser.update(sirabasu_ok: true)
+    redirect_to user_path(params[:BBBB])
   end
 
   def sirabasu_params

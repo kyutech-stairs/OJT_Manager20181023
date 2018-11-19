@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_17_190607) do
+ActiveRecord::Schema.define(version: 2018_11_19_121059) do
 
   create_table "checklists", force: :cascade do |t|
     t.integer "number"
@@ -95,6 +95,15 @@ ActiveRecord::Schema.define(version: 2018_11_17_190607) do
     t.integer "userid"
     t.integer "cid"
     t.json "image"
+  end
+
+  create_table "sirabasuusers", force: :cascade do |t|
+    t.integer "kanrisya_id"
+    t.integer "sirabasu_id"
+    t.boolean "sirabasu_ok", default: false, null: false
+    t.boolean "boolean", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

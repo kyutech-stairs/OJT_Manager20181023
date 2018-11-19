@@ -67,6 +67,7 @@ Rails.application.routes.draw do
   get 'checkusers/check'
   get 'checkusers/del'
   get 'checklists/checkuser'
+  post 'sirabasus/sirabasu_complete'
 
   get 'kanrisyas/new'
 
