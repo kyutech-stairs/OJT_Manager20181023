@@ -55,6 +55,8 @@ Rails.application.routes.draw do
   get 'kanri/kanri_user'
 
   resources :sirabasus do
+    resources :images do
+    end
     resources :checklists do
       resources :checkusers
     end
@@ -65,9 +67,11 @@ Rails.application.routes.draw do
   post 'sirabasus/:id/publishing_config_update',
    to: 'sirabasus#publishing_config_update',
    as: 'publishing_config_update'
+  post "sirabasus/del"
 
   post 'checkusers/checkup'
   get 'checkusers/check'
+  get 'checkusers/del'
   get 'checklists/checkuser'
 
   get 'kanrisyas/new'

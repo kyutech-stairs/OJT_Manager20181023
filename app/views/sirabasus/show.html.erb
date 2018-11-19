@@ -25,7 +25,6 @@
         </tr>
       </thead>
       <tbody>
-        <%# @sirabasus.each do |sirabasu| %>
         <tr>
           <td>
             <%= @sirabasu.number %>
@@ -40,9 +39,15 @@
             <%= @kanrisya.name %>
           </td>
         </tr>
-        <%# end %>
       </tbody>
     </table>
+    <% if @sirabasu.image?%>
+    <% i = 1 %>
+    <% @sirabasu.image.each do |image|%>
+    <%=image_tag image.url , :size =>'130x130'%>画像<%= i%>
+    <% i = i + 1 %>
+    <% end %>
+    <% end %>
   </div>
 </div>
 

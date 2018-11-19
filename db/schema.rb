@@ -101,7 +101,7 @@ ActiveRecord::Schema.define(version: 2018_11_19_110701) do
     t.datetime "updated_at", null: false
     t.integer "userid"
     t.integer "cid"
-    t.boolean "available", default: false
+    t.json "image"
   end
 
 end

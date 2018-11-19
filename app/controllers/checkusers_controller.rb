@@ -16,6 +16,11 @@ class CheckusersController < ApplicationController
     redirect_to sirabasu_path(params[:AAAA])
   end
 
+  def del
+    @sirabasu = Sirabasu.find(params[:id])
+    redirect_to "/sirabasus"
+  end
+
   def checklist_params
     params.require(:checklist).permit(:number, :content, :cid, :userid)
   end

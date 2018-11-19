@@ -1,29 +1,63 @@
-<h1>新しい社員の登録</h1>
+<div class="first-box">
+  <div class="content-box">
+    <h1>新しい社員の登録</h1>
 
-<%= form_for @kanrisya,:url => {:action => :create} do |f| %>
-<p><%= f.label :name, '名前' %>
-<%= f.text_field :name %></p>
-<p><%= f.label :crew_number, '社員番号' %>
-<%= f.text_field :crew_number %></p>
-<p><%= f.label :sex, '性別' %>
-<%= f.select :sex, [["",""], ["女性","女性"], ["男性","男性"]], {} %></p>
-<p><%= f.label :age, '年齢' %>
-<%= f.number_field :age %></p>
-<p><%= f.label :email, 'メールアドレス' %>
-<%= f.email_field :email %></p>
-<p><%= f.label :password, 'パスワード' %>
-<%= f.password_field :password %></p>
-<p><%= f.label :password_confirmation, 'パスワード（もう１度ご入力ください）' %>
-<%= f.password_field :password_confirmation %></p>
-<p><%= f.label :image, 'プロフィール画像' %>
-<%= f.file_field :image %></p>
-<p><%= f.label :admin, '管理権限を与える場合はチェックを入れてください' %>
-<%= f.check_box :admin, { }, true, false %>
-</p>
+    <%= form_for @kanrisya,:url => {:action => :create} do |f| %>
 
-<%= f.hidden_field :cid, value: current_kanrisya.cid %>
+    <div class="field">
+      <p><%= f.label :name, '名前' %><br />
+      <%= f.text_field :name, :class=> "input-box" %></p>
+    </div>
 
-<p><%= f.submit '登録する' %></p>
-<% end %>
+    <div class="field">
+      <p><%= f.label :crew_number, '社員番号' %><br />
+      <%= f.text_field :crew_number, :class=> "input-box" %></p>
+    </div>
 
+    <div class="field">
+      <p><%= f.label :sex, '性別' %><br />
+      <%= f.select :sex, [["",""], ["女性","女性"], ["男性","男性"]], {}, :class=> "input-box" %></p>
+    </div>
+
+    <div class="field">
+      <p><%= f.label :age, '年齢' %><br />
+      <%= f.number_field :age, :class=> "input-box" %></p>
+    </div>
+
+    <div class="field">
+      <p><%= f.label :email, 'メールアドレス' %><br />
+      <%= f.email_field :email, :class=> "input-box" %></p>
+    </div>
+
+    <div class="field">
+      <p><%= f.label :password, 'パスワード' %><br />
+      <%= f.password_field :password, :class=> "input-box" %></p>
+    </div>
+
+    <div class="field">
+      <p><%= f.label :password_confirmation, 'パスワード（もう１度ご入力ください）' %><br />
+      <%= f.password_field :password_confirmation, :class=> "input-box" %></p>
+    </div>
+
+    <div class="field">
+      <p><%= f.label :image, 'プロフィール画像' %><br />
+      <%= f.file_field :image %></p>
+    </div>
+
+    <div class="field">
+      <p><%= f.label :admin, '管理権限を与える場合はチェックを入れてください' %>
+      <%= f.check_box :admin, { }, true, false %>
+      </p>
+    </div>
+
+    <%= f.hidden_field :cid, value: current_kanrisya.cid %>
+
+    <div class="field">
+      <p><%= f.submit '登録する', :class => "link-button"%></p>
+    </div>
+
+    <% end %>
+
+  </div>
+</div>
 <%= link_to 'Back', "/user/index" %>

@@ -26,6 +26,14 @@
         <div class="field">
             <%= f.label :section_name, "内容" %><br />
             <%= f.text_area :content, :class => "text-area"%>
+            <p><%= f.file_field :image, multiple: true %></p>
+            <% if @sirabasu.image?%>
+            <% i = 1 %>
+            <% @sirabasu.image.each do |image|%>
+            <%=image_tag image.url , :size =>'130x130'%>画像<%= i %>
+            <% i = i + 1 %>
+            <% end %>
+            <% end %>
         </div>
         <%= f.nested_fields_for :checklists, wrapper_tag: :div do |che| %>
         <div class="fields">
