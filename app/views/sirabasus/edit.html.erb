@@ -26,6 +26,7 @@
         <div class="field">
             <%= f.label :section_name, "内容" %><br />
             <%= f.text_area :content, :class => "text-area"%>
+            <%= f.file_field :image, multiple: true %>
         </div>
         <%= f.nested_fields_for :checklists, wrapper_tag: :div do |che| %>
         <div class="fields">
