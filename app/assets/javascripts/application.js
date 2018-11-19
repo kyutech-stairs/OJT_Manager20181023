@@ -17,3 +17,7 @@
 //= require turbolinks
 //= require_tree .
 //= require nested_form_fields
+
+window.onload = function() {
+    autosize(document.querySelectorAll('textarea'));
+}

@@ -1,48 +1,34 @@
-<h1>
-  クルー確認ページ
-</h1>
+<div class="first-box">
+  <div class="content-box">
+    <h1>従業員一覧</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>従業員一覧</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @kanrisya.each do |kanrisya| %>
-    <% if kanrisya.cid == current_kanrisya.cid %>
-     <% if kanrisya.admin == false %>
-      <tr>
-        <td>
-            <%=link_to kanrisya.name ,user_path(kanrisya)%>
-        </td>
-      </tr>
-      <% end %>
-     <% end %>
-    <% end %>
-  </tbody>
-</table>
 
-<table>
-  <thead>
-    <tr>
-      <th>管理者一覧</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @kanrisya.each do |kanrisya| %>
-      <tr>
-        <td>
+
+    <div class="lists">
+      <p>ADMIN</p>
+      <table>
+        <tbody>
+          <% @kanrisya.each do |kanrisya| %>
           <% if kanrisya.cid == current_kanrisya.cid %>
-           <% if kanrisya.admin == true %>
-            <%=link_to kanrisya.name ,user_path(kanrisya)%>
-           <% end %>
+            <% if kanrisya.admin == true %>
+          <tr>
+            <td>
+                  <%=link_to kanrisya.name ,user_path(kanrisya)%>
+            </td>
+          </tr>
           <% end %>
-        </td>
-      </tr>
+        <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <% if current_kanrisya.admin == true %>
+      <p><%= link_to '新しい社員登録', '/user/new' %></p>
     <% end %>
-  </tbody>
-</table>
+
+  </div>
+</div>
 
 <% if current_kanrisya.admin == true %>
 <p><%= link_to '新しい社員登録', '/user/new' %></p>
