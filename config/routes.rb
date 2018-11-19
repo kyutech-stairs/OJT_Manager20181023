@@ -59,6 +59,12 @@ Rails.application.routes.draw do
       resources :checkusers
     end
   end
+  get 'sirabasus/:id/publishing_config',
+   to: 'sirabasus#publishing_config',
+    as: 'publishing_config'
+  post 'sirabasus/:id/publishing_config_update',
+   to: 'sirabasus#publishing_config_update',
+   as: 'publishing_config_update'
 
   post 'checkusers/checkup'
   get 'checkusers/check'

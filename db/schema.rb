@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_15_101316) do
+ActiveRecord::Schema.define(version: 2018_11_19_110701) do
 
   create_table "checklists", force: :cascade do |t|
     t.integer "number"
@@ -76,6 +76,13 @@ ActiveRecord::Schema.define(version: 2018_11_15_101316) do
     t.index ["reset_password_token"], name: "index_kanrisyas_on_reset_password_token", unique: true
   end
 
+  create_table "publishing_configs", force: :cascade do |t|
+    t.integer "sirabasu_id"
+    t.integer "required_sirabasu"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "sessions", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -94,6 +101,7 @@ ActiveRecord::Schema.define(version: 2018_11_15_101316) do
     t.datetime "updated_at", null: false
     t.integer "userid"
     t.integer "cid"
+    t.boolean "available", default: false
   end
 
 end

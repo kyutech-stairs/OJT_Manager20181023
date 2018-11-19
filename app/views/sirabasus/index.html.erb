@@ -13,6 +13,7 @@
             <% if current_kanrisya.admin == true %>
               <td><%= link_to "編集", edit_sirabasu_path(sirabasu.number) %></td>
               <td><%= link_to "削除", sirabasu_path(sirabasu.number), :method => :delete %></td>
+              <td><%= link_to "公開設定", publishing_config_path(sirabasu.number) %></td>
             <% end %>
           </tr>
           <% end %>
