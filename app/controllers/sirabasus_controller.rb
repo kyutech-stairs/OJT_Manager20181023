@@ -6,13 +6,33 @@ class SirabasusController < ApplicationController
       @sirabasu = Sirabasu.where(cid: current_kanrisya.cid).order(:number)
     else
       @sirabasu = []
-      stat = true
-      Sirabasu.where(cid: current_kanrisya.cid).order(:number).each do |s|
-        # 1つめはかならず表示
-        if s.number == 1 || stat
-          @sirabasu.push(s)
+      sirabasu = Sirabasu.where(cid: current_kanrisya.cid).order(:number)
+      
+      # 各シラバスに対して、前提シラバスが全て完了しているか？
+      sirabasu.each do |sira|
+        # stat:そのシラバスを表示してもよいか(boolean)
+        stat = true
+        # p_c:siraに対するpublishing_configの全レコード
+        p_c = sira.publishing_configs.all
+        # siraについて何も設定されていないなら常に表示とみなす
+        unless p_c.empty?
+          # 各レコードを見て、
+          p_c.each do |p|
+            # required_sirabasuから、シラバスを取り出す
+            s = Sirabasu.find_by(cid: current_kanrisya.cid, id: p.required_sirabasu)
+            # そのシラバスが完了していないなら
+            unless is_this_sirabasu_done(s)
+              # puts s.id
+              # puts "のシラバスは完了していません"
+              # 1回でもここに来ると、表示されない
+              stat = false
+            end
+          end
         end
-        stat = is_this_sirabasu_done(s) # これがtrueなら、次のシラバスを表示
+        if stat
+          # レコードが１つも無いまたは、前提シラバスが完遂
+          @sirabasu.push(sira)
+        end
       end
     end
   end
@@ -92,6 +112,8 @@ class SirabasusController < ApplicationController
   def destroy
     if current_kanrisya.admin == true
       @sirabasu = Sirabasu.find_by(number: params[:id], cid: current_kanrisya.cid)
+      # 公開設定から、消しきれないレコードを殲滅
+      PublishingConfig.where(required_sirabasu: @sirabasu.id).destroy_all
       @sirabasu.destroy
       @sirabasu = Sirabasu.where(cid: current_kanrisya.cid)
       i = 1
