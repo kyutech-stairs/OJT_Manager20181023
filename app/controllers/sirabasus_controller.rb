@@ -35,6 +35,25 @@ class SirabasusController < ApplicationController
         end
       end
     end
+    # これより先は、シラバスの公開設定を確認するためのものです。
+    # つかいものにならないのであとで消します（by　吉井）
+    # puts "****************公開設定******************"
+    # Sirabasu.where(cid: current_kanrisya.cid).order(:number).each do |sss|
+    #   ppp = sss.publishing_configs.all
+    #   puts sss.number
+    #   puts "の前提シラバス： "
+    #   unless ppp.empty?
+    #     ppp.each do |pp|
+    #       tmp = Sirabasu.find_by(cid: current_kanrisya.cid, id: pp.required_sirabasu)
+    #       puts tmp.number
+    #       puts ", "
+    #     end
+    #   else
+    #     puts "なし"
+    #   end
+    # end
+    # puts "******************以上********************"
+    # ここまで
   end
 
   def show
