@@ -15,34 +15,6 @@
       <%= link_to "編集", edit_sirabasu_path(@sirabasu.number), :class => "link-button" %>
     </div>
     <% end %>
-    <table>
-      <thead>
-        <tr>
-          <th>章番号</th>
-          <th>名前</th>
-          <th>内容</th>
-          <th>作成者</th>
-        </tr>
-      </thead>
-      <tbody>
-        <%# @sirabasus.each do |sirabasu| %>
-        <tr>
-          <td>
-            <%= @sirabasu.number %>
-          </td>
-          <td>
-            <%= @sirabasu.name %>
-          </td>
-          <td>
-            <%= @sirabasu.content %>
-          </td>
-          <td>
-            <%= @kanrisya.name %>
-          </td>
-        </tr>
-        <%# end %>
-      </tbody>
-    </table>
   </div>
 </div>
 
