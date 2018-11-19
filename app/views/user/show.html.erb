@@ -19,7 +19,8 @@
   <p>総チェック割合 <%= @check_parcent %>%</p>
   <h4>シラバスごとの進捗</h4>
   <% @sirabasu.each do |sirabasu| %>
-   <p><%= sirabasu.number %> <%=link_to sirabasu.name, checklists_checkuser_path(:sirabasu_id => sirabasu.id,:kanrisya_id => @kanrisya.id)%> <%= @sirabasu_check_ok_parcent[sirabasu.number-1] %>%</p>
+   <p><%= sirabasu.number %> <%=link_to sirabasu.name, checklists_checkuser_path(:sirabasu_id => sirabasu.id,:kanrisya_id => @kanrisya.id)%> <%= @sirabasu_check_ok_parcent[sirabasu.number-1] %>%
+    <% if @sirabasuuser[sirabasu.id].sirabasu_ok == true%>OJT完了！<% end %></p>
   <% end %>
   <% end %>
  </div>

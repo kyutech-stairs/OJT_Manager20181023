@@ -1,4 +1,7 @@
 <h4><%= @sirabasu.name %></h4>
+<% if @sirabasuuser.sirabasu_ok == true%>
+<%= @kanrisya.name %> はこのOJTを終了しています
+<% end %>
 <% @checklist.each do |checklist| %>
  <p><%= checklist.content %>
    <% if @checkuser[checklist.number].check_ok == true %>
@@ -7,4 +10,18 @@
    ✖
  　<% end %></p>
 <% end %>
-<%= link_to 'back', user_path(@kanrisya) %>
+進捗<%= @check_parcent %>％
+<%=form_tag({ controller: 'sirabasus', action: 'sirabasu_complete' },{ method: "post"}) do %>
+<% if current_kanrisya.admin == true || @s.sirabasu_ok ==true %>
+ <% if @sirabasuuser.sirabasu_ok == false && @check_parcent == 100%>
+  <%= hidden_field_tag :BBBB, @kanrisya.id %>
+  <%= hidden_field_tag :id, @sirabasuuser.id %>
+  <%= submit_tag 'OJTの完了', :class=> "link-button"%>
+ <% end %>
+<% else %>
+ <% if @sirabasuuser.sirabasu_ok == false && @check_parcent == 100%>
+  <p>このシラバスのOJT完了サインを貰ってください</p>
+ <% end %>
+<% end %>
+<% end %>
+<p><%= link_to 'back', user_path(@kanrisya) %></p>
