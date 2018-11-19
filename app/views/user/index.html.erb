@@ -23,6 +23,25 @@
       </table>
     </div>
 
+    <div class="lists">
+      <p>USER</p>
+      <table>
+        <tbody>
+          <% @kanrisya.each do |kanrisya| %>
+          <% if kanrisya.cid == current_kanrisya.cid %>
+            <% if kanrisya.admin == false %>
+          <tr>
+            <td>
+                  <%=link_to kanrisya.name ,user_path(kanrisya)%>
+            </td>
+          </tr>
+          <% end %>
+        <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
     <% if current_kanrisya.admin == true %>
       <p><%= link_to '新しい社員登録', '/user/new' %></p>
     <% end %>

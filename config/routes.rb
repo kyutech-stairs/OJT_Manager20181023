@@ -61,10 +61,11 @@ Rails.application.routes.draw do
       resources :checkusers
     end
   end
-  post "sirabasus/image_destroy"
+  post "sirabasus/del"
 
   post 'checkusers/checkup'
   get 'checkusers/check'
+  get 'checkusers/del'
   get 'checklists/checkuser'
 
   get 'kanrisyas/new'
