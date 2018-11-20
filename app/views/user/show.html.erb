@@ -16,11 +16,12 @@
  </div>
 
   <div>
-  <p>社員番号 <%= @kanrisya.crew_number %></p>
+  <p>社員番号:<%= @kanrisya.crew_number %></p>
   <% if @kanrisya.age.present? %>
-    <p>年齢<%= @kanrisya.age %></p>
+    <p>年齢:<%= @kanrisya.age %></p>
   <% end %>
   <p><%= @kanrisya.sex %></p>
+  <p>所属:<%= @kanrisya.belong %></p>
   <p>メールアドレス <%= @kanrisya.email %></p>
   <p>管理権限 <%= @kanrisya.admin %></p>
   <% if @kanrisya.admin == false %>

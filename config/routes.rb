@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   get 'user/update'
   get 'user/hei'
   get 'user/not'
+  get 'user/search'
 
   # ログイン / ログアウト
   get     'login',   to: 'sessions#new'
