@@ -44,7 +44,8 @@
     <% if @sirabasu.image?%>
     <% i = 1 %>
     <% @sirabasu.image.each do |image|%>
-    <%=image_tag image.url , :size =>'130x130'%>画像<%= i%>
+    <%=image_tag image.url , :size =>'130x130'%>画像
+    <%= i%>
     <% i = i + 1 %>
     <% end %>
     <% end %>
@@ -53,6 +54,7 @@
 
 <div class="first-box">
   <div class="content-box">
+    <% if @stat %>
     <h1>チェックリスト</h1>
     <%=form_tag({ controller: 'checkusers', action: 'checkup' },{ method: "post"}) do %>
     <table>
@@ -107,6 +109,33 @@
     <%= hidden_field_tag :AAAA, @sirabasu.number %>
     <%= submit_tag 'チェックの更新', :class=> "link-button"%>
     <% end %>
+    <% end %>
+
+    <% else %>
+    <!--従業員がシラバスを利用できない場合-->
+    あなたはこのシラバスのチェックリストを利用できません。<br>
+    開放するには、以下のシラバスを完遂してください
+    <table>
+      <tbody>
+        <% i = 0 %>
+        <% @zentei.each do |s| %>
+        <tr>
+          <td>
+            <%= s.number %>
+          </td>
+          <td>
+            <%= link_to s.name, sirabasu_path(s.number) %>
+          </td>
+          <% unless @stat_list[i] %>
+          <td>
+          未開放
+          </td>
+          <% end %>
+        </tr>
+        <% i += 1 %>
+        <% end %>
+      </tbody>
+    </table>
     <% end %>
     <%= link_to 'シラバス一覧へ戻る', sirabasus_path %>
   </div>
