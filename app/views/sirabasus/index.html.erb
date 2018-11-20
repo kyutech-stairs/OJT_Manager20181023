@@ -11,11 +11,9 @@
             <td><%= sirabasu.number %>. </td>
             <td><%= link_to sirabasu.name, sirabasu_path(sirabasu.number) %></td>
             <% if current_kanrisya.admin == true %>
-              <td><%= link_to "編集", edit_sirabasu_path(sirabasu.number) %></td>
-              <td><%= link_to "削除", sirabasu_path(sirabasu.number), :method => :delete %></td>
-              <td><%= link_to "公開設定", publishing_config_path(sirabasu.number) %></td>
               <td><%= link_to(content_tag(:i,'edit',class:'material-icons'), edit_sirabasu_path(sirabasu.number)) %></td>
               <td><%= link_to(content_tag(:i,'delete',class:'material-icons'), sirabasu_path(sirabasu.number), :method => :delete) %></td>
+              <td><%= link_to "公開設定", publishing_config_path(sirabasu.number) %></td>
             <% end %>
           </tr>
           <% end %>

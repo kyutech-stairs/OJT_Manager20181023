@@ -25,6 +25,11 @@
     </div>
 
     <div class="field">
+      <p><%= f.label :belong, '所属' %><br />
+      <%= f.select :belong, [["",""], ["正社員","正社員"], ["派遣社員","派遣社員"],["パート","パート"], ["アルバイト","アルバイト"]], {}, :class => "input-box" %></p>
+    </div>
+
+    <div class="field">
       <p><%= f.label :email, 'メールアドレス' %><br />
       <%= f.email_field :email, :class=> "input-box" %></p>
     </div>

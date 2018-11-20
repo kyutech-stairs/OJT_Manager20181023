@@ -2,7 +2,7 @@
   <div class="content-box">
   <h1>プロフィール</h1>
   <% if @kanrisya.cid == current_kanrisya.cid %>
-  
+
   <div class="field">
   <h3><%= @kanrisya.name %></h3>
   <% if  @kanrisya.image.present?%>
@@ -11,11 +11,12 @@
  </div>
 
   <div>
-  <p>社員番号 <%= @kanrisya.crew_number %></p>
+  <p>社員番号:<%= @kanrisya.crew_number %></p>
   <% if @kanrisya.age.present? %>
-    <p>年齢<%= @kanrisya.age %></p>
+    <p>年齢:<%= @kanrisya.age %></p>
   <% end %>
   <p><%= @kanrisya.sex %></p>
+  <p>所属:<%= @kanrisya.belong %></p>
   <p>メールアドレス <%= @kanrisya.email %></p>
   <p>管理権限 <%= @kanrisya.admin %></p>
   <% if @kanrisya.admin == false %>
