@@ -15,6 +15,14 @@
       <%= link_to "編集", edit_sirabasu_path(@sirabasu.number), :class => "link-button" %>
     </div>
     <% end %>
+    
+    <% if @sirabasu.image?%>
+    <% i = 1 %>
+    <% @sirabasu.image.each do |image|%>
+    <%=image_tag image.url , :size =>'130x130'%>画像<%= i%>
+    <% i = i + 1 %>
+    <% end %>
+    <% end %>
   </div>
 </div>
 

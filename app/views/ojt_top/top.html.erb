@@ -18,6 +18,7 @@
               <% end %>
             </div>
             <div class="card-num">
+              チェック進捗
               <p><%= @check_parcent[checkuser.id] %>%</p>
             </div>
           </div>
@@ -26,7 +27,7 @@
             <!--<p><%=link_to @user[checkuser.id].name, user_path(@user[checkuser.id])%></p>-->
           </div>
           <div class="card-belongs">
-            <p>Kyutech</p>
+            <p><%= @user[checkuser.id].belong %></p>
           </div>
         </div>
         <% end %>

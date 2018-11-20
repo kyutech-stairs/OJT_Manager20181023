@@ -2,39 +2,51 @@
   <div class="content-box">
     <h1>従業員一覧</h1>
 
-    <div class="lists">
-      <p>USER</p>
-      <table>
-        <tbody>
-          <% @kanrisya.each do |kanrisya| %>
-          <tr>
-            <td>
-              <% if kanrisya.cid == current_kanrisya.cid %>
-                <% if kanrisya.admin == false %>
-                  <%=link_to kanrisya.name ,user_path(kanrisya)%>
-                <% end %>
-              <% end %>
-            </td>
-          </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
+<%=form_tag({ controller: 'user', action: 'index' },{ method: "get"}) do %>
+ <%= text_field_tag :name%>
+ <%= submit_tag '検索'%> <%= link_to "詳細検索", "/user/search" %>
+<% end %>
+<% if @user.present? %>
+検索結果　
+<% @user.each do |user| %>
+<p><%=link_to user.name ,user_path(user)%></p>
+<% end %>
+<% else %>
+<% end %>
 
     <div class="lists">
       <p>ADMIN</p>
       <table>
         <tbody>
           <% @kanrisya.each do |kanrisya| %>
+          <% if kanrisya.cid == current_kanrisya.cid %>
+            <% if kanrisya.admin == true %>
           <tr>
             <td>
-              <% if kanrisya.cid == current_kanrisya.cid %>
-                <% if kanrisya.admin == true %>
                   <%=link_to kanrisya.name ,user_path(kanrisya)%>
-                <% end %>
-              <% end %>
             </td>
           </tr>
+          <% end %>
+        <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="lists">
+      <p>USER</p>
+      <table>
+        <tbody>
+          <% @kanrisya.each do |kanrisya| %>
+          <% if kanrisya.cid == current_kanrisya.cid %>
+            <% if kanrisya.admin == false %>
+          <tr>
+            <td>
+                  <%=link_to kanrisya.name ,user_path(kanrisya)%>
+            </td>
+          </tr>
+          <% end %>
+        <% end %>
           <% end %>
         </tbody>
       </table>

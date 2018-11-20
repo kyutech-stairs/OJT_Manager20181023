@@ -63,3 +63,8 @@ gem 'virtus'
 gem 'nested_form_fields'
 
 gem 'jquery-rails'
+
+group :development, :test do
+  gem 'hirb'
+  gem 'hirb-unicode'
+end

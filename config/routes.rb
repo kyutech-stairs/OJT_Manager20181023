@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   get 'user/update'
   get 'user/hei'
   get 'user/not'
+  get 'user/search'
 
   # ログイン / ログアウト
   get     'login',   to: 'sessions#new'
@@ -55,14 +56,25 @@ Rails.application.routes.draw do
   get 'kanri/kanri_user'
 
   resources :sirabasus do
+    resources :images do
+    end
     resources :checklists do
       resources :checkusers
     end
   end
+  get 'sirabasus/:id/publishing_config',
+   to: 'sirabasus#publishing_config',
+    as: 'publishing_config'
+  post 'sirabasus/:id/publishing_config_update',
+   to: 'sirabasus#publishing_config_update',
+   as: 'publishing_config_update'
+  post "sirabasus/del"
 
   post 'checkusers/checkup'
   get 'checkusers/check'
+  get 'checkusers/del'
   get 'checklists/checkuser'
+  post 'sirabasus/sirabasu_complete'
 
   get 'kanrisyas/new'
 

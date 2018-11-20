@@ -35,6 +35,10 @@ class UserController < ApplicationController
      @sirabasu_check_ok_parcent[i] = ((@sirabasu_check_ok/(@sirabasu_check.count).to_f).round(2)*100).to_i
      i = i + 1
     end
+    @sirabasuuser = []
+    @sirabasu.each do |sirabasu|
+    @sirabasuuser[sirabasu.id] = Sirabasuuser.find_by(kanrisya_id: @kanrisya.id, sirabasu_id: sirabasu.id)
+    end
    end
   end
 
@@ -42,7 +46,6 @@ class UserController < ApplicationController
   end
 
   def search_result
-
   end
 
   def hei
@@ -70,6 +73,16 @@ class UserController < ApplicationController
         checklist_id: i.id
       )
       @checkuser.save
+      end
+      #中間テーブルへの保存ここまで
+      #シラバス中間テーブルへの保存開始
+      sirabasu = Sirabasu.where(cid: @kanrisya.cid)
+      sirabasu.each do |i|
+      @sirabasuuser = Sirabasuuser.new(
+        kanrisya_id: @kanrisya.id,
+        sirabasu_id: i.id
+      )
+      @sirabasuuser.save
       end
       #中間テーブルへの保存ここまで
       redirect_to "/user/index"
