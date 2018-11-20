@@ -5,7 +5,7 @@
     <!---<p> ログインユーザー<%= link_to current_kanrisya.name,user_path(current_kanrisya) %></p>
 --->
     <div class="block">
-      <p>直近のチェックリスト完了者</p>
+      <p>直近のチェックリスト更新者</p>
       <div class="card">
         <% @checkuser.each do |checkuser| %>
         <% if @user[checkuser.id].cid == current_kanrisya.cid &&  @user[checkuser.id].check_time.present?%>

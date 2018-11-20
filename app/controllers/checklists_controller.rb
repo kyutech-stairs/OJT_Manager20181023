@@ -35,6 +35,8 @@ class ChecklistsController < ApplicationController
     @checklist = sirabasu.checklists.new(checklist_params)
     # @new_num = Checklist.count + 1
     @new_num = sirabasu.checklists.count + 1
+    sirabasuuser = sirabasu.sirabasuusers.all
+    sirabasuuser.update(sirabasu_ok: false)
     if @checklist.save
       #中間テーブルへの保存開始
       kanrisya = Kanrisya.where(cid: @checklist.cid).where(admin: false)
