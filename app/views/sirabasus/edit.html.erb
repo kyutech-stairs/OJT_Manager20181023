@@ -26,7 +26,7 @@
         <div class="field">
             <%= f.label :section_name, "内容" %><br />
             <%= f.text_area :content, :class => "text-area"%>
-            <p><%= f.file_field :image, multiple: true %></p>
+            <%= f.file_field :image, multiple: true %>
             <% if @sirabasu.image?%>
             <% i = 1 %>
             <% @sirabasu.image.each do |image|%>

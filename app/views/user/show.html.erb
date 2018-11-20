@@ -3,11 +3,16 @@
   <h1>プロフィール</h1>
   <% if @kanrisya.cid == current_kanrisya.cid %>
   
-  <div class="field">
-  <h3><%= @kanrisya.name %></h3>
-  <% if  @kanrisya.image.present?%>
-    <%= image_tag @kanrisya.image.url, :size =>'200x200' %>
-  <% end %>
+  <div class="plofile">
+    <div class='plofile-img'>
+      <% if  @kanrisya.image.present?%>
+        <%= image_tag @kanrisya.image.url, :size =>'150x150' %>
+      <% end %>
+    </div>
+    <div class='plofile-name'>
+      <h2><%= @kanrisya.name %></h2>
+      <h3><%= @kanrisya.belong %></h3>
+    </div>
  </div>
 
   <div>
@@ -30,8 +35,16 @@
  </div>
 
  <% if current_kanrisya.admin == true %>
- <p><%= link_to '編集', edit_user_path(@kanrisya) %></p>
- <p><%= link_to "削除", user_path(@kanrisya), :method => :delete %></p>
+  <%= link_to edit_user_path(@kanrisya) do %>
+    <div class="weak-button">
+      <i class='material-icons'>edit</i>編集
+    </div>
+  <% end %>
+  <%= link_to user_path(@kanrisya), :method => :delete do %>
+    <div class="weak-button">
+      <i class="material-icons">delete</i>削除
+    </div>
+  <% end %>
  <% end %>
 <% else %>
 あなたの会社の社員ではありません。

@@ -1,20 +1,29 @@
 <%= form_tag({ controller: 'sirabasus', action: 'publishing_config_update' },
 { method: "post"}) do |f| %>
-<h2>公開設定</h2>
-<%= @now.number %>
-<%= @now.name %><br><br><br>
-<%# 各シラバスを表示%>
+<div class="first-box">
+  <div class="content-box">
+    <h1>公開設定</h1>
+    <h2>
+      <%= @now.number %>
+      <%= @now.name %>
+    </h2>
+    <p>このシラバスを表示するためにチェックを完了しておく必要のあるシラバスにチェックを入れてください</p>
+
+    <%# 各シラバスを表示%>
     <% @sirabasu.each do |s| %>
-        <% unless s.number == @num %>
-<%= hidden_field_tag 'sirabasu_id[]' %>
-            <% if @conf.find_by(required_sirabasu: s.id).nil? %>
-<%= check_box_tag 'sirabasu_id[]', s.id, checked = false %>
-            <% else %>
-<%= check_box_tag 'sirabasu_id[]', s.id, checked = true %>
-            <% end %>
-<%= s.number %>
-<%= s.name %><br>
-        <% end %>
+      <% unless s.number == @num %>
+      <%= hidden_field_tag 'sirabasu_id[]' %>
+      <% if @conf.find_by(required_sirabasu: s.id).nil? %>
+        <%= check_box_tag 'sirabasu_id[]', s.id, checked = false %>
+      <% else %>
+        <%= check_box_tag 'sirabasu_id[]', s.id, checked = true %>
+      <% end %>
+      <%= s.number %>
+      <%= s.name %><br>
+      <% end %>
     <% end %>
-<%= submit_tag '公開設定を保存'%>
+
+    <%= submit_tag '公開設定を保存'%>
+  </div>
+</div>
 <% end %>
