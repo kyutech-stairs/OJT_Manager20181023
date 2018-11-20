@@ -1,6 +1,7 @@
 class UserController < ApplicationController
 
   def index
+    @user = Kanrisya.where(name: params[:name])
      @kanrisya = Kanrisya.all
      @checkuser = Checkuser.all
   end
@@ -37,7 +38,10 @@ class UserController < ApplicationController
    end
   end
 
-  def checkuser
+  def search
+  end
+
+  def search_result
 
   end
 
@@ -96,7 +100,7 @@ class UserController < ApplicationController
   end
 
   def kanrisya_params
-  params.require(:kanrisya).permit(:name, :email, :password, :password_confirmation, :crew_number, :age, :sex, :admin, :cid, :image)
+  params.require(:kanrisya).permit(:name, :email, :password, :password_confirmation, :crew_number, :age, :sex, :admin, :cid, :image, :belong)
   end
 
   def user_top

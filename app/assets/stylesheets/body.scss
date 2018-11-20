@@ -235,13 +235,12 @@ textarea {
     box-shadow: 0px 5px 8px rgba($color: #000000, $alpha: 0.3);
 }
 
-
-
-
 .card-flex {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    @media screen and (orientation: landscape) {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 }
 
 .card-photo img {
@@ -249,6 +248,7 @@ textarea {
     border-width: 1px;
     border-radius: 50%;
 }
+
 
 .card-num {
     margin: auto;
