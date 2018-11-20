@@ -125,6 +125,12 @@ class SirabasusController < ApplicationController
     end
   end
 
+  def sirabasu_complete
+   @sirabasuuser = Sirabasuuser.find(params[:id])
+   @sirabasuuser.update(sirabasu_ok: true)
+   redirect_to user_path(params[:BBBB])
+  end
+
   def publishing_config
     @sirabasu = Sirabasu.where(cid: current_kanrisya.cid).order(:number)
     @now = Sirabasu.find_by(number: params[:id], cid: current_kanrisya.cid)
@@ -147,8 +153,8 @@ class SirabasusController < ApplicationController
   end
 
   def sirabasu_params
-    params.require(:sirabasu).permit(:number, :name, :content, :userid, :cid, {image: []}, 
-    images_attributes: [:image_path], 
+    params.require(:sirabasu).permit(:number, :name, :content, :userid, :cid, {image: []},
+    images_attributes: [:image_path],
     checklists_attributes: [:id, :sirabasu_id, :number, :content, :userid, :cid, :_destroy])
   end
 

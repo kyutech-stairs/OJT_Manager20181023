@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_19_121059) do
+ActiveRecord::Schema.define(version: 2018_11_20_092541) do
 
   create_table "checklists", force: :cascade do |t|
     t.integer "number"
@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(version: 2018_11_19_121059) do
     t.text "check"
     t.string "image"
     t.datetime "check_time"
+    t.string "belong"
     t.index ["email"], name: "index_kanrisyas_on_email", unique: true
     t.index ["reset_password_token"], name: "index_kanrisyas_on_reset_password_token", unique: true
   end

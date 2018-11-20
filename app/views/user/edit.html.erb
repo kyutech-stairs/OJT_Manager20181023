@@ -1,21 +1,46 @@
-<h1>登録変更</h1>
+<div class="first-box">
+  <div class="content-box">
+    <h1>プロフィールの編集</h1>
 
-<%= form_for @kanrisya,:url => {:action => :update} do |f| %>
-<p><%= f.label :name, '名前' %>
-<%= f.text_field :name %></p>
-<p><%= f.label :sex, '性別' %>
-<%= f.select :sex, [["",""], ["女性","女性"], ["男性","男性"]], {} %></p>
-<p><%= f.label :age, '年齢' %>
-<%= f.number_field :age %></p>
-<p><%= f.label :email, 'メールアドレス' %>
-<%= f.email_field :email %></p>
-<p><%= f.label :image, 'プロフィール画像' %></p>
-<% if  @kanrisya.image.present?%>
-  <%= image_tag @kanrisya.image.url, :size =>'200x200' %>
-<% end %>
-<p><%= f.file_field :image %></p>
+    <%= form_for @kanrisya,:url => {:action => :update} do |f| %>
 
-<p><%= f.submit '登録する' %></p>
-<% end %>
+    <div class="field">
+      <p><%= f.label :name, '名前' %><br />
+      <%= f.text_field :name, :class => "input-box" %></p>
+    </div>
 
+    <div class="field">
+      <p><%= f.label :sex, '性別' %><br />
+      <%= f.select :sex, [["",""], ["女性","女性"], ["男性","男性"]], {}, :class => "input-box" %></p>
+    </div>
+
+    <div class="field">
+      <p><%= f.label :age, '年齢' %><br />
+      <%= f.number_field :age, :class => "input-box" %></p>
+    </div>
+
+    <div class="field">
+      <p><%= f.label :belong, '所属' %><br />
+      <%= f.select :belong, [["",""], ["正社員","正社員"], ["派遣社員","派遣社員"],["パート","パート"], ["アルバイト","アルバイト"]], {}, :class => "input-box" %></p>
+    </div>
+
+    <div class="field">
+      <p><%= f.label :email, 'メールアドレス' %><br />
+      <%= f.email_field :email, :class => "input-box" %></p>
+    </div>
+
+    <div class="field">
+      <p><%= f.label :image, 'プロフィール画像' %></p><br />
+      <% if  @kanrisya.image.present?%>
+        <%= image_tag @kanrisya.image.url, :size =>'200x200' %>
+      <% end %>
+      <p><%= f.file_field :image %></p>
+    </div>
+
+    <div class="field">
+      <p><%= f.submit '登録する', :class => "link-button" %></p>
+    </div>
+    <% end %>
+  </div>
+</div>
 <%= link_to 'Back', "/user/index" %>
