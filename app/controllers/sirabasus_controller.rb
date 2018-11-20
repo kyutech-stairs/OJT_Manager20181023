@@ -2,34 +2,46 @@
 
 class SirabasusController < ApplicationController
   def index
-    if current_kanrisya.admin == true
-      @sirabasu = Sirabasu.where(cid: current_kanrisya.cid).order(:number)
-    else
-      @sirabasu = []
-      sirabasu = Sirabasu.where(cid: current_kanrisya.cid).order(:number)
-
-      # 各シラバスに対して、前提シラバスが全て完了しているか？
-      sirabasu.each do |sira|
-        if is_this_sirabasu_available(sira)
-          @sirabasu.push(sira)
-        end
+    @sirabasu = Sirabasu.where(cid: current_kanrisya.cid).order(:number)
+    if current_kanrisya.admin == false
+      # @stat: 各シラバスが利用できるかを配列で
+      @stat_list = []
+      @sirabasu.each do |s|
+        @stat_list.push(is_this_sirabasu_available(s))
       end
     end
   end
 
   def show
     @sirabasu = Sirabasu.find_by(number: params[:id], cid: current_kanrisya.cid)
-    if is_this_sirabasu_available(@sirabasu)
-      @images = @sirabasu.images.all
-      #シラバスを作った管理者が見つかる
-      @kanrisya = Kanrisya.find(@sirabasu.userid)
-      # 今選択しているシラバスに紐付くチェックリストを抽出
-      @checklist = @sirabasu.checklists.all
+    @images = @sirabasu.images.all
+    #シラバスを作った管理者が見つかる
+    @kanrisya = Kanrisya.find(@sirabasu.userid)
+    # 今選択しているシラバスに紐付くチェックリストを抽出
+    @checklist = @sirabasu.checklists.all
+    #前提シラバスがクリアできていたらtrue（管理者の場合は無関係）
+    @stat = true
+    # 従業員か管理者かで以下の処理
+    if current_kanrisya.admin == false
+      # 従業員なら
+      # 前提シラバスがクリアできていたらtrue
+      @stat = is_this_sirabasu_available(@sirabasu)  
       # 今ログインしている従業員に紐づくレコードを抽出
       @checkuser = Kanrisya.find(current_kanrisya.id).checkusers.all
+      # 前提シラバスを取得
+      @p_c = @sirabasu.publishing_configs.all
+      @zentei = []
+      @stat_list = []
+      unless @p_c.empty?
+        @p_c.each do |p|
+          tmp = Sirabasu.find_by(id: p.required_sirabasu, cid: current_kanrisya.cid)
+          @zentei.push(tmp)
+          @stat_list.push(is_this_sirabasu_available(tmp))
+        end
+      end
     else
-      # URLを直接打ち込んで来られると困ります
-      redirect_to '/sirabasus'
+      # 管理者なら
+      @checklist = @sirabasu.checklists.all
     end
   end
 
@@ -58,7 +70,7 @@ class SirabasusController < ApplicationController
       @sirabasuuser.save
       end
       #中間テーブルへの保存ここまで
-      redirect_to('/sirabasus')
+      redirect_to edit_sirabasu_path(@sirabasu.number)
     else
       render 'new'
     end
@@ -184,15 +196,16 @@ class SirabasusController < ApplicationController
     return stat
   end
 
-  # そのシラバスは進捗100%ですか？
+  # そのシラバスの完了は管理者に承認されましたか？
   def is_this_sirabasu_done(sirabasu)
-    che = sirabasu.checklists.all
-    che.each do |c|
-      unless current_kanrisya.checkusers.find_by(checklist_id: c.id).check_ok
-      # unless Checkuser.find_by(kanrisya_id: current_kanrisya.id,checklist_id: c.id).check_ok
-        return false
-      end
-    end
-    return true
+    return current_kanrisya.sirabasuusers.find_by(sirabasu_id: sirabasu.id).sirabasu_ok
+    # che = sirabasu.checklists.all
+    # che.each do |c|
+    #   unless current_kanrisya.checkusers.find_by(checklist_id: c.id).check_ok
+    #   # unless Checkuser.find_by(kanrisya_id: current_kanrisya.id,checklist_id: c.id).check_ok
+    #     return false
+    #   end
+    # end
+    # return true
   end
 end

@@ -1,14 +1,15 @@
 <%= form_for @sirabasu,url: sirabasu_path do |f| %>
-<!--エラーがあれば表示しています吉井-->
-<% if @sirabasu.errors.any? %>
+<!--
+<%# if @sirabasu.errors.any? %>
 <ul>
-    <% @sirabasu.errors.full_messages.each do |message| %>
+    <%# @sirabasu.errors.full_messages.each do |message| %>
     <li>
-        <%= message%>
+        <%#= message%>
     </li>
-    <% end %>
+    <%# end %>
 </ul>
-<% end %>
+<%# end %>
+-->
 <div class="first-box">
     <div class="content-box">
         <h1>シラバス編集</h1>
