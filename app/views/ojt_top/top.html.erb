@@ -20,6 +20,9 @@
             <div class="card-num">
               チェック進捗
               <p><%= @check_parcent[checkuser.id] %>%</p>
+              <% if @user_sign[checkuser.id] == true %>
+              ！
+              <%end%>
             </div>
           </div>
           <div class="card-name">
