@@ -48,6 +48,16 @@ class SirabasusController < ApplicationController
     @sirabasu = Sirabasu.new(sirabasu_params)
     @new_num = Sirabasu.where(cid: current_kanrisya.cid).count + 1
     if @sirabasu.save
+      #シラバス中間テーブルへの保存開始
+      kanrisya = Kanrisya.where(cid: @sirabasu.cid).where(admin: false)
+      kanrisya.each do |i|
+      @sirabasuuser = Sirabasuuser.new(
+        kanrisya_id: i.id,
+        sirabasu_id: @sirabasu.id
+      )
+      @sirabasuuser.save
+      end
+      #中間テーブルへの保存ここまで
       redirect_to('/sirabasus')
     else
       render 'new'
