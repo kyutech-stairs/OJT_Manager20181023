@@ -18,6 +18,6 @@
 //= require_tree .
 //= require nested_form_fields
 
-window.onload = function() {
-    autosize(document.querySelectorAll('textarea'));
-}
+$(document).on('turbolinks:load',function() {
+    autosize($('textarea'));
+});

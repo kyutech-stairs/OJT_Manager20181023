@@ -3,7 +3,7 @@
     <h1>シラバス</h1>
 
     <div class="lists">
-      <p>一覧<p>
+      <p>一覧</p>
       <table>
         <tbody>
           <% @sirabasu.each do |sirabasu| %>
@@ -14,6 +14,8 @@
               <td><%= link_to "編集", edit_sirabasu_path(sirabasu.number) %></td>
               <td><%= link_to "削除", sirabasu_path(sirabasu.number), :method => :delete %></td>
               <td><%= link_to "公開設定", publishing_config_path(sirabasu.number) %></td>
+              <td><%= link_to(content_tag(:i,'edit',class:'material-icons'), edit_sirabasu_path(sirabasu.number)) %></td>
+              <td><%= link_to(content_tag(:i,'delete',class:'material-icons'), sirabasu_path(sirabasu.number), :method => :delete) %></td>
             <% end %>
           </tr>
           <% end %>
@@ -22,7 +24,14 @@
     </div>
 
     <% if current_kanrisya.admin == true %>
-      <%= link_to '新規作成', new_sirabasu_path, :class=> "link-button" %>
+      <%= link_to '新規作成', new_sirabasu_path,:class=>'link-button' %>
+    <% end %>
+
+    <%= link_to new_sirabasu_path, class:'link-button' do %>
+      <div>
+        <i class='material-icons'>add</i>
+        新規作成
+      </div>
     <% end %>
     <p><%= link_to 'トップへ', '/ojt_top/top' %></p>
   </div>
