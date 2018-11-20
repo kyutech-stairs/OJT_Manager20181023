@@ -17,7 +17,7 @@
  <% for num in 0..(@i-1) %>
   <p><%= link_to @user2[num].name, user_path(@user2[num]) %></p>
  <% end %>
- <p>該当者 <%= @i.count %>名</p>
+ <p>該当者 <%= @i %>名</p>
 <% else %>
 <p>該当者 <%= @user.count %>名</p>
 <% end %>
