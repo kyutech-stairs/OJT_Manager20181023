@@ -70,7 +70,7 @@ class SirabasusController < ApplicationController
       @sirabasuuser.save
       end
       #中間テーブルへの保存ここまで
-      redirect_to('/sirabasus')
+      redirect_to edit_sirabasu_path(@sirabasu.number)
     else
       render 'new'
     end
@@ -196,15 +196,16 @@ class SirabasusController < ApplicationController
     return stat
   end
 
-  # そのシラバスは進捗100%ですか？
+  # そのシラバスの完了は管理者に承認されましたか？
   def is_this_sirabasu_done(sirabasu)
-    che = sirabasu.checklists.all
-    che.each do |c|
-      unless current_kanrisya.checkusers.find_by(checklist_id: c.id).check_ok
-      # unless Checkuser.find_by(kanrisya_id: current_kanrisya.id,checklist_id: c.id).check_ok
-        return false
-      end
-    end
-    return true
+    return current_kanrisya.sirabasuusers.find_by(sirabasu_id: sirabasu.id).sirabasu_ok
+    # che = sirabasu.checklists.all
+    # che.each do |c|
+    #   unless current_kanrisya.checkusers.find_by(checklist_id: c.id).check_ok
+    #   # unless Checkuser.find_by(kanrisya_id: current_kanrisya.id,checklist_id: c.id).check_ok
+    #     return false
+    #   end
+    # end
+    # return true
   end
 end
