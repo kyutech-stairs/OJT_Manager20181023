@@ -216,19 +216,26 @@ textarea {
     border-width: 1px 0px 0px 0px;
     border-style: solid;
     border-color: #777777;
+    a {
+        display: block;
+        width: 30%;
+    }
 }
 
 .card-box {
     margin: 0.5rem 0rem;
     padding : 0.5rem 0.5rem 1.5rem 0.5rem;
-    width: 30%;
-    //height: 10rem;
+    // width: 30%;
     border-style: solid;
     border-width: 1px;
     border-radius: 5px;
     background-color: #fff;
+    border-color: #777777;
     box-shadow: 0px 5px 8px rgba($color: #000000, $alpha: 0.3);
 }
+
+
+
 
 .card-flex {
     display: flex;
@@ -245,7 +252,7 @@ textarea {
 .card-num {
     margin: auto;
     p {
-      font-size: 2rem;
+      font-size: 1rem;
     }
 }
 
