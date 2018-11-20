@@ -224,8 +224,9 @@ textarea {
 
 .card-box {
     margin: 0.5rem 0rem;
-    padding : 0.5rem 0.5rem 1.5rem 0.5rem;
+    padding : 0.5rem;
     // width: 30%;
+    color: #444444;
     border-style: solid;
     border-width: 1px;
     border-radius: 5px;
@@ -252,7 +253,7 @@ textarea {
 .card-num {
     margin: auto;
     p {
-      font-size: 1rem;
+      font-size: 1.5rem;
     }
 }
 
