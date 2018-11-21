@@ -1,6 +1,6 @@
 <div class="first-box">
   <div class="content-box">
-    <h1>従業員一覧</h1>
+    <h1>スタッフ</h1>
 
 <%=form_tag({ controller: 'user', action: 'index' },{ method: "get"}) do %>
  <%= text_field_tag :name%>
@@ -58,11 +58,11 @@
 
   </div>
 </div>
-
+<!--
 <% if current_kanrisya.admin == true %>
 <p><%= link_to '新しい社員登録', '/user/new' %></p>
 <% end %>
 
 <p>
   <%= link_to 'Back', '/ojt_top/top' %>
-</p>
+</p> -->
