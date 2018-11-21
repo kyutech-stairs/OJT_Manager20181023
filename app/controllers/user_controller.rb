@@ -1,7 +1,7 @@
 class UserController < ApplicationController
 
   def index
-    @user = Kanrisya.where(name: params[:name])
+    @user = Kanrisya.where(name: params[:name]).where(cid: current_kanrisya.cid)
     @i = 0
 
     if params[:sirabasu] != "" && params[:ok] != "" then
@@ -74,6 +74,10 @@ class UserController < ApplicationController
       @sirabasu_check_ok = @sirabasu_check_ok + sirabasu_check_ok.count
      end
      @sirabasu_check_ok_parcent[i] = ((@sirabasu_check_ok/(@sirabasu_check.count).to_f).round(2)*100).to_i
+     if @sirabasu_check_ok_parcent[i] != 100
+       sirabasuuser = Sirabasuuser.where(kanrisya_id: @kanrisya.id).where(sirabasu_id: @sirabasu[i].id)
+       sirabasuuser.update(sirabasu_ok: false)
+     end
      i = i + 1
     end
     @sirabasuuser = []
