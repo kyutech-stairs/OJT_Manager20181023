@@ -4,6 +4,8 @@
 
     <!---<p> ログインユーザー<%= link_to current_kanrisya.name,user_path(current_kanrisya) %></p>
 --->
+    <% if current_kanrisya.admin == true %>
+    <!--管理者のみに表示-->
     <div class="block">
       <p>直近のチェックリスト更新者</p>
       <div class="card">
@@ -14,23 +16,28 @@
           <div class="card-flex">
             <div class="card-photo">
               <% if  @user[checkuser.id].image.present?%>
-                <%= image_tag @user[checkuser.id].image.url, :size =>'90x90' %>
+              <%= image_tag @user[checkuser.id].image.url, :size =>'90x90' %>
               <% end %>
             </div>
             <div class="card-num">
               チェック進捗
-              <p><%= @check_parcent[checkuser.id] %>%</p>
+              <p>
+                <%= @check_parcent[checkuser.id] %>%</p>
               <% if @user_sign[checkuser.id] == true %>
               ！
               <%end%>
             </div>
           </div>
           <div class="card-name">
-            <p><%= @user[checkuser.id].name %></p>
+            <p>
+              <%= @user[checkuser.id].name %>
+            </p>
             <!--<p><%=link_to @user[checkuser.id].name, user_path(@user[checkuser.id])%></p>-->
           </div>
           <div class="card-belongs">
-            <p><%= @user[checkuser.id].belong %></p>
+            <p>
+              <%= @user[checkuser.id].belong %>
+            </p>
           </div>
         </div>
         <% end %>
@@ -44,5 +51,14 @@
 
       </div>
     </div>
+    <% else %>
+    <!--従業員のみに表示-->
+    あなたが最近取り組んでいるシラバス<br>
+    <% @sirabasu.each do |sira| %>
+    <%= sira.number %>
+    <%= link_to sira.name, sirabasu_path(sira.number) %>
+    <%= @updated[sira.id].strftime("%Y-%m-%d %H:%M:%S") %><br>
+    <% end %>
+    <% end %>
   </div>
 </div>

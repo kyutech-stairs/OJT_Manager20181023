@@ -7,7 +7,15 @@ class SirabasusController < ApplicationController
       # @stat: 各シラバスが利用できるかを配列で
       @stat_list = []
       @sirabasu.each do |s|
-        @stat_list.push(is_this_sirabasu_available(s))
+        if is_this_sirabasu_available(s)
+          if is_this_sirabasu_done(s)
+            @stat_list.push("完了")
+          else
+            @stat_list.push("未完了")
+          end
+        else
+          @stat_list.push("未開放")
+        end
       end
     end
   end
