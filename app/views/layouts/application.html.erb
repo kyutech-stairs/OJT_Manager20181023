@@ -14,12 +14,15 @@
   </head>
   <body>
     <header>
-      <div class="header-logo">OJT Manager</div>
+      <div class="header-logo">
+        <%= image_tag('/assets/logo.svg') %>
+        <h1>Manager</h1>
+      </div>
         <!--- ログインしてなかったら非表示。してたらトップページなどにとぶリンクが出てくる --->
         <% if kanrisya_signed_in? %>
           <div class="header-link">
             <div class="header-link-left">
-              <p><%= link_to 'トップページ', '/ojt_top/top' %></p>
+              <p><%= link_to 'ホーム', '/ojt_top/top' %></p>
               <p><%= link_to 'シラバス一覧', '/sirabasus/' %></p>
               <p><%= link_to '従業員一覧', '/user/index' %></p>
             </div>

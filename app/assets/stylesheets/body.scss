@@ -15,7 +15,7 @@ body {
 header {
     box-sizing: border-box;
     background-color: #8bc34a;
-    color: #fff;
+    color: #444;
     display: flex;
     justify-content: space-between;
     align-items: baseline;
@@ -27,19 +27,34 @@ header {
 }
 
 .header-logo{
-    //display: flex;
-    padding: 20px 40px;
-    font-size: 1.5rem;
-    font-weight: 900;
+    display: flex;
+    padding: 16px 40px;
+    h1 {
+      font-weight: 900;
+      line-height: 38px;
+      margin-left: 8px;
+      font-size: 1.5rem;
+    }
+    img {
+      height: 38px;
+    }
 }
 
 .header-link{
+  position: absolute;
+  top: 0;
+  right: 0;
     display: flex;
-    padding: 20px 40px;
+    padding: 16px 40px;
     font-size: 1rem;
     a {
+      line-height: 38px;
       &:visited {
-        color: #000;
+        color: #444;
+      }
+      &:hover {
+        background-color: rgba($color: #fff, $alpha: 0.5);
+        transition: 0.5s;
       }
     }
 }
