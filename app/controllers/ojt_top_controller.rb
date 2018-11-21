@@ -5,6 +5,14 @@ class OjtTopController < ApplicationController
 
   def user
   end
+
+  def copy_check
+  end
+
+  def copy
+    redirect_to "/sirabasus"
+  end
+
   def top
     if current_kanrisya.admin == true
       @company = Company.find_by(cid: current_kanrisya.cid)

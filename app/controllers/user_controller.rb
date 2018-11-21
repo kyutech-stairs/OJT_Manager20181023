@@ -97,9 +97,14 @@ class UserController < ApplicationController
   end
 
   def company_save
+    @copy_from = Company.find_by(cname: params[:cname], copy: true)
     @company = Company.new(cname: params[:cname],cid: params[:cid], cname_sub: params[:cname_sub])
     if @company.save
-      redirect_to "/ojt_top/top"
+      if @copy_from.present?
+        redirect_to "/ojt_top/copy_check"
+      else
+        redirect_to "/ojt_top/top"
+      end
     else
       logger.debug @company.errors.inspect
       redirect_to "/user/hei"
@@ -108,7 +113,7 @@ class UserController < ApplicationController
 
   def company_up
     @company = Company.find(params[:id])
-    if @company.update(cname: params[:cname],cid: params[:cid], cname_sub: params[:cname_sub], password: params[:password])
+    if @company.update(cname: params[:cname],cid: params[:cid], cname_sub: params[:cname_sub], password: params[:password], copy: params[:copy])
       redirect_to "/ojt_top/top"
     else
       logger.debug @company.errors.inspect

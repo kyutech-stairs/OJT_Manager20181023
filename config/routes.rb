@@ -72,6 +72,8 @@ Rails.application.routes.draw do
    to: 'sirabasus#publishing_config_update',
    as: 'publishing_config_update'
   post "sirabasus/del"
+  get 'ojt_top/copy_check'
+  post 'ojt_top/copy'
 
   post 'checkusers/checkup'
   get 'checkusers/check'
