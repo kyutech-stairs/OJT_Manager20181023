@@ -2,28 +2,28 @@
   <div class="content-box">
     <h1>従業員一覧</h1>
 
-<%=form_tag({ controller: 'user', action: 'index' },{ method: "get"}) do %>
- <%= text_field_tag :name%>
- <%= submit_tag '検索'%> <%= link_to "詳細検索", "/user/search" %>
-<% end %>
+    <%=form_tag({ controller: 'user', action: 'index' },{ method: "get"}) do %>
+      <%= text_field_tag(:name, '', class: 'input-box') %>
+      <%= submit_tag '検索'%> 
+      <%= link_to "詳細検索", "/user/search" %>
+    <% end %>
+    <% if @user.present? || @user2.present? && params[:commit] == "検索" then %>
+      <p>検索結果</p>
+      <% @user.each do |user| %>
+        <p><%=link_to user.name ,user_path(user)%></p>
+    <% end %>
 
-<% if @user.present? || @user2.present? && params[:commit] == "検索" then %>
-検索結果　
-<% @user.each do |user| %>
- <p><%=link_to user.name ,user_path(user)%></p>
-<% end %>
-
-<% if @i != 0 %>
- <% for num in 0..(@i-1) %>
-  <p><%= link_to @user2[num].name, user_path(@user2[num]) %></p>
- <% end %>
- <p>該当者 <%= @i %>名</p>
-<% else %>
-<p>該当者 <%= @user.count %>名</p>
-<% end %>
-<% elsif params[:commit] == "検索"then %>
-検索結果　その検索条件での該当者はいませんでした
-<% end %>
+    <% if @i != 0 %>
+      <% for num in 0..(@i-1) %>
+        <p><%= link_to @user2[num].name, user_path(@user2[num]) %></p>
+      <% end %>
+      <p>該当者 <%= @i %>名</p>
+    <% else %>
+      <p>該当者 <%= @user.count %>名</p>
+    <% end %>
+    <% elsif params[:commit] == "検索"then %>
+      <p>検索結果　その検索条件での該当者はいませんでした</p>
+    <% end %>
 
     <div class="lists">
       <p>ADMIN</p>
