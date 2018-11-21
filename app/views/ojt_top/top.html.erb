@@ -42,13 +42,18 @@
 
       </div>
     </div>
+      <% if @company.present? %>
+        <p><%= @company.cname %> <%= @company.cname_sub %> <%= link_to "編集", user_hei2_path %></p>
+      <% else %>
+        <p><%= link_to "会社名登録", user_hei_path %></p>
+      <% end %>
     <% else %>
     <!--従業員のみに表示-->
     あなたが最近取り組んでいるシラバス<br>
     <% @sirabasu.each do |sira| %>
     <%= sira.number %>
     <%= link_to sira.name, sirabasu_path(sira.number) %>
-    <%= @updated[sira.id].strftime("%Y-%m-%d %H:%M:%S") %><br>
+    <%= @updated[sira.id].in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S") %><br>
     <% end %>
     <% end %>
   </div>

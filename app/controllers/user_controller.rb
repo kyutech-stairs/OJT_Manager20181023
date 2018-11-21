@@ -96,11 +96,31 @@ class UserController < ApplicationController
     end
   end
 
-  def search_result
+  def company_save
+    @company = Company.new(cname: params[:cname],cid: params[:cid], cname_sub: params[:cname_sub])
+    if @company.save
+      redirect_to "/ojt_top/top"
+    else
+      logger.debug @company.errors.inspect
+      redirect_to "/user/hei"
+    end
+  end
+
+  def company_up
+    @company = Company.find(params[:id])
+    if @company.update(cname: params[:cname],cid: params[:cid], cname_sub: params[:cname_sub], password: params[:password])
+      redirect_to "/ojt_top/top"
+    else
+      logger.debug @company.errors.inspect
+      redirect_to "/user/hei2"
+    end
   end
 
   def hei
+  end
 
+  def hei2
+    @company = Company.find_by(cid: current_kanrisya.cid)
   end
 
   def new
@@ -165,6 +185,10 @@ class UserController < ApplicationController
 
   def kanrisya_params
   params.require(:kanrisya).permit(:name, :email, :password, :password_confirmation, :crew_number, :age, :sex, :admin, :cid, :image, :belong)
+  end
+
+  def company_params
+  params.require(:company).permit(:cname, :cid, :password)
   end
 
   def user_top

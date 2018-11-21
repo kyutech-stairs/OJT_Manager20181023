@@ -7,6 +7,7 @@ class OjtTopController < ApplicationController
   end
   def top
     if current_kanrisya.admin == true
+      @company = Company.find_by(cid: current_kanrisya.cid)
       @checkuser = Kanrisya.limit(6).order("check_time DESC") # updated_timeの降順で60件取得
       @user = []
       @user_sign = []
