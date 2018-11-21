@@ -2,7 +2,7 @@
   <div class="content-box">
   <h1>プロフィール</h1>
   <% if @kanrisya.cid == current_kanrisya.cid %>
-  
+
   <div class="plofile">
     <div class='plofile-img'>
       <% if  @kanrisya.image.present?%>
@@ -23,7 +23,7 @@
   <p><%= @kanrisya.sex %></p>
   <p>所属:<%= @kanrisya.belong %></p>
   <p>メールアドレス <%= @kanrisya.email %></p>
-  <p>管理権限 <%= @kanrisya.admin %></p>
+  <p>管理権限 <% if @kanrisya.admin==true %>あり<% else %>なし<%end%></p>
   <% if @kanrisya.admin == false %>
   <p>総チェック数 <%= @check_ok_count %></p>
   <p>総チェック割合 <%= @check_parcent %>%</p>

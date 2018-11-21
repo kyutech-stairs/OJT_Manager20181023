@@ -6,16 +6,26 @@
       <p>一覧</p>
       <table>
         <tbody>
+          <% i = 0 %>
           <% @sirabasu.each do |sirabasu| %>
           <tr>
             <td><%= sirabasu.number %>. </td>
             <td><%= link_to sirabasu.name, sirabasu_path(sirabasu.number) %></td>
             <% if current_kanrisya.admin == true %>
+              <td><%#= link_to "編集", edit_sirabasu_path(sirabasu.number) %></td>
+              <td><%#= link_to "削除", sirabasu_path(sirabasu.number), method: :delete, data: {confirm: "削除しますか？"} %></td>
               <td><%= link_to(content_tag(:i,'edit',class:'material-icons'), edit_sirabasu_path(sirabasu.number)) %></td>
-              <td><%= link_to(content_tag(:i,'delete',class:'material-icons'), sirabasu_path(sirabasu.number), :method => :delete) %></td>
-              <td><%= link_to(content_tag(:i,'settings',class:'material-icons'), publishing_config_path(sirabasu.number)) %></td>
+
+              <td><%= link_to(content_tag(:i,'delete',class:'material-icons'), sirabasu_path(sirabasu.number), :method => :delete, data: {confirm: "削除しますか？"}) %></td>
+              <td><%= link_to "公開設定", publishing_config_path(sirabasu.number) %></td>
+            <% else %>
+              <% unless @stat_list[i] %>
+              <td>未開放</td>
+              <% end %>
+
             <% end %>
           </tr>
+          <% i += 1 %>
           <% end %>
         </tbody>
       </table>

@@ -17,6 +17,9 @@
             </div>
             <div class="top-card__graph">
               <p><%= @check_parcent[checkuser.id] %>%</p>
+              <% if @user_sign[checkuser.id] == true %>
+              ！
+              <%end%>
             </div>
           </div>
           <div class="top-card__name">

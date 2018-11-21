@@ -2,8 +2,49 @@ class UserController < ApplicationController
 
   def index
     @user = Kanrisya.where(name: params[:name])
-     @kanrisya = Kanrisya.all
-     @checkuser = Checkuser.all
+    @i = 0
+
+    if params[:sirabasu] != "" && params[:ok] != "" then
+     @sirabasuuser = Sirabasuuser.where(sirabasu_id: params[:sirabasu]).where(sirabasu_ok: params[:ok])
+     @user2 = []
+     @sirabasuuser.each do |sirabasuuser|
+      if params[:sex] == "" && params[:belong] == "" then
+       @user2[@i] = Kanrisya.find_by(id: sirabasuuser.kanrisya_id)
+       @i = @i + 1
+     elsif params[:sex] != "" && params[:belong] == "" then
+        u = Kanrisya.find_by(id: sirabasuuser.kanrisya_id)
+        if u.sex == params[:sex]
+          @user2[@i] = Kanrisya.find_by(id: u.id)
+          @i = @i + 1
+        end
+      elsif params[:sex] == "" && params[:belong] != "" then
+        u = Kanrisya.find_by(id: sirabasuuser.kanrisya_id)
+        if u.belong == params[:belong]
+          @user2[@i] = Kanrisya.find_by(id: u.id)
+          @i = @i + 1
+        end
+      elsif params[:sex] != "" && params[:belong] != "" then
+        u = Kanrisya.find_by(id: sirabasuuser.kanrisya_id)
+        if u.belong == params[:belong] && u.sex == params[:sex]
+          @user2[@i] = Kanrisya.find_by(id: u.id)
+          @i = @i + 1
+        end
+       end
+     end
+
+    elsif params[:sex] != "" then
+      if params[:belong] != ""
+       @user = Kanrisya.where(sex: params[:sex]).where(belong: params[:belong]).where(cid: current_kanrisya.cid)
+      else
+        @user = Kanrisya.where(sex: params[:sex]).where(cid: current_kanrisya.cid)
+      end
+
+    elsif params[:belong] != "" then
+      @user = Kanrisya.where(belong: params[:belong]).where(cid: current_kanrisya.cid)
+    end
+
+    @kanrisya = Kanrisya.all
+    @checkuser = Checkuser.all
   end
 
   def show
@@ -43,6 +84,12 @@ class UserController < ApplicationController
   end
 
   def search
+    @sirabasu = Sirabasu.where(cid: current_kanrisya.cid)
+    @sirabasu_choise = []
+    @sirabasu_choise << ["",""]
+    @sirabasu.each do |sirabasu|
+     @sirabasu_choise << [sirabasu.name,sirabasu.id]
+    end
   end
 
   def search_result
