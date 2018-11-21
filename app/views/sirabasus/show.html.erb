@@ -12,35 +12,15 @@
 
     <% if current_kanrisya.admin == true %>
     <div class="field">
-      <%= link_to "編集", edit_sirabasu_path(@sirabasu.number), :class => "link-button" %>
+      <%= link_to edit_sirabasu_path(@sirabasu.number) do %>
+        <div class='link-button'>
+          <i class='material-icons'>edit</i>
+          編集
+        </div>
+      <% end %>
     </div>
     <% end %>
-    <table>
-      <thead>
-        <tr>
-          <th>章番号</th>
-          <th>名前</th>
-          <th>内容</th>
-          <th>作成者</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>
-            <%= @sirabasu.number %>
-          </td>
-          <td>
-            <%= @sirabasu.name %>
-          </td>
-          <td>
-            <%= @sirabasu.content %>
-          </td>
-          <td>
-            <%= @kanrisya.name %>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    
     <% if @sirabasu.image?%>
     <% i = 1 %>
     <% @sirabasu.image.each do |image|%>
@@ -104,7 +84,7 @@
       </tbody>
     </table>
     <% if current_kanrisya.admin == true %>
-    <%= link_to 'チェックリスト作成', new_sirabasu_checklist_path(@sirabasu.number) %>
+    <%= link_to '編集', edit_sirabasu_path(@sirabasu.number), :class => 'link-button' %>
     <% else %>
     <%= hidden_field_tag :AAAA, @sirabasu.number %>
     <%= submit_tag 'チェックの更新', :class=> "link-button"%>
@@ -114,7 +94,7 @@
     <% else %>
     <!--従業員がシラバスを利用できない場合-->
     あなたはこのシラバスのチェックリストを利用できません。<br>
-    開放するには、以下のシラバスを完了してください
+    以下のシラバスを完了し、管理者に承認してもらってください
     <table>
       <tbody>
         <% i = 0 %>
