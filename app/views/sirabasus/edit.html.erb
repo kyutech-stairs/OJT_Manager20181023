@@ -1,19 +1,8 @@
 <%= form_for @sirabasu,url: sirabasu_path do |f| %>
-<!--
-<%# if @sirabasu.errors.any? %>
-<ul>
-    <%# @sirabasu.errors.full_messages.each do |message| %>
-    <li>
-        <%#= message%>
-    </li>
-    <%# end %>
-</ul>
-<%# end %>
--->
 <div class="first-box">
     <div class="content-box">
+    
         <h1>シラバス編集</h1>
-
         <div class="field">
             <%= f.label :section_number, "章番号" %><br />
             <%= f.number_field :number ,:readonly => true,:value => "#{@sirabasu.number}",:class => "input-box" %>
@@ -28,7 +17,7 @@
             <%= f.label :section_name, "内容" %><br />
             <%= f.text_area :content, :class => "text-area"%>
             <p><%= f.file_field :image, multiple: true %></p>
-            <% if @sirabasu.image?%>
+            <% if @sirabasu.image? %>
             <% i = 1 %>
             <% @sirabasu.image.each do |image|%>
             <%=image_tag image.url , :size =>'130x130'%>画像<%= i %>

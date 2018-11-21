@@ -86,9 +86,7 @@ class SirabasusController < ApplicationController
    end
   end
 
-  # データを更新するためのAction
   def update
-    # ここちょっとよくわからないですね（by 吉井）
     @sirabasu = Sirabasu.find_by(number: params[:id], cid: current_kanrisya.cid)
     @checklist_num = 1
     # シラバスの更新、チェックリストの作成・更新
