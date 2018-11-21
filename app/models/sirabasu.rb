@@ -11,6 +11,6 @@ class Sirabasu < ApplicationRecord
     has_many :sirabasuusers, dependent: :destroy
     has_many :kanrisyas, through: :sirabasuusers
     accepts_nested_attributes_for :sirabasuusers
-    # validates :name, {presence: true,length: {maximum: 100}}
-    # validates :content, {presence: true,length: {maximum: 100}}
+    validates :name, {presence: true,length: {maximum: 100}}
+    validates :content, {presence: true,length: {maximum: 1000}}
 end
