@@ -8,12 +8,12 @@
         <tbody>
           <% @sirabasu.each do |sirabasu| %>
           <tr>
-            <td><%= sirabasu.number %>. </td>
+            <td class='number'><%= sirabasu.number %>. </td>
             <td><%= link_to sirabasu.name, sirabasu_path(sirabasu.number) %></td>
             <% if current_kanrisya.admin == true %>
-              <td><%= link_to(content_tag(:i,'edit',class:'material-icons'), edit_sirabasu_path(sirabasu.number)) %></td>
-              <td><%= link_to(content_tag(:i,'delete',class:'material-icons'), sirabasu_path(sirabasu.number), :method => :delete) %></td>
-              <td><%= link_to(content_tag(:i,'settings',class:'material-icons'), publishing_config_path(sirabasu.number)) %></td>
+              <td class='icon'><%= link_to(content_tag(:i,'edit',class:'material-icons'), edit_sirabasu_path(sirabasu.number)) %></td>
+              <td class='icon'><%= link_to(content_tag(:i,'delete',class:'material-icons'), sirabasu_path(sirabasu.number), :method => :delete) %></td>
+              <td class='icon'><%= link_to(content_tag(:i,'settings',class:'material-icons'), publishing_config_path(sirabasu.number)) %></td>
             <% end %>
           </tr>
           <% end %>

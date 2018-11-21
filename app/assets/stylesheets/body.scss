@@ -169,7 +169,7 @@ textarea {
 }
 
 .first-box {
-    margin: 5vh auto;
+    margin: 4vh auto;
     padding-top: 3%;
     padding-bottom: 3%;
     background-color: #ffffff;
@@ -188,15 +188,38 @@ textarea {
 }
 
 .lists {
+    margin-top: 2vh;
+
     table {
         border-collapse: collapse;
-        font-size: 1.5rem;
+        table-layout: fixed;
+        font-size: 1.8rem;
+        width: 100%;
     }
 
     td {
         border-width: 1px 0px;
         border-style: solid;
         border-color: #777777;
+        padding: 0.7rem 0 ;
+        font-weight: 500;
+        vertical-align: baseline;
+    }
+
+    i {
+        font-size: 36px;
+    }
+
+    .number {
+        padding-left: 0.7rem;
+    }
+
+    .icon, .number{
+        width: 50px;
+    }
+
+    a {
+        color: #444444;
     }
 }
 

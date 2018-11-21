@@ -12,7 +12,12 @@
 
     <% if current_kanrisya.admin == true %>
     <div class="field">
-      <%= link_to "編集", edit_sirabasu_path(@sirabasu.number), :class => "link-button" %>
+      <%= link_to edit_sirabasu_path(@sirabasu.number) do %>
+        <div class='link-button'>
+          <i class='material-icons'>edit</i>
+          編集
+        </div>
+      <% end %>
     </div>
     <% end %>
     
@@ -77,7 +82,7 @@
       </tbody>
     </table>
     <% if current_kanrisya.admin == true %>
-    <%= link_to 'チェックリスト作成', new_sirabasu_checklist_path(@sirabasu.number) %>
+    <%= link_to '編集', edit_sirabasu_path(@sirabasu.number), :class => 'link-button' %>
     <% else %>
     <%= hidden_field_tag :AAAA, @sirabasu.number %>
     <%= submit_tag 'チェックの更新', :class=> "link-button"%>
