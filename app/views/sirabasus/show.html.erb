@@ -37,6 +37,28 @@
     <% if @stat %>
     <h1>チェックリスト</h1>
     <%=form_tag({ controller: 'checkusers', action: 'checkup' },{ method: "post"}) do %>
+    <div class="check-list">
+      <% @checklist.each do |checklist| %>
+        <% if current_kanrisya.cid == checklist.cid %>
+          <div class="check-box">
+            <% if current_kanrisya.admin == true %>
+              <p><%= checklist.content %></p>
+            <% else %>
+            <% i = 1 %>
+              <% @checkuser.each do |checkuser| %>
+                <% if checkuser.checklist_id == checklist.id %>
+                  <%= hidden_field_tag 'checklist_id[]' ,checklist.id%>
+                  <%= hidden_field_tag 'check_id[]' %>
+                  <%= check_box_tag 'check_id[]' ,checklist.id,checkuser.check_ok,{:id=> "checkbox_#{i}"} %>
+                  <%= label_tag "checkbox_#{i}", checklist.content, :class => 'checkbox-user' %>
+                <% end %>
+                  <% i += 1 %>
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
     <table>
       <thead>
         <tr>
