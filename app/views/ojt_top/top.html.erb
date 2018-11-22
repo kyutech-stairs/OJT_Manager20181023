@@ -58,8 +58,16 @@
         
       </div>
     </div>
+
+    
     <% else %>
     <!--従業員のみに表示-->
+    <% if @company.present? %>
+    <h3>
+      <%= @company.cname %>
+      <%= @company.cname_sub %>
+    </h3>
+    <% end %>
     あなたが最近取り組んでいるシラバス
     <% if @sirabasu.empty? %>
     はありません<br>
@@ -87,5 +95,46 @@
     </table>
     <% end %>
     <% end %>
+    
+    <div class="top-storage">
+      <p>直近のチェックリスト完了者</p>
+      <div class="top-card">
+        <% @checkuser.each do |checkuser| %>
+        <% if @user[checkuser.id].cid == current_kanrisya.cid &&  @user[checkuser.id].check_time.present?%>
+        <%= link_to user_path(@user[checkuser.id]) do %>
+        <div class="top-card__box">
+          <div class="top-card__flex">
+            <div class="top-card__photo">
+              <% if  @user[checkuser.id].image.present?%>
+                <%= image_tag @user[checkuser.id].image.url%>
+              <% end %>
+            </div>
+            <div class="top-card__graph">
+              <p>
+                <%= @check_parcent[checkuser.id] %>%</p>
+              <% if @user_sign[checkuser.id] == true %>
+              <%end%>
+            </div>
+          </div>
+          <div class="top-card__name">
+            <p>
+              <%= @user[checkuser.id].name %>
+            </p>
+            <!--<p><%=link_to @user[checkuser.id].name, user_path(@user[checkuser.id])%></p>-->
+          </div>
+          <div class="top-card__belongs">
+            <p>
+              <%= @user[checkuser.id].belong %>
+            </p>
+          </div>
+        </div>
+        <% end %>
+        <% end %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="top-storage">
+      <div class="top-card">
   </div>
 </div>

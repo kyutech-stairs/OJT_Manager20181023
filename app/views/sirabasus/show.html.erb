@@ -1,26 +1,14 @@
 <%= flash[:checkuser_update] %>
 <div class="first-box">
   <div class="content-box">
-    <h1>シラバス</h1>
-    <h2>
+    <h1>
       <%= @sirabasu.number %>.
       <%= @sirabasu.name %>
-    </h2>
+    </h1>
 
     <div class="field">
       <%= simple_format(@sirabasu.content) %>
     </div>
-
-    <% if current_kanrisya.admin == true %>
-    <div class="field">
-      <%= link_to edit_sirabasu_path(@sirabasu.number) do %>
-      <div class='link-button'>
-        <i class='material-icons'>edit</i>
-        編集
-      </div>
-      <% end %>
-    </div>
-    <% end %>
 
     <% if @sirabasu.image?%>
     <% i = 1 %>
@@ -31,19 +19,18 @@
     <% end %>
     <% end %>
   </div>
-</div>
 
-<div class="first-box">
   <div class="content-box">
     <% if @stat %>
-    <h1>チェックリスト</h1>
     <%=form_tag({ controller: 'checkusers', action: 'checkup' },{ method: "post"}) do %>
     <div class="check-list">
       <% @checklist.each do |checklist| %>
         <% if current_kanrisya.cid == checklist.cid %>
           <div class="check-box">
             <% if current_kanrisya.admin == true %>
-              <p><%= checklist.content %></p>
+              <div class="checklist-content">
+                <%= checklist.content %>
+              </div>
             <% else %>
             <% i = 1 %>
               <% @checkuser.each do |checkuser| %>
@@ -60,52 +47,7 @@
         <% end %>
       <% end %>
     </div>
-    <table>
-      <thead>
-        <tr>
-          <th>節番号</th>
-          <th>内容</th>
-          <% if current_kanrisya.admin == false %>
-          <th>チェックボックス</th>
-          <% end %>
-        </tr>
-      </thead>
-      <tbody>
-        <% @checklist.each do |checklist| %>
-        <% if current_kanrisya.cid == checklist.cid %>
-        <tr>
-          <td>
-            <%= checklist.number %>
-          </td>
-          <td>
-            <%= checklist.content %>
-          </td>
-          <% if current_kanrisya.admin == true %>
-          <td>
-            <%= link_to "編集", edit_sirabasu_checklist_path(@sirabasu.number,checklist.number) %>
-          </td>
-          <td>
-            <%= link_to "削除", sirabasu_checklist_path(@sirabasu.number,checklist.number), :method => :delete %>
-          </td>
-          <% end %>
-
-          <% if current_kanrisya.admin == false %>
-          <% @checkuser.each do |checkuser| %>
-          <% if checkuser.checklist_id == checklist.id %>
-          <%= hidden_field_tag 'checklist_id[]' ,checklist.id%>
-          <%= hidden_field_tag 'check_id[]' %>
-          <td>
-            <%= check_box_tag 'check_id[]' ,checklist.id,checkuser.check_ok %>
-          </td>
-          <% end %>
-          <% end %>
-          <% end %>
-
-        </tr>
-        <% end %>
-        <% end %>
-      </tbody>
-    </table>
+    
     <% if current_kanrisya.admin == true %>
     <%= link_to edit_sirabasu_path(@sirabasu.number), class:'link-button' do %>
       <div>
@@ -144,5 +86,4 @@
     </table>
     <% end %>
     <%= link_to 'シラバス一覧へ戻る', sirabasus_path %>
-  </div>
 </div>

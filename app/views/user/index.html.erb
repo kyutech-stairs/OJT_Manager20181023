@@ -8,10 +8,15 @@
       <%= link_to "詳細検索", "/user/search" %>
     <% end %>
     <% if @user.present? || @user2.present? && params[:commit] == "検索" then %>
-      <p>検索結果</p>
-      <% @user.each do |user| %>
-        <p><%=link_to user.name ,user_path(user)%>
-        </p>
+      <div class="lists">
+        <p>検索結果</p>
+        <table>
+        <% @user.each do |user| %>
+          <tr>
+            <td><p><%=link_to user.name ,user_path(user)%></p></td>
+          </tr>
+        </table>
+      </div>
     <% end %>
 
     <% if @i != 0 %>
@@ -83,12 +88,11 @@
         <% end %>
       </div>
     </div>
+    <% if current_kanrisya.admin == true %>
+      <p><%= link_to '新しい社員登録', '/user/new',class:'link-button' %></p>
+    <% end %>
   </div>
 </div>
-
-<% if current_kanrisya.admin == true %>
-<p><%= link_to '新しい社員登録', '/user/new' %></p>
-<% end %>
 
 <p>
   <%= link_to 'Back', '/ojt_top/top' %>
