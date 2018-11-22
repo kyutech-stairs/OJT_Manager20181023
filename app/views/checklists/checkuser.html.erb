@@ -25,19 +25,14 @@
               </tbody>
             </table>
           </div>
-
-          <!-- 進捗<%= @check_parcent %>％ -->
           <%=form_tag({ controller: 'sirabasus', action: 'sirabasu_complete' },{ method: "post"}) do %>
           <% if current_kanrisya.admin == true || @s.sirabasu_ok ==true %>
            <% if @sirabasuuser.sirabasu_ok == false && @check_parcent == 100%>
             <%= hidden_field_tag :BBBB, @kanrisya.id %>
             <%= hidden_field_tag :id, @sirabasuuser.id %>
-            <div class="opitions">
-            <%= submit_tag 'OJT完了', :class=> "link-button" do%>
-            <div>
-              <i class='material-icons'>edit</i>
-              編集
-            </div></div>
+            <%= button_tag :type=>'submit', :class=> "link-button" do%>
+              <i class='material-icons'>thumb_up_alt</i>
+              OJT完了
             <% end %>
            <% end %>
           <% else %>
@@ -46,7 +41,6 @@
            <% end %>
           <% end %>
           <% end %>
-          <!-- <p><%= link_to 'back', user_path(@kanrisya) %></p> -->
       </div>
     </div>
   </div>

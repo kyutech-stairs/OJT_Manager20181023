@@ -52,10 +52,6 @@ header {
       &:visited {
         color: #444;
       }
-      &:hover {
-        // background-color: rgba($color: #fff, $alpha: 0.5);
-        // transition: 0.5s;
-      }
     }
     .material-icons {
       position: relative;
@@ -327,13 +323,18 @@ textarea {
         font-size: 36px;
         position: relative;
         top: 8px;
-        // font-size: 1.5rem;
     }
 }
 
 .ojt-comp {
     text-align: right;
     width: 120px;
+    i {
+        margin: 0 1rem;
+        font-size: 36px;
+        position: relative;
+        top: 6px;
+    }
 }
 
 .field {
@@ -606,4 +607,8 @@ textarea {
     border-width: 1px 0px 0px 0px;
     border-style: solid;
     border-color: #777777;
+    form {
+      margin-top: 4rem;
+      text-align: center;
+    }
 }

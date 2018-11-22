@@ -57,7 +57,14 @@
             <td class='number'><%= sirabasu.number %>. </td>
             <td><%=link_to sirabasu.name, checklists_checkuser_path(:sirabasu_id => sirabasu.id,:kanrisya_id => @kanrisya.id)%></td>
             <td class="ojt-comp"><%= @sirabasu_check_ok_parcent[sirabasu.number-1] %> %</td>
-            <td class="ojt-comp"><% if @sirabasuuser[sirabasu.id].sirabasu_ok == true%>完了！<% end %></td>
+            <td class="ojt-comp">
+              <% if @sirabasuuser[sirabasu.id].sirabasu_ok == true%>
+                <i class='material-icons'>check_box</i>
+              <% end %>
+              <% if @sirabasuuser[sirabasu.id].sirabasu_ok == false%>
+                <i class='material-icons'>check_box_outline_blank</i>
+              <% end %>
+            </td>
           </tr>
         <% end %>
       </tbody>
