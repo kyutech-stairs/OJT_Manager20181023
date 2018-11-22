@@ -34,7 +34,9 @@
             <% if kanrisya.admin == true %>
           <tr>
             <td>
+              <% if kanrisya.image? %>
                   <%= image_tag kanrisya.image.url, :size =>'150x150' %>
+              <% end %>
                   <%=link_to kanrisya.name ,user_path(kanrisya)%>
             </td>
           </tr>
@@ -54,7 +56,9 @@
             <% if kanrisya.admin == false %>
           <tr>
             <td>
+              <% if kanrisya.image? %>
               <%= image_tag kanrisya.image.url, :size =>'150x150' %>
+              <% end %>
                   <%=link_to kanrisya.name ,user_path(kanrisya)%>
             </td>
           </tr>
