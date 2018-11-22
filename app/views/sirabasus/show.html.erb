@@ -1,4 +1,5 @@
-<div class="first-box">
+<%= flash[:checkuser_update] %>
+  <div class="first-box">
   <div class="content-box">
     <h1>シラバス</h1>
     <h2>
@@ -94,23 +95,21 @@
     <% else %>
     <!--従業員がシラバスを利用できない場合-->
     あなたはこのシラバスのチェックリストを利用できません。<br>
-    以下のシラバスを完了し、管理者に承認してもらってください
+    以下のシラバスの進捗を100%にし、管理者に承認してもらってください
     <table>
       <tbody>
         <% i = 0 %>
         <% @zentei.each do |s| %>
         <tr>
           <td>
-            <%= s.number %>
+            <%= s.number %>.
           </td>
           <td>
             <%= link_to s.name, sirabasu_path(s.number) %>
           </td>
-          <% unless @stat_list[i] %>
           <td>
-          未開放
+          <%= @stat_list[i] %>
           </td>
-          <% end %>
         </tr>
         <% i += 1 %>
         <% end %>
