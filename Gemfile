@@ -65,6 +65,8 @@ gem 'virtus'
 
 gem 'nested_form_fields'
 
+gem 'cocoon'
+
 gem 'jquery-rails'
 
 group :development, :test do

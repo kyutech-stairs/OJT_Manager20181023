@@ -11,7 +11,7 @@ class UserController < ApplicationController
       if params[:sex] == "" && params[:belong] == "" then
        @user2[@i] = Kanrisya.find_by(id: sirabasuuser.kanrisya_id)
        @i = @i + 1
-     elsif params[:sex] != "" && params[:belong] == "" then
+      elsif params[:sex] != "" && params[:belong] == "" then
         u = Kanrisya.find_by(id: sirabasuuser.kanrisya_id)
         if u.sex == params[:sex]
           @user2[@i] = Kanrisya.find_by(id: u.id)
@@ -63,22 +63,29 @@ class UserController < ApplicationController
     #ユーザーに関連するシラバスの情報
     @sirabasu = Sirabasu.where(cid: @kanrisya.cid)
     i = 0
+    #各シラバスの進捗
     @sirabasu_check_ok_parcent = []
+    # 各シラバスでチェックした数
+    @sirabasu_check_ok = []
+    # 各シラバスのチェックリストの数
+    @sirabasu_check_count = []
     while i < @sirabasu.count do
-     #シラバスに関係するチェックリストの取得
-     @sirabasu_check = @sirabasu[i].checklists.all
-     #チェックリストに関連するチェック判定の取得
-     @sirabasu_check_ok = 0
-     @sirabasu_check.each do |sirabasu_check|
-      sirabasu_check_ok = Checkuser.where(checklist_id: sirabasu_check.id).where(kanrisya_id: @kanrisya.id).where(check_ok: true)
-      @sirabasu_check_ok = @sirabasu_check_ok + sirabasu_check_ok.count
-     end
-     @sirabasu_check_ok_parcent[i] = ((@sirabasu_check_ok/(@sirabasu_check.count).to_f).round(2)*100).to_i rescue 0
-     if @sirabasu_check_ok_parcent[i] != 100
-       sirabasuuser = Sirabasuuser.where(kanrisya_id: @kanrisya.id).where(sirabasu_id: @sirabasu[i].id)
-       sirabasuuser.update(sirabasu_ok: false)
-     end
-     i = i + 1
+      #シラバスに関係するチェックリストの取得
+      @sirabasu_check = @sirabasu[i].checklists.all
+      #チェックリストに関連するチェック判定の取得
+      @sirabasu_check_ok[i] = 0
+      # 各チェックリストについて調べる
+      @sirabasu_check.each do |sirabasu_check|
+        sirabasu_check_ok = Checkuser.where(checklist_id: sirabasu_check.id).where(kanrisya_id: @kanrisya.id).where(check_ok: true)
+        @sirabasu_check_ok[i] += sirabasu_check_ok.count
+      end
+      @sirabasu_check_count[i] = @sirabasu_check.count
+      @sirabasu_check_ok_parcent[i] = ((@sirabasu_check_ok[i]/(@sirabasu_check_count[i]).to_f).round(2)*100).to_i rescue 0
+      if @sirabasu_check_ok_parcent[i] != 100
+        sirabasuuser = Sirabasuuser.where(kanrisya_id: @kanrisya.id).where(sirabasu_id: @sirabasu[i].id)
+        sirabasuuser.update(sirabasu_ok: false)
+      end
+      i = i + 1
     end
     @sirabasuuser = []
     @sirabasu.each do |sirabasu|
