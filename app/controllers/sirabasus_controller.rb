@@ -226,6 +226,7 @@ class SirabasusController < ApplicationController
         checked_count += 1
       end
     end
-    return ((checked_count / (checklist_count).to_f).round(2) * 100).to_i
+    per = ((checked_count / (checklist_count).to_f).round(2) * 100).to_i rescue 0
+    return per
   end
 end

@@ -44,12 +44,17 @@
     </div>
     <% else %>
     <!--従業員のみに表示-->
-    あなたが最近取り組んでいるシラバス<br>
+    あなたが最近取り組んでいるシラバス
+    <% if @sirabasu.empty? %>
+    はありません<br>
+    <% else %>
+    <br>
     <% @sirabasu.each do |sira| %>
     <%= sira.number %>
     <%= link_to sira.name, sirabasu_path(sira.number) %>
     <%= @updated[sira.id].strftime("%Y-%m-%d %H:%M:%S") %>
     <%= @percent[sira.id] %><br>
+    <% end %>
     <% end %>
     <% end %>
   </div>
