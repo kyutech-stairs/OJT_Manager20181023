@@ -1,7 +1,7 @@
 class UserController < ApplicationController
 
   def index
-    @user = Kanrisya.where(name: params[:name])
+    @user = Kanrisya.where(name: params[:name]).where(cid: current_kanrisya.cid)
     @i = 0
 
     if params[:sirabasu] != "" && params[:ok] != "" then
@@ -74,6 +74,10 @@ class UserController < ApplicationController
       @sirabasu_check_ok = @sirabasu_check_ok + sirabasu_check_ok.count
      end
      @sirabasu_check_ok_parcent[i] = ((@sirabasu_check_ok/(@sirabasu_check.count).to_f).round(2)*100).to_i
+     if @sirabasu_check_ok_parcent[i] != 100
+       sirabasuuser = Sirabasuuser.where(kanrisya_id: @kanrisya.id).where(sirabasu_id: @sirabasu[i].id)
+       sirabasuuser.update(sirabasu_ok: false)
+     end
      i = i + 1
     end
     @sirabasuuser = []
@@ -92,11 +96,36 @@ class UserController < ApplicationController
     end
   end
 
-  def search_result
+  def company_save
+    @copy_from = Company.find_by(cname: params[:cname], copy: true)
+    @company = Company.new(cname: params[:cname],cid: params[:cid], cname_sub: params[:cname_sub])
+    if @company.save
+      if @copy_from.present?
+        redirect_to ojt_top_copy_check_path(id: @copy_from.id)
+      else
+        redirect_to "/ojt_top/top"
+      end
+    else
+      logger.debug @company.errors.inspect
+      redirect_to "/user/hei"
+    end
+  end
+
+  def company_up
+    @company = Company.find(params[:id])
+    if @company.update(cname: params[:cname],cid: params[:cid], cname_sub: params[:cname_sub], pas: params[:pas], copy: params[:copy])
+      redirect_to "/ojt_top/top"
+    else
+      logger.debug @company.errors.inspect
+      redirect_to "/user/hei2"
+    end
   end
 
   def hei
+  end
 
+  def hei2
+    @company = Company.find_by(cid: current_kanrisya.cid)
   end
 
   def new
@@ -161,6 +190,10 @@ class UserController < ApplicationController
 
   def kanrisya_params
   params.require(:kanrisya).permit(:name, :email, :password, :password_confirmation, :crew_number, :age, :sex, :admin, :cid, :image, :belong)
+  end
+
+  def company_params
+  params.require(:company).permit(:cname, :cid, :password)
   end
 
   def user_top

@@ -300,14 +300,27 @@ textarea {
         box-shadow: 0px 3px 5px rgba($color: #000000, $alpha: 0.3);
     }
 
+    &__staff-flex {
+        display: flex;
+    }
+
     &__flex {
-        margin-bottom: 0.25rem; 
+        margin-bottom: 0.25rem;
         @media screen and (orientation: landscape) {
           display: flex;
           justify-content: space-between;
           align-items: center;
         }
     }
+
+    &__flex {
+
+    }
+
+    &__set {
+      margin: auto 1rem;
+    }
+
     &__photo img {
       width: 80px;
       height: 80px;
@@ -329,13 +342,21 @@ textarea {
       font-size: 1.25rem;
     }
 
+    &__staff-name {
+      margin: auto 0 auto auto;
+
+    }
+
     &__belongs {
       opacity: 0.6;
       font-size: 0.75rem;
+      opacity: 0.6;
+      width: auto;
       padding-top: 0.25rem;
       border-width: 1px 0px 0px 0px;
       border-style: solid;
       border-color: #777777;
+      min-width: 100px;
     }
 }
 

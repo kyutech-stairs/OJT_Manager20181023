@@ -24,56 +24,62 @@
     <% elsif params[:commit] == "検索"then %>
       <p>検索結果　その検索条件での該当者はいませんでした</p>
     <% end %>
-
     <div class="top-storage">
       <p>ADMIN</p>
       <div class="top-card">
-          <% @kanrisya.each do |kanrisya| %>
-          <% if kanrisya.cid == current_kanrisya.cid %>
-          <% if kanrisya.admin == true %>
-
-          <div class="top-card__box">
-            <div class="top-card__flex">
-              <div class="top-card__photo">
-
+        <% @kanrisya.each do |kanrisya| %>
+        <% if kanrisya.cid == current_kanrisya.cid %>
+        <% if kanrisya.admin == true %>
+        <%=link_to user_path(kanrisya) do%>
+        <div class="top-card__box">
+          <div class="top-card__staff-flex">
+            <div class="top-card__photo">
+              <%= image_tag kanrisya.image.url %>
+            </div>
+            <div class="top-card__set">
+              <div class="top-card__staff-name">
+                <%=kanrisya.name %>
               </div>
-              <div class="top-card__name">
-
               <div class="top-card__belongs">
-
+                <%=kanrisya.belong %>
               </div>
             </div>
-          <% end %>
-          <% end %>
-          <% end %>
+          </div>
         </div>
+        <% end %>
+        <% end %>
+        <% end %>
+        <% end %>
       </div>
     </div>
-
-
-    <div class="lists">
+    <div class="top-storage">
       <p>USER</p>
-      <table>
-        <tbody>
-          <% @kanrisya.each do |kanrisya| %>
-          <% if kanrisya.cid == current_kanrisya.cid %>
-            <% if kanrisya.admin == false %>
-          <tr>
-            <td>
-                  <%=link_to kanrisya.name ,user_path(kanrisya)%>
-            </td>
-          </tr>
-          <% end %>
+      <div class="top-card">
+        <% @kanrisya.each do |kanrisya| %>
+        <% if kanrisya.cid == current_kanrisya.cid %>
+        <% if kanrisya.admin == false %>
+        <%=link_to user_path(kanrisya) do%>
+        <div class="top-card__box">
+          <div class="top-card__staff-flex">
+            <div class="top-card__photo">
+              <%= image_tag kanrisya.image.url %>
+            </div>
+            <div class="top-card__set">
+              <div class="top-card__staff-name">
+                <%=kanrisya.name %>
+              </div>
+              <div class="top-card__belongs">
+                <%=kanrisya.belong %>
+              </div>
+            </div>
+          </div>
+        </div>
         <% end %>
-          <% end %>
-        </tbody>
-      </table>
+        <% end %>
+        <% end %>
+        <% end %>
+      </div>
     </div>
-
-    <% if current_kanrisya.admin == true %>
-      <p><%= link_to '新しい社員登録', '/user/new' %></p>
-    <% end %>
-
   </div>
 </div>
 
