@@ -65,6 +65,8 @@ gem 'virtus'
 
 gem 'nested_form_fields'
 
+gem 'cocoon'
+
 gem 'jquery-rails'
 
 group :development, :test do
@@ -73,5 +75,5 @@ group :development, :test do
 end
 
 group :production do
-  gem 'pg'
+  gem 'pg', "~> 0.21.0"
 end

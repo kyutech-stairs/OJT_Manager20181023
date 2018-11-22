@@ -11,11 +11,12 @@ class SirabasusController < ApplicationController
           if is_this_sirabasu_done(s)
             @stat_list.push("完了")
           else
-            
-            @stat_list.push("#{get_percent(s)}%")
+            # 進捗を取得
+            tmp = get_percent(s)
+            @stat_list.push("#{tmp.fetch(2)}% " + "(#{tmp.fetch(0)}/" + "#{tmp.fetch(1)})")
           end
         else
-          @stat_list.push("未開放")
+          @stat_list.push("利用不可")
         end
       end
     end
@@ -43,9 +44,19 @@ class SirabasusController < ApplicationController
       @stat_list = []
       unless @p_c.empty?
         @p_c.each do |p|
-          tmp = Sirabasu.find_by(id: p.required_sirabasu, cid: current_kanrisya.cid)
-          @zentei.push(tmp)
-          @stat_list.push(is_this_sirabasu_available(tmp))
+          s = Sirabasu.find_by(id: p.required_sirabasu, cid: current_kanrisya.cid)
+          @zentei.push(s)
+          if is_this_sirabasu_available(s)
+            if is_this_sirabasu_done(s)
+              @stat_list.push("完了")
+            else
+              # 進捗を取得
+              tmp = get_percent(s)
+              @stat_list.push("#{tmp.fetch(2)}% " + "(#{tmp.fetch(0)}/" + "#{tmp.fetch(1)})")
+            end
+          else
+            @stat_list.push("利用不可")
+          end
         end
       end
     else
@@ -152,7 +163,11 @@ class SirabasusController < ApplicationController
     @sirabasu = Sirabasu.where(cid: current_kanrisya.cid).order(:number)
     @now = Sirabasu.find_by(number: params[:id], cid: current_kanrisya.cid)
     @num = @now.number
-    @conf = @now.publishing_configs.all
+    # @conf = @now.publishing_configs.all
+    @conf = []
+    @sirabasu.each do |sirabasu|
+      @conf[sirabasu.id] = sirabasu.publishing_configs.all
+    end
   end
 
   def publishing_config_update
@@ -166,7 +181,9 @@ class SirabasusController < ApplicationController
         @now.publishing_configs.create(required_sirabasu: p)
       end
     end
-    redirect_to '/sirabasus'
+    flash[:config_update] = "公開設定を更新しました"
+    redirect_to publishing_config_path(params[:id])
+    # redirect_to '/sirabasus'
   end
 
   def sirabasu_params
@@ -227,6 +244,7 @@ class SirabasusController < ApplicationController
       end
     end
     per = ((checked_count / (checklist_count).to_f).round(2) * 100).to_i rescue 0
-    return per
+    # [チェックされた個数, チェックリストの総数, 割合]で返却
+    return [checked_count, checklist_count, per]
   end
 end
