@@ -107,9 +107,10 @@ header {
     .user-links {
         position: absolute;
         top: 60px;
-        left: -100px;
+        right: 0;
         padding: 0.5rem 1rem;
-        width: 15vw;
+        min-width: 170px;
+        width: 10vw;
         background: #ffffff;
         border-radius: 10px;
         display: none;
