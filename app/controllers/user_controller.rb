@@ -59,7 +59,7 @@ class UserController < ApplicationController
     #そのユーザーに関係あるチェッく数
     @check_count = @checkuser.count
     #全チェックの進捗%
-    @check_parcent = ((@check_ok_count/@check_count.to_f).round(2)*100).to_i
+    @check_parcent = ((@check_ok_count/@check_count.to_f).round(2)*100).to_i rescue 0
     #ユーザーに関連するシラバスの情報
     @sirabasu = Sirabasu.where(cid: @kanrisya.cid)
     i = 0
