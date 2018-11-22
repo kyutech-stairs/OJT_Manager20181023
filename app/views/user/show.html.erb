@@ -39,23 +39,37 @@
           </div>
           <div class="plofile-info-ojt-right">
             <% if @kanrisya.admin == false %>
-            <p><%= @check_parcent %>%</p>
+              <p><%= @check_parcent %>%</p>
+            <% end %>
           </div>
         </div>
       </div>
     </div>
   </div>
+
+  <% if @kanrisya.admin == false %>
   <div class="lists">
-    <h3>シラバスの進捗</h3>
-    <% @sirabasu.each do |sirabasu| %>
-    <p><%= sirabasu.number %> <%=link_to sirabasu.name, checklists_checkuser_path(:sirabasu_id => sirabasu.id,:kanrisya_id => @kanrisya.id)%> <%= @sirabasu_check_ok_parcent[sirabasu.number-1] %>%
-    <% if @sirabasuuser[sirabasu.id].sirabasu_ok == true%>完了！<% end %></p>
-    <% end %>
-    <% end %>
-    <% else %>
-      あなたの会社の社員ではありません。
-    <% end %>
-    </div>
+    <p>シラバスの進捗</p>
+    <table>
+      <tbody>
+        <% @sirabasu.each do |sirabasu| %>
+          <tr>
+            <td class='number'><%= sirabasu.number %>. </td>
+            <td><%=link_to sirabasu.name, checklists_checkuser_path(:sirabasu_id => sirabasu.id,:kanrisya_id => @kanrisya.id)%></td>
+            <td><%= @sirabasu_check_ok_parcent[sirabasu.number-1] %> %</td>
+            <td><% if @sirabasuuser[sirabasu.id].sirabasu_ok == true%>完了！<% end %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <% end %>
+
+  <% else %>
+    <p>あなたの会社の社員ではありません。</p>
+  <% end %>
+
+    
     <div class="options">
       <% if current_kanrisya.admin == true %>
       <%= link_to edit_user_path(@kanrisya) do %>
