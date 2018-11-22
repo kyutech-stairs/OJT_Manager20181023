@@ -12,6 +12,24 @@ body {
     background-color: #EEEFF1;
 }
 
+// .material-icons {
+//  font-family: ‘Material Icons’;
+//  font-weight: normal;
+//  font-style: normal;
+//  font-size: 32px;
+//  line-height: 1;
+//  letter-spacing: normal;
+//  text-transform: none;
+//  white-space: nowrap;
+//  word-wrap: normal;
+//  direction: ltr;
+//  -moz-font-feature-settings: ‘liga’;
+//  -moz-osx-font-smoothing: grayscale;
+//
+//  display: inline-flex;
+//  vertical-align: middle;
+// }
+
 header {
     box-sizing: border-box;
     background-color: #8bc34a;
@@ -57,6 +75,14 @@ header {
         transition: 0.5s;
       }
     }
+    .material-icons {
+      position: relative;
+      top: 6px;
+    }
+}
+
+.icon-links {
+    margin: 0 1rem;
 }
 
 .header-link-left {
@@ -68,6 +94,9 @@ header {
 
 .header-link-right{
     margin-left: 2.5rem;
+}
+
+.home {
 }
 
 .contents {

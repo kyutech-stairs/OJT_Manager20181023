@@ -45,7 +45,7 @@
       </div>
     </div>
   </div>
-  <div class="sirabasu-ojt">
+  <div class="lists">
     <h3>シラバスの進捗</h3>
     <% @sirabasu.each do |sirabasu| %>
     <p><%= sirabasu.number %> <%=link_to sirabasu.name, checklists_checkuser_path(:sirabasu_id => sirabasu.id,:kanrisya_id => @kanrisya.id)%> <%= @sirabasu_check_ok_parcent[sirabasu.number-1] %>%

@@ -23,12 +23,32 @@
         <% if kanrisya_signed_in? %>
           <div class="header-link">
             <div class="header-link-left">
-              <p><%= link_to 'ホーム', '/ojt_top/top' %></p>
-              <p><%= link_to 'シラバス', '/sirabasus/' %></p>
-              <p><%= link_to 'スタッフ', '/user/index' %></p>
+              <%=link_to '/ojt_top/top' do%>
+              <div class="icon-links">
+                <i class="material-icons">home</i>
+                ホーム
+              </div>
+              <% end %>
+              <%=link_to '/sirabasus/' do%>
+              <div class="icon-links">
+                <i class="material-icons">list</i>
+                SYLLABUS
+              </div>
+              <% end %>
+              <%=link_to '/user/index' do%>
+              <div class="icon-links">
+                <i class="material-icons">account_box</i>
+                STAFF
+              </div>
+              <% end %>
             </div>
             <div class="header-link-right">
-              <%= link_to('ログアウト', destroy_kanrisya_session_path, :method => :delete) %>
+              <%= link_to(destroy_kanrisya_session_path, :method => :delete) do %>
+              <div class="icon-links">
+                <i class="material-icons">reply</i>
+                LOGOUT
+              </div>
+              <% end %>
             </div>
           </div>
         <% end %>
