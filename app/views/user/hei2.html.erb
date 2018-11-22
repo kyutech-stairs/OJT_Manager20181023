@@ -1,0 +1,22 @@
+<div class="first-box">
+  <div class="content-box">
+
+ <h1>
+  会社名変更 & パスワード設定
+ </h1>
+ <%=form_tag({ controller: 'user', action: 'company_up' },{ method: "post"}) do %>
+ <p>会社名の変更入力(必須)</p>
+ <%= text_field_tag :cname , @company.cname, :class=> "input-box" %>
+ <p>支店名の変更入力</p>
+ <%= text_field_tag :cname_sub, @company.cname_sub, :class=> "input-box" %>
+ <p>他の支店にシラバスのコピーを許可
+ <%= select_tag(:copy, options_for_select([["する",true],["しない",false]], :selected => @company.copy ))%></p>
+ <p>シラバスコピー用のパスワードを設定(最大4桁の数字)</p>
+ <%= password_field_tag :password, "", maxlength:4 ,:class=> "input-box" %>
+ <%= hidden_field_tag :cid, current_kanrisya.cid %>
+ <%= hidden_field_tag :id, @company.id %>
+ <p><%= submit_tag '登録', :class=> "link-button"%></p>
+ <% end %>
+
+  </div>
+</div>

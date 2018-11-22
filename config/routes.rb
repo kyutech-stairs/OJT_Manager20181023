@@ -20,8 +20,11 @@ Rails.application.routes.draw do
   get 'user/edit'
   get 'user/update'
   get 'user/hei'
+  get 'user/hei2'
   get 'user/not'
   get 'user/search'
+  post 'user/company_save'
+  post 'user/company_up'
 
   # ログイン / ログアウト
   get     'login',   to: 'sessions#new'
@@ -69,6 +72,8 @@ Rails.application.routes.draw do
    to: 'sirabasus#publishing_config_update',
    as: 'publishing_config_update'
   post "sirabasus/del"
+  get 'ojt_top/copy_check'
+  post 'ojt_top/copy'
 
   post 'checkusers/checkup'
   get 'checkusers/check'

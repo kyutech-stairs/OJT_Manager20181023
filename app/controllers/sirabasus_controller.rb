@@ -7,7 +7,16 @@ class SirabasusController < ApplicationController
       # @stat: 各シラバスが利用できるかを配列で
       @stat_list = []
       @sirabasu.each do |s|
-        @stat_list.push(is_this_sirabasu_available(s))
+        if is_this_sirabasu_available(s)
+          if is_this_sirabasu_done(s)
+            @stat_list.push("完了")
+          else
+            
+            @stat_list.push("#{get_percent(s)}%")
+          end
+        else
+          @stat_list.push("未開放")
+        end
       end
     end
   end
@@ -25,7 +34,7 @@ class SirabasusController < ApplicationController
     if current_kanrisya.admin == false
       # 従業員なら
       # 前提シラバスがクリアできていたらtrue
-      @stat = is_this_sirabasu_available(@sirabasu)  
+      @stat = is_this_sirabasu_available(@sirabasu)
       # 今ログインしている従業員に紐づくレコードを抽出
       @checkuser = Kanrisya.find(current_kanrisya.id).checkusers.all
       # 前提シラバスを取得
@@ -86,9 +95,7 @@ class SirabasusController < ApplicationController
    end
   end
 
-  # データを更新するためのAction
   def update
-    # ここちょっとよくわからないですね（by 吉井）
     @sirabasu = Sirabasu.find_by(number: params[:id], cid: current_kanrisya.cid)
     @checklist_num = 1
     # シラバスの更新、チェックリストの作成・更新
@@ -207,5 +214,19 @@ class SirabasusController < ApplicationController
     #   end
     # end
     # return true
+  end
+
+  # シラバスの進捗を％で取得
+  def get_percent(sirabasu)
+    checklist = sirabasu.checklists.all
+    checklist_count = checklist.count
+    checked_count = 0
+    checklist.each do |c|
+      if current_kanrisya.checkusers.find_by(checklist_id: c.id).check_ok
+        checked_count += 1
+      end
+    end
+    per = ((checked_count / (checklist_count).to_f).round(2) * 100).to_i rescue 0
+    return per
   end
 end
