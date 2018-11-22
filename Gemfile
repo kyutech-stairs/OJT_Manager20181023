@@ -67,7 +67,7 @@ gem 'nested_form_fields'
 
 gem 'cocoon'
 
-gem 'jquery-rails' "~> 1.9.1"
+gem 'jquery-rails'
 
 group :development, :test do
   gem 'hirb'
