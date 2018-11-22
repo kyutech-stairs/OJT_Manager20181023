@@ -1,29 +1,63 @@
 <%= form_tag({ controller: 'sirabasus', action: 'publishing_config_update' },
 { method: "post"}) do |f| %>
+<%= flash[:config_update] %><br>
 <div class="first-box">
   <div class="content-box">
     <h1>公開設定</h1>
     <h2>
-      <%= @now.number %>
+      <%= @now.number %>.
       <%= @now.name %>
     </h2>
-    <p>このシラバスを表示するためにチェックを完了しておく必要のあるシラバスにチェックを入れてください</p>
-
+    <!--
+    <p>チェックを入れたシラバスがすべて完了すると、このシラバスは利用可能になります</p>
+-->
     <%# 各シラバスを表示%>
     <% @sirabasu.each do |s| %>
-      <% unless s.number == @num %>
-      <%= hidden_field_tag 'sirabasu_id[]' %>
-      <% if @conf.find_by(required_sirabasu: s.id).nil? %>
-        <%= check_box_tag 'sirabasu_id[]', s.id, checked = false %>
-      <% else %>
-        <%= check_box_tag 'sirabasu_id[]', s.id, checked = true %>
-      <% end %>
-      <%= s.number %>
-      <%= s.name %><br>
-      <% end %>
+    <% unless s.number == @now.number %>
+    <%= hidden_field_tag 'sirabasu_id[]' %>
+    <!--設定されていなければ、レコードがない-->
+    <% if @conf[@now.id].find_by(required_sirabasu: s.id).nil? %>
+    <%= check_box_tag 'sirabasu_id[]', s.id, checked = false %>
+    <% else %>
+    <%= check_box_tag 'sirabasu_id[]', s.id, checked = true %>
     <% end %>
-
+    <%= s.number %>
+    <%= s.name %><br>
+    <% end %>
+    <% end %>
     <%= submit_tag '公開設定を保存'%>
+    <%#= link_to 'シラバス一覧に戻る', sirabasus_path %>
   </div>
 </div>
 <% end %>
+
+<div class="first-box">
+  <div class="content-box">
+    <h1>現在の公開設定</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>シラバス</th>
+          <th>公開条件</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @sirabasu.each do |s|%>
+        <tr>
+          <td>
+            <%= s.number%>.
+            <%= link_to s.name, publishing_config_path(s.number) %>
+          </td>
+          <td>
+            <% @conf[s.id].each do |cf| %>
+            <%= @sirabasu.find(cf.required_sirabasu).number %>
+            <%#= @sirabasu.find(cf.required_sirabasu).name %>
+            <% end %>
+            <br>
+          </td>
+        </tr>
+        <% end %>
+      <tbody>
+    </table>
+  </div>
+</div>

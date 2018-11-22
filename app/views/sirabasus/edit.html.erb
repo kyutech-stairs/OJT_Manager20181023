@@ -1,7 +1,16 @@
 <%= form_for @sirabasu,url: sirabasu_path do |f| %>
+<% if @sirabasu.errors.any? %>
+<ul>
+    <% @sirabasu.errors.full_messages.each do |msg| %>
+    <li>
+        <%= msg %>
+    </li>
+    <% end %>
+</ul>
+<% end %>
 <div class="first-box">
     <div class="content-box">
-    
+
         <h1>シラバス編集</h1>
         <div class="field">
             <%= f.label :section_number, "章番号" %><br />
@@ -20,16 +29,17 @@
             <% if @sirabasu.image?%>
             <% i = 1 %>
             <% @sirabasu.image.each do |image|%>
-            <%=image_tag image.url , :size =>'130x130'%>画像<%= i %>
+            <%=image_tag image.url , :size =>'130x130'%>画像
+            <%= i %>
             <% i = i + 1 %>
             <% end %>
             <% end %>
         </div>
-        
+
         <div class="field">
             <%= button_tag :type => 'submit', :class=>'link-button' do %>
-                <i class='material-icons'>save</i>
-                保存
+            <i class='material-icons'>save</i>
+            保存
             <% end %>
         </div>
     </div>
@@ -38,27 +48,41 @@
     <div class="content-box">
         <h1>チェックリスト</h1>
 
-        <%= f.nested_fields_for :checklists, wrapper_tag: :div do |che| %>
-        <div class="fields">
-            <%#= che.number_field :number ,:readonly => true, :value %>
-            <%= che.hidden_field :number , :value => "#{@checklist_num}"%>
-            <%= che.text_area :content, :class => "checklist" %>
-            <%= che.hidden_field :cid, value: current_kanrisya.cid %>
-            <%= che.hidden_field :userid, value: current_kanrisya.id %>
-            <%= che.remove_nested_fields_link '削除', class: 'btn btn-danger', role: 'button' %>
-        </div>
+        <!--新しくcocoonを試用-->
+        <%= f.fields_for :checklists do |builder| %>
+        <%= render 'checklist_fields', f: builder %>
+
         <% end %>
         <div class="field">
-            <%= f.add_nested_fields_link :checklists, '追加', class: 'link-button', role: 'button'  %>
-        </div>
-        <div class="field">
+            <%= link_to_add_association "追加", f, :checklists, class: 'link-button' %><br />
+            
             <%= button_tag :type=>'submit', :class=> "link-button" do %>
                 <i class='material-icons'>save</i>
                 保存
             <% end %>
         </div>
+        <!--
+        <div class="fields">
+            <%#= che.number_field :number ,:readonly => true, :value %>
+            <%#= che.hidden_field :number , :value => "#{@checklist_num}"%>
+            <%#= che.text_area :content, :class => "checklist" %>
+            <%#= che.hidden_field :cid, value: current_kanrisya.cid %>
+            <%#= che.hidden_field :userid, value: current_kanrisya.id %>
+            <%#= che.remove_nested_fields_link '削除', class: 'btn btn-danger', role: 'button' %>
+        </div>
+        <%# end %>
+        <div class="field">
+            <%#= f.add_nested_fields_link :checklists, '追加', class: 'link-button', role: 'button'  %>
+        </div>
+        <div class="field">
+            <%#= button_tag :type=>'submit', :class=> "link-button" do %>
+                <i class='material-icons'>save</i>
+                保存
+            <%# end %>
+        </div>
+        -->
     </div>
 </div>
 <% end %>
 
-<%= link_to 'シラバス一覧へ', sirabasus_path %>
+<%#= link_to 'シラバス一覧へ', sirabasus_path %>
