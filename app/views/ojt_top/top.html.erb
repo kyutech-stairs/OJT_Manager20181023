@@ -3,11 +3,18 @@
     <h1>トップページ </h1>
     <% if current_kanrisya.admin == true %>
     <% if @company.present? %>
-     <h3><%= @company.cname %> <%= @company.cname_sub %> </h3>
-     <p><%= link_to "設定", user_hei2_path %></p>
-   <% else %>
-     <p><%= link_to "会社名登録", user_hei_path %></p>
-   <% end %>
+    <h3>
+      <%= @company.cname %>
+      <%= @company.cname_sub %>
+    </h3>
+    <p>
+      <%= link_to "設定", user_hei2_path %>
+    </p>
+    <% else %>
+    <p>
+      <%= link_to "会社名登録", user_hei_path %>
+    </p>
+    <% end %>
     <!---<p> ログインユーザー<%= link_to current_kanrisya.name,user_path(current_kanrisya) %></p>--->
     <div class="top-storage">
       <p>直近のチェックリスト完了者</p>
@@ -23,18 +30,23 @@
               <% end %>
             </div>
             <div class="top-card__graph">
-              <p><%= @check_parcent[checkuser.id] %>%</p>
+              <p>
+                <%= @check_parcent[checkuser.id] %>%</p>
               <% if @user_sign[checkuser.id] == true %>
               ！
               <%end%>
             </div>
           </div>
           <div class="top-card__name">
-            <p><%= @user[checkuser.id].name %></p>
+            <p>
+              <%= @user[checkuser.id].name %>
+            </p>
             <!--<p><%=link_to @user[checkuser.id].name, user_path(@user[checkuser.id])%></p>-->
           </div>
           <div class="top-card__belongs">
-            <p><%= @user[checkuser.id].belong %></p>
+            <p>
+              <%= @user[checkuser.id].belong %>
+            </p>
           </div>
         </div>
         <% end %>
@@ -43,7 +55,6 @@
       </div>
     </div>
     <div class="top-storage">
-      <p>新着情報</p>
       <div class="top-card">
 
       </div>
@@ -61,7 +72,7 @@
     <%= @updated[sira.id].in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S") %>
     <%= @percent[sira.id] %><br>
     <% end %>
-    <% end%>
+    <% end %>
     <% end %>
   </div>
 </div>

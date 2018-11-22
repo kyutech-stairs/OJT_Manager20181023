@@ -1,5 +1,5 @@
 <%= flash[:checkuser_update] %>
-  <div class="first-box">
+<div class="first-box">
   <div class="content-box">
     <h1>シラバス</h1>
     <h2>
@@ -14,14 +14,14 @@
     <% if current_kanrisya.admin == true %>
     <div class="field">
       <%= link_to edit_sirabasu_path(@sirabasu.number) do %>
-        <div class='link-button'>
-          <i class='material-icons'>edit</i>
-          編集
-        </div>
+      <div class='link-button'>
+        <i class='material-icons'>edit</i>
+        編集
+      </div>
       <% end %>
     </div>
     <% end %>
-    
+
     <% if @sirabasu.image?%>
     <% i = 1 %>
     <% @sirabasu.image.each do |image|%>
@@ -108,7 +108,7 @@
             <%= link_to s.name, sirabasu_path(s.number) %>
           </td>
           <td>
-          <%= @stat_list[i] %>
+            <%= @stat_list[i] %>
           </td>
         </tr>
         <% i += 1 %>
