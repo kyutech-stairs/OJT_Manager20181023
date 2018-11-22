@@ -69,6 +69,8 @@ gem 'cocoon'
 
 gem 'jquery-rails'
 
+gem 'jquery-ui-rails'
+
 group :development, :test do
   gem 'hirb'
   gem 'hirb-unicode'
