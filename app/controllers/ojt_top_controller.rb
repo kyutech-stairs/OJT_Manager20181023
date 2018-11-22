@@ -1,4 +1,5 @@
 class OjtTopController < ApplicationController
+  protect_from_forgery except: :search # searchアクションを除外
 
   def kanri
   end
@@ -12,7 +13,7 @@ class OjtTopController < ApplicationController
 
   def copy
     @copy_from = Company.find(params[:id])
-    if params[:pas] == "#{@copy_from.pas}"
+    if params[:password] == "#{@copy_from.password}"
      sirabasu_from = Sirabasu.where(cid: @copy_from.cid)
      sirabasu_from.each do |sirabasu_from|
        sirabasu = Sirabasu.new(
@@ -24,13 +25,35 @@ class OjtTopController < ApplicationController
          cid: current_kanrisya.cid
        )
        if sirabasu.save
-         checklist_from = sirabasu_from.checklists.all
+         checklist_from = Checklist.where(sirabasu_id: sirabasu_from.id)
+         checklist_from.each do |checklist_from|
+           checklist = Checklist.new(
+             number: checklist_from.number,
+             content: checklist_from.content,
+             cid: current_kanrisya.cid,
+             sirabasu_id:  sirabasu.id,
+             userid: current_kanrisya.id
+           )
+           if checklist.save
+             #中間テーブルへの保存開始
+             kanrisya = Kanrisya.where(cid: current_kanrisya.cid).where(admin: false)
+             kanrisya.each do |i|
+             @checkuser = Checkuser.new(
+               kanrisya_id: i.id,
+               checklist_id: checklist.id
+             )
+             @checkuser.save
+             end
+             #中間テーブルへの保存ここまで
+           end
+         end
+
          #シラバス中間テーブルへの保存開始
-         kanrisya = Kanrisya.where(cid: @copy_from.cid).where(admin: false)
+         kanrisya = Kanrisya.where(cid: current_kanrisya.cid).where(admin: false)
          kanrisya.each do |i|
          @sirabasuuser = Sirabasuuser.new(
            kanrisya_id: i.id,
-           sirabasu_id: sirabasu_from.id
+           sirabasu_id: sirabasu.id
          )
          @sirabasuuser.save
          end
@@ -80,6 +103,7 @@ class OjtTopController < ApplicationController
       @sirabasu = []
       @updated = []
       @checkuser = []
+      @percent = []
       # 各シラバスで、最新のチェックリスト更新をひとつ取得する
       @checkuser = current_kanrisya.checkusers.order(updated_at: :DESC)
       # 最近更新したチェックリストを降順に取得
@@ -96,6 +120,7 @@ class OjtTopController < ApplicationController
           end
           if insert_ok
             @updated[s.id] = che.updated_at
+            @percent[s.id] = "#{get_percent(s)}%"
             @sirabasu.push(s)
           end
         end
@@ -116,5 +141,18 @@ class OjtTopController < ApplicationController
       end
     end
     return !(per_0 || per_100)
+  end
+
+  def get_percent(sirabasu)
+    checklist = sirabasu.checklists.all
+    checklist_count = checklist.count
+    checked_count = 0
+    checklist.each do |c|
+      if current_kanrisya.checkusers.find_by(checklist_id: c.id).check_ok
+        checked_count += 1
+      end
+    end
+    per = ((checked_count / (checklist_count).to_f).round(2) * 100).to_i rescue 0
+    return per
   end
 end

@@ -12,7 +12,7 @@
  <p>他の支店にシラバスのコピーを許可
  <%= select_tag(:copy, options_for_select([["する",true],["しない",false]], :selected => @company.copy ))%></p>
  <p>シラバスコピー用のパスワードを設定(最大4桁の数字)</p>
- <%= text_field_tag :pas, "", maxlength:4 ,:class=> "input-box" %>
+ <%= password_field_tag :password, "", maxlength:4 ,:class=> "input-box" %>
  <%= hidden_field_tag :cid, current_kanrisya.cid %>
  <%= hidden_field_tag :id, @company.id %>
  <p><%= submit_tag '登録', :class=> "link-button"%></p>
