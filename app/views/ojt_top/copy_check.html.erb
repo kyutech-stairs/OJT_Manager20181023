@@ -1,7 +1,7 @@
 <div class="first-box">
   <div class="content-box">
 
-   <h4>"<%= @company.cname %>"のシラバスのコピーを行うことができます</h4>
+   <h4>"<%= @company.cname %>"のシラバスのコピーを行うことができます </h4>
     <p>コピーを行う場合は教えられた4桁のパスワードを入力してください</p>
     <%=form_tag({ controller: 'ojt_top', action: 'copy' },{ method: "post"}) do %>
     <p><%= text_field_tag :pas, "", maxlength:4 ,:class=> "input-box" %></p>

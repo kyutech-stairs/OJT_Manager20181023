@@ -4,7 +4,7 @@
 
     <%=form_tag({ controller: 'user', action: 'index' },{ method: "get"}) do %>
       <%= text_field_tag(:name, '', class: 'input-box') %>
-      <%= submit_tag '検索'%> 
+      <%= submit_tag '検索'%>
       <%= link_to "詳細検索", "/user/search" %>
     <% end %>
     <% if @user.present? || @user2.present? && params[:commit] == "検索" then %>
@@ -34,6 +34,7 @@
             <% if kanrisya.admin == true %>
           <tr>
             <td>
+                  <%= image_tag kanrisya.image.url, :size =>'150x150' %>
                   <%=link_to kanrisya.name ,user_path(kanrisya)%>
             </td>
           </tr>
@@ -53,6 +54,7 @@
             <% if kanrisya.admin == false %>
           <tr>
             <td>
+              <%= image_tag kanrisya.image.url, :size =>'150x150' %>
                   <%=link_to kanrisya.name ,user_path(kanrisya)%>
             </td>
           </tr>

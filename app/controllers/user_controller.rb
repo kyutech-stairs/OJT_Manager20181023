@@ -113,7 +113,7 @@ class UserController < ApplicationController
 
   def company_up
     @company = Company.find(params[:id])
-    if @company.update(cname: params[:cname],cid: params[:cid], cname_sub: params[:cname_sub], password: params[:pas], copy: params[:copy])
+    if @company.update(cname: params[:cname],cid: params[:cid], cname_sub: params[:cname_sub], pas: params[:pas], copy: params[:copy])
       redirect_to "/ojt_top/top"
     else
       logger.debug @company.errors.inspect

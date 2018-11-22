@@ -12,7 +12,32 @@ class OjtTopController < ApplicationController
 
   def copy
     @copy_from = Company.find(params[:id])
-    if params[:cid] == @copy_from.cid
+    if params[:pas] == "#{@copy_from.pas}"
+     sirabasu_from = Sirabasu.where(cid: @copy_from.cid)
+     sirabasu_from.each do |sirabasu_from|
+       sirabasu = Sirabasu.new(
+         name: sirabasu_from.name,
+         content: sirabasu_from.content,
+         number: sirabasu_from.number,
+         userid: current_kanrisya.id,
+         image: sirabasu_from.image,
+         cid: current_kanrisya.cid
+       )
+       if sirabasu.save
+         checklist_from = sirabasu_from.checklists.all
+         #シラバス中間テーブルへの保存開始
+         kanrisya = Kanrisya.where(cid: @copy_from.cid).where(admin: false)
+         kanrisya.each do |i|
+         @sirabasuuser = Sirabasuuser.new(
+           kanrisya_id: i.id,
+           sirabasu_id: sirabasu_from.id
+         )
+         @sirabasuuser.save
+         end
+         #中間テーブルへの保存ここまで
+         sirabasu_from
+       end
+     end
      redirect_to "/sirabasus"
     else
       redirect_to ojt_top_copy_check_path(id: @copy_from.id)
