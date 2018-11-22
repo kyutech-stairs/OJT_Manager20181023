@@ -76,6 +76,8 @@ header {
 
     img {
         border-radius: 50%;
+        width: 40px;
+        height: 40px;
     }
 
     menu {
@@ -587,13 +589,23 @@ textarea {
         display: block;
         font-family: 'Material Icons';
         content: '\e835';
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        font-size: 1.5rem;
     }
 
     input[type=checkbox]:checked + .checkbox-user:before {
         font-family: 'Material Icons';
         content: '\e834';
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        font-size: 1.5rem;
     }
 }
+
+
 .sirabasu-ojt {
     margin: 1rem;
     h3 {
@@ -609,11 +621,17 @@ textarea {
 .confir-check {
     margin: 1rem 0;
     padding: 1rem;
-    border-width: 1px 0px 0px 0px;
+    border-width: 1px 0 0 0;
     border-style: solid;
     border-color: #777777;
     form {
       margin-top: 4rem;
       text-align: center;
     }
+    tr {
+      border-width: 0 0 5px 0;
+      border-style: solid;
+      border-color: #fff;
+    }
+
 }
