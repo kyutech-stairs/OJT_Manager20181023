@@ -12,6 +12,24 @@ body {
     background-color: #EEEFF1;
 }
 
+// .material-icons {
+//  font-family: ‘Material Icons’;
+//  font-weight: normal;
+//  font-style: normal;
+//  font-size: 32px;
+//  line-height: 1;
+//  letter-spacing: normal;
+//  text-transform: none;
+//  white-space: nowrap;
+//  word-wrap: normal;
+//  direction: ltr;
+//  -moz-font-feature-settings: ‘liga’;
+//  -moz-osx-font-smoothing: grayscale;
+//
+//  display: inline-flex;
+//  vertical-align: middle;
+// }
+
 header {
     box-sizing: border-box;
     background-color: #8bc34a;
@@ -41,9 +59,9 @@ header {
 }
 
 .header-link{
-  position: absolute;
-  top: 0;
-  right: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
     display: flex;
     padding: 16px 40px;
     font-size: 1rem;
@@ -57,6 +75,14 @@ header {
         transition: 0.5s;
       }
     }
+    .material-icons {
+      position: relative;
+      top: 6px;
+    }
+}
+
+.icon-links {
+    margin: 0 1rem;
 }
 
 .header-link-left {
@@ -122,6 +148,9 @@ header {
 
 #dropdown {
     display: none;
+}
+
+.home {
 }
 
 .contents {
@@ -323,43 +352,64 @@ textarea {
 }
 
 .top-storage {
-    margin: 1rem 0rem 1.5rem 0rem;
+    margin: 1.5rem 0rem 3rem 0rem;
 }
 
 .top-card {
     display: flex;
+    margin: 1rem 0;
+    padding: 1rem 0;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: center;
     border-width: 1px 0px 0px 0px;
     border-style: solid;
     border-color: #777777;
     a {
         display: block;
-        width: 30%;
+        width: 33%;
     }
 
 
     &__box {
-        margin: 0.5rem 0rem;
-        padding : 0.5rem;
+        margin: 1.25rem;
+        padding : 1rem;
         // width: 30%;
         color: #444444;
-        border-style: solid;
-        border-width: 1px;
-        border-radius: 10px;
+        // border-style: solid;
+        // border-width: 1px;
+        border-radius: 5px;
         background-color: #fff;
         border-color: #777777;
-        box-shadow: 0px 5px 8px rgba($color: #000000, $alpha: 0.3);
+        box-shadow: 0px 3px 5px rgba($color: #000000, $alpha: 0.3);
+    }
+
+    &__staff-flex {
+        @media screen and (max-width:960px) and (min-width:480px) {
+          display: flex;
+        }
     }
 
     &__flex {
+        margin-bottom: 0.25rem;
         @media screen and (orientation: landscape) {
           display: flex;
           justify-content: space-between;
           align-items: center;
         }
     }
+
+    &__flex {
+
+    }
+
+    &__set {
+      margin: auto 1rem;
+      min-width: 100px;
+    }
+
     &__photo img {
+      width: 80px;
+      height: 80px;
       border-style: solid;
       border-width: 1px;
       border-color: #777777;
@@ -374,11 +424,24 @@ textarea {
     }
 
     &__name {
+      margin-bottom: 0.25rem;
       font-size: 1.25rem;
+    }
+
+    &__staff-name {
+      margin: auto 0 auto auto;
+
     }
 
     &__belongs {
       opacity: 0.6;
+      font-size: 0.75rem;
+      opacity: 0.6;
+      width: auto;
+      padding-top: 0.25rem;
+      border-width: 1px 0px 0px 0px;
+      border-style: solid;
+      border-color: #777777;
     }
 }
 
@@ -386,17 +449,59 @@ textarea {
     font-size: 2rem;
 }
 
+.options {
+    margin-top: 2rem;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: stretch;
+    align-items: stretch;
+}
+
 .plofile {
     display: flex;
     border-bottom: solid 1px #777777;
     align-items: center;
-
+    margin: 1rem;
+    padding: 1rem;
     img {
+        width: 200px;
+        height: 200px;
+        border-style: solid;
+        border-width: 1px;
+        border-color: #777777;
         border-radius: 50%;
     }
     h2 {
         font-size: 2rem;
     }
+}
+
+.plofile-info {
+    margin: auto;
+}
+
+.plofile-info-flex {
+    display: flex;
+    margin: auto;
+}
+
+.plofile-info-sub {
+    margin: 1rem 0;
+    opacity: 0.8;
+}
+
+.plofile-info-num-right{
+    margin-left: 2rem;
+}
+
+.plofile-info-mail-right{
+    margin-left: 2rem;
+}
+
+.plofile-info-ojt-right{
+    margin-left: 2rem;
 }
 
 .serch-box {
@@ -406,6 +511,7 @@ textarea {
     font-size: 1.5rem;
 }
 
+<<<<<<< HEAD
 .check-box {
     input {
         display: none;
@@ -440,3 +546,16 @@ textarea {
         transform: rotate(45deg);
     }
 }
+=======
+.sirabasu-ojt {
+    margin: 1rem;
+    h3 {
+      margin: 0.5rem 0;
+    }
+}
+
+.actions {
+    width: 250px;
+    margin: 0 auto;
+}
+>>>>>>> 7874618ca6bad6b05e00727342d8db086008bfa9

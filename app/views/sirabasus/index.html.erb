@@ -16,9 +16,7 @@
               <td class='icon'><%= link_to(content_tag(:i,'delete',class:'material-icons'), sirabasu_path(sirabasu.number), :method => :delete, data: {confirm: "削除しますか？"}) %></td>
               <td class='icon'><%= link_to(content_tag(:i,'settings',class:'material-icons'), publishing_config_path(sirabasu.number)) %></td>
             <% else %>
-              <% unless @stat_list[i] %>
-                <td>未開放</td>
-              <% end %>
+              <td><%= @stat_list[i] %></td>
             <% end %>
           </tr>
           <% i += 1 %>
@@ -36,6 +34,6 @@
       <% end %>
     <% end %>
 
-    <p><%= link_to 'トップへ', '/ojt_top/top' %></p>
+    <!-- <p><%= link_to 'トップへ', '/ojt_top/top' %></p> -->
   </div>
 </div>
