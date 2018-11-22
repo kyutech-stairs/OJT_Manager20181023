@@ -17,7 +17,6 @@
 //= require turbolinks
 //= require_tree .
 //= require nested_form_fields
-//= require jquery_nested_form
 
 $(document).on('turbolinks:load',function() {
     autosize($('textarea'));
