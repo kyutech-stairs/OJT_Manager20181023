@@ -48,19 +48,38 @@
                 <input id='dropdown' type="checkbox">
                 <menu>
                   <%= image_tag current_kanrisya.image.url, :size=>'50x50' %>
-                  <ul>
-                    <li><%= link_to('ログアウト', destroy_kanrisya_session_path, :method => :delete) %></li>
-                    <li><%= link_to('ログアウト', destroy_kanrisya_session_path, :method => :delete) %></li>
-                  </ul>
+                  <div class='user-links'>
+                  <table>
+                    <tr>
+                    <td>
+                      <%= link_to user_path(current_kanrisya) do %>
+                      <div class="icon-links">
+                        プロフィール
+                      </div>
+                      <% end %>
+                    </td>
+                    </tr>
+                    <tr>
+                    <td>
+                      <%= link_to(destroy_kanrisya_session_path, :method => :delete) do %>
+                      <div class="icon-links">
+                        <i class="material-icons">reply</i>
+                          LOGOUT
+                      </div>
+                      <% end %>
+                    </td>
+                    </tr>
+                  </table>
+                  </div>
                 </menu>
                 <div class="overlay"></div>
               </label>
-              <%= link_to(destroy_kanrisya_session_path, :method => :delete) do %>
+              <!--<%= link_to(destroy_kanrisya_session_path, :method => :delete) do %>
               <div class="icon-links">
                 <i class="material-icons">reply</i>
                 LOGOUT
               </div>
-              <% end %>
+              <% end %>-->
             </div>
           </div>
         <% end %>
