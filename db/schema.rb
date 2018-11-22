@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_22_055733) do
+ActiveRecord::Schema.define(version: 2018_11_22_135021) do
 
   create_table "checklists", force: :cascade do |t|
     t.integer "number"
@@ -40,18 +40,6 @@ ActiveRecord::Schema.define(version: 2018_11_22_055733) do
     t.string "cname_sub"
     t.boolean "copy", default: false, null: false
     t.integer "pas"
-  end
-
-  create_table "crews", force: :cascade do |t|
-    t.string "name"
-    t.string "email"
-    t.integer "age"
-    t.string "sex"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "crew_number"
-    t.string "image"
-    t.string "password_digest"
   end
 
   create_table "images", force: :cascade do |t|
