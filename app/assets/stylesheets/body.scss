@@ -71,8 +71,8 @@ header {
         color: #444;
       }
       &:hover {
-        background-color: rgba($color: #fff, $alpha: 0.5);
-        transition: 0.5s;
+        // background-color: rgba($color: #fff, $alpha: 0.5);
+        // transition: 0.5s;
       }
     }
     .material-icons {
@@ -94,9 +94,6 @@ header {
 
 .header-link-right{
     margin-left: 2.5rem;
-}
-
-.home {
 }
 
 .contents {
@@ -243,7 +240,20 @@ textarea {
         padding-left: 0.7rem;
     }
 
-    .icon, .number{
+    .icon {
+        width: 50px;
+        position: relative;
+        // top: 0px;
+        padding-top: 8px;
+        font-size: 1.5rem;
+        .material-icons {
+            position: relative;
+            top: 2px;
+            font-size: 2rem;
+        }
+    }
+
+    .number{
         width: 50px;
     }
 
@@ -251,6 +261,8 @@ textarea {
         color: #444444;
     }
 }
+
+
 
 .field {
     margin: 15px 0px;
@@ -279,6 +291,11 @@ textarea {
     &:visited {
         color: #ffffff;
     }
+    .material-icons {
+        position: relative;
+        top: 2px;
+        font-size: 1.5rem;
+    }
 }
 
 .weak-button {
@@ -292,6 +309,8 @@ textarea {
     font-size: 1.5rem;
 
     .material-icons {
+        position: relative;
+        top: 2px;
         font-size: 1.5rem;
     }
 

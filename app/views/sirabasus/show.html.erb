@@ -20,7 +20,7 @@
       <% end %>
     </div>
     <% end %>
-    
+
     <% if @sirabasu.image?%>
     <% i = 1 %>
     <% @sirabasu.image.each do |image|%>
@@ -84,7 +84,12 @@
       </tbody>
     </table>
     <% if current_kanrisya.admin == true %>
-    <%= link_to '編集', edit_sirabasu_path(@sirabasu.number), :class => 'link-button' %>
+    <%= link_to edit_sirabasu_path(@sirabasu.number), class:'link-button' do %>
+      <div>
+        <i class='material-icons'>edit</i>
+        編集
+      </div>
+    <% end %>
     <% else %>
     <%= hidden_field_tag :AAAA, @sirabasu.number %>
     <%= submit_tag 'チェックの更新', :class=> "link-button"%>
