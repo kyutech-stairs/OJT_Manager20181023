@@ -10,7 +10,7 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require nested_form_fields
+//= require jquery_ujs
 //= require jquery
 //= require rails-ujs
 //= require activestorage
