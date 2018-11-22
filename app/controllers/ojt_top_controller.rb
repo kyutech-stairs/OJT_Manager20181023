@@ -103,6 +103,7 @@ class OjtTopController < ApplicationController
       @sirabasu = []
       @updated = []
       @checkuser = []
+      @percent = []
       # 各シラバスで、最新のチェックリスト更新をひとつ取得する
       @checkuser = current_kanrisya.checkusers.order(updated_at: :DESC)
       # 最近更新したチェックリストを降順に取得
@@ -119,6 +120,7 @@ class OjtTopController < ApplicationController
           end
           if insert_ok
             @updated[s.id] = che.updated_at
+            @percent[s.id] = "#{get_percent(s)}%"
             @sirabasu.push(s)
           end
         end
@@ -139,5 +141,18 @@ class OjtTopController < ApplicationController
       end
     end
     return !(per_0 || per_100)
+  end
+
+  def get_percent(sirabasu)
+    checklist = sirabasu.checklists.all
+    checklist_count = checklist.count
+    checked_count = 0
+    checklist.each do |c|
+      if current_kanrisya.checkusers.find_by(checklist_id: c.id).check_ok
+        checked_count += 1
+      end
+    end
+    per = ((checked_count / (checklist_count).to_f).round(2) * 100).to_i rescue 0
+    return per
   end
 end
