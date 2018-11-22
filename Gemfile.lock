@@ -75,6 +75,7 @@ GEM
     chromedriver-helper (2.1.0)
       archive-zip (~> 0.10)
       nokogiri (~> 1.8)
+    cocoon (1.2.12)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
     coffee-rails (4.2.2)
@@ -248,6 +249,7 @@ DEPENDENCIES
   capybara (>= 2.15, < 4.0)
   carrierwave (~> 1.0)
   chromedriver-helper
+  cocoon
   coffee-rails (~> 4.2)
   devise
   duktape
