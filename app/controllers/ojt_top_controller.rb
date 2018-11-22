@@ -1,12 +1,75 @@
 class OjtTopController < ApplicationController
+  protect_from_forgery except: :search # searchアクションを除外
 
   def kanri
   end
 
   def user
   end
+
+  def copy_check
+    @company = Company.find_by(id: params[:id])
+  end
+
+  def copy
+    @copy_from = Company.find(params[:id])
+    if params[:password] == "#{@copy_from.password}"
+     sirabasu_from = Sirabasu.where(cid: @copy_from.cid)
+     sirabasu_from.each do |sirabasu_from|
+       sirabasu = Sirabasu.new(
+         name: sirabasu_from.name,
+         content: sirabasu_from.content,
+         number: sirabasu_from.number,
+         userid: current_kanrisya.id,
+         image: sirabasu_from.image,
+         cid: current_kanrisya.cid
+       )
+       if sirabasu.save
+         checklist_from = Checklist.where(sirabasu_id: sirabasu_from.id)
+         checklist_from.each do |checklist_from|
+           checklist = Checklist.new(
+             number: checklist_from.number,
+             content: checklist_from.content,
+             cid: current_kanrisya.cid,
+             sirabasu_id:  sirabasu.id,
+             userid: current_kanrisya.id
+           )
+           if checklist.save
+             #中間テーブルへの保存開始
+             kanrisya = Kanrisya.where(cid: current_kanrisya.cid).where(admin: false)
+             kanrisya.each do |i|
+             @checkuser = Checkuser.new(
+               kanrisya_id: i.id,
+               checklist_id: checklist.id
+             )
+             @checkuser.save
+             end
+             #中間テーブルへの保存ここまで
+           end
+         end
+
+         #シラバス中間テーブルへの保存開始
+         kanrisya = Kanrisya.where(cid: current_kanrisya.cid).where(admin: false)
+         kanrisya.each do |i|
+         @sirabasuuser = Sirabasuuser.new(
+           kanrisya_id: i.id,
+           sirabasu_id: sirabasu.id
+         )
+         @sirabasuuser.save
+         end
+         #中間テーブルへの保存ここまで
+         sirabasu_from
+       end
+     end
+     redirect_to "/sirabasus"
+    else
+      redirect_to ojt_top_copy_check_path(id: @copy_from.id)
+    end
+  end
+
   def top
     if current_kanrisya.admin == true
+      @company = Company.find_by(cid: current_kanrisya.cid)
       @checkuser = Kanrisya.limit(6).order("check_time DESC") # updated_timeの降順で60件取得
       @user = []
       @user_sign = []

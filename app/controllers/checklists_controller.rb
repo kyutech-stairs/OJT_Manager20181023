@@ -14,7 +14,7 @@ class ChecklistsController < ApplicationController
       i = i + 1
     end
    end
-     @check_parcent = ((i/@checklist.count.to_f).round(2)*100).to_i
+     @check_parcent = ((i/@checklist.count.to_f).round(2)*100).to_i rescue 0
      @s = Sirabasuuser.find_by(sirabasu_id: @sirabasu.id,kanrisya_id: current_kanrisya.id)
   end
 

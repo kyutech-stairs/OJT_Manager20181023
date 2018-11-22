@@ -34,7 +34,7 @@ class SirabasusController < ApplicationController
     if current_kanrisya.admin == false
       # 従業員なら
       # 前提シラバスがクリアできていたらtrue
-      @stat = is_this_sirabasu_available(@sirabasu)  
+      @stat = is_this_sirabasu_available(@sirabasu)
       # 今ログインしている従業員に紐づくレコードを抽出
       @checkuser = Kanrisya.find(current_kanrisya.id).checkusers.all
       # 前提シラバスを取得
