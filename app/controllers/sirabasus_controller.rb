@@ -11,7 +11,8 @@ class SirabasusController < ApplicationController
           if is_this_sirabasu_done(s)
             @stat_list.push("完了")
           else
-            @stat_list.push("未完了")
+            
+            @stat_list.push("#{get_percent(s)}%")
           end
         else
           @stat_list.push("未開放")
@@ -213,5 +214,18 @@ class SirabasusController < ApplicationController
     #   end
     # end
     # return true
+  end
+
+  # シラバスの進捗を％で取得
+  def get_percent(sirabasu)
+    checklist = sirabasu.checklists.all
+    checklist_count = checklist.count
+    checked_count = 0
+    checklist.each do |c|
+      if current_kanrisya.checkusers.find_by(checklist_id: c.id).check_ok
+        checked_count += 1
+      end
+    end
+    return ((checked_count / (checklist_count).to_f).round(2) * 100).to_i
   end
 end

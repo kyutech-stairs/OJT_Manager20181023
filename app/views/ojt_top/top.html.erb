@@ -48,7 +48,8 @@
     <% @sirabasu.each do |sira| %>
     <%= sira.number %>
     <%= link_to sira.name, sirabasu_path(sira.number) %>
-    <%= @updated[sira.id].strftime("%Y-%m-%d %H:%M:%S") %><br>
+    <%= @updated[sira.id].strftime("%Y-%m-%d %H:%M:%S") %>
+    <%= @percent[sira.id] %><br>
     <% end %>
     <% end %>
   </div>
