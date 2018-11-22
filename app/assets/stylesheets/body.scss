@@ -52,10 +52,6 @@ header {
       &:visited {
         color: #444;
       }
-      &:hover {
-        background-color: rgba($color: #fff, $alpha: 0.5);
-        transition: 0.5s;
-      }
     }
     .material-icons {
       position: relative;
@@ -77,7 +73,7 @@ header {
 .header-link-right{
     margin-left: 2.5rem;
     vertical-align: baseline;
-    
+
     img {
         border-radius: 50%;
     }
@@ -134,9 +130,6 @@ header {
 
 #dropdown {
     display: none;
-}
-
-.home {
 }
 
 .contents {
@@ -274,6 +267,7 @@ textarea {
         padding: 0.7rem 0 ;
         font-weight: 500;
         vertical-align: baseline;
+
     }
 
     i {
@@ -284,12 +278,64 @@ textarea {
         padding-left: 0.7rem;
     }
 
-    .icon, .number{
+    .icon {
+        width: 50px;
+        position: relative;
+        // top: 0px;
+        padding-top: 8px;
+        font-size: 1.5rem;
+        .material-icons {
+            position: relative;
+            top: 2px;
+            font-size: 2rem;
+        }
+    }
+
+    .number{
         width: 50px;
     }
 
     a {
         color: #444444;
+    }
+}
+
+.confir-lists {
+    margin-top: 2vh;
+
+    table {
+        border-collapse: collapse;
+        table-layout: fixed;
+        font-size: 1.8rem;
+        width: 100%;
+    }
+    tr{
+
+    }
+    td {
+        margin: 3rem;
+        padding: 0.7rem;
+        font-weight: 500;
+        vertical-align: baseline;
+        background-color: rgba($color: #283593, $alpha: 0.4);
+        border-radius: 10px;
+    }
+
+    i {
+        font-size: 36px;
+        position: relative;
+        top: 8px;
+    }
+}
+
+.ojt-comp {
+    text-align: right;
+    width: 120px;
+    i {
+        margin: 0 1rem;
+        font-size: 36px;
+        position: relative;
+        top: 6px;
     }
 }
 
@@ -320,6 +366,11 @@ textarea {
     &:visited {
         color: #ffffff;
     }
+    .material-icons {
+        position: relative;
+        top: 2px;
+        font-size: 1.5rem;
+    }
 }
 
 .weak-button {
@@ -333,6 +384,8 @@ textarea {
     font-size: 1.5rem;
 
     .material-icons {
+        position: relative;
+        top: 2px;
         font-size: 1.5rem;
     }
 
@@ -371,8 +424,11 @@ textarea {
     }
 
     &__staff-flex {
-        @media screen and (max-width:960px) and (min-width:480px) {
+        @media screen and (min-width: 1025px) {
           display: flex;
+        }
+        @media screen and (max-width:1024px)  {
+          display: block;
         }
     }
 
@@ -430,6 +486,11 @@ textarea {
       border-style: solid;
       border-color: #777777;
     }
+    .information-box li {
+      border-style: solid;
+      border-color: #777777;
+      border-width: 1px;
+    }
 }
 
 .checklist {
@@ -461,7 +522,7 @@ textarea {
 
 .plofile {
     display: flex;
-    border-bottom: solid 1px #777777;
+    // border-bottom: solid 1px #777777;
     align-items: center;
     margin: 1rem;
     padding: 1rem;
@@ -524,7 +585,7 @@ textarea {
         font-size: 1.7em;
         padding: 0.5rem;
         padding-left: 52px;
-        margin: 0.5rem 0; 
+        margin: 0.5rem 0;
         min-width: 70%;
         user-select: none;
         cursor: pointer;
@@ -558,4 +619,16 @@ textarea {
 .actions {
     width: 250px;
     margin: 0 auto;
+}
+
+.confir-check {
+    margin: 1rem 0;
+    padding: 1rem;
+    border-width: 1px 0px 0px 0px;
+    border-style: solid;
+    border-color: #777777;
+    form {
+      margin-top: 4rem;
+      text-align: center;
+    }
 }

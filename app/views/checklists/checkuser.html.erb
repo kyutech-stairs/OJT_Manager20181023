@@ -1,46 +1,47 @@
-<h3>
-  <%= @sirabasu.number %>.
-  <%= @sirabasu.name %>
-</h3>
-<% if @sirabasuuser.sirabasu_ok == true%>
-<%= @kanrisya.name %> はこのシラバスを完了しています
-<% end %>
-<table>
-  <tbody>
-    <% @checklist.each do |checklist| %>
-    <tr>
-      <td>
-        <%= checklist.number %>.
-      </td>
-      <td>
-        <%= checklist.content %>
-      </td>
-      <td>
-        <% if @checkuser[checklist.number].check_ok == true %>
-        〇
-        <% else %>
-        ✖
-        <% end %>
-      </td>
-    <tr>
-      <% end %>
-  </tbody>
-</table>
-進捗
-<%= @check_parcent %>％
-<%=form_tag({ controller: 'sirabasus', action: 'sirabasu_complete' },{ method: "post"}) do %>
-<% if current_kanrisya.admin == true || @s.sirabasu_ok ==true %>
-<% if @sirabasuuser.sirabasu_ok == false && @check_parcent == 100%>
-<%= hidden_field_tag :BBBB, @kanrisya.id %>
-<%= hidden_field_tag :id, @sirabasuuser.id %>
-<%= submit_tag 'OJTの完了', :class=> "link-button"%>
-<% end %>
-<% else %>
-<% if @sirabasuuser.sirabasu_ok == false && @check_parcent == 100%>
-<p>このシラバスを完了するには、管理者の承認が必要です</p>
-<% end %>
-<% end %>
-<% end %>
-<p>
-  <%= link_to '戻る', user_path(@kanrisya) %>
-</p>
+<div class="first-box">
+  <div class="content-box">
+    <h1>進捗確認</h1>
+      <div class="top-storage">
+        <h3><%= @sirabasu.number %>. <%= @sirabasu.name %></h3>
+        <div class="confir-check">
+          <% if @sirabasuuser.sirabasu_ok == true%>
+          <p><span style="font-size: 1.25rem;"><%= @kanrisya.name %> </span> さんはこのOJTを終了しています</p>
+          <% end %>
+
+          <div class="confir-lists">
+            <table>
+              <tbody>
+                <% @checklist.each do |checklist| %>
+                <tr>
+                  <td>
+                    <% if @checkuser[checklist.number].check_ok == true %>
+                      <i class='material-icons'>check_box</i>
+                    <% else %>
+                      <i class='material-icons'>check_box_outline_blank</i>
+                    <% end %>
+                    <%= checklist.content %><% end %>
+                  </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <%=form_tag({ controller: 'sirabasus', action: 'sirabasu_complete' },{ method: "post"}) do %>
+          <% if current_kanrisya.admin == true || @s.sirabasu_ok ==true %>
+           <% if @sirabasuuser.sirabasu_ok == false && @check_parcent == 100%>
+            <%= hidden_field_tag :BBBB, @kanrisya.id %>
+            <%= hidden_field_tag :id, @sirabasuuser.id %>
+            <%= button_tag :type=>'submit', :class=> "link-button" do%>
+              <i class='material-icons'>thumb_up_alt</i>
+              OJT完了
+            <% end %>
+           <% end %>
+          <% else %>
+           <% if @sirabasuuser.sirabasu_ok == false && @check_parcent == 100%>
+            <p>このシラバスのOJT完了サインを貰ってください</p>
+           <% end %>
+          <% end %>
+          <% end %>
+      </div>
+    </div>
+  </div>
+</div>
