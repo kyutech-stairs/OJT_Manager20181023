@@ -1,9 +1,9 @@
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-<%= devise_error_messages! %>
+<%#= devise_error_messages! %>
 <div class="first-box">
   <div class="content-box">
-  <h1>最初のサインアップ</h1>
+  <h1>あなたのOJTマネジメントを始めましょう</h1>
 
   <div class="field">
    <%= f.label :name, '名前' %><br />
@@ -22,7 +22,7 @@
 
   <div class="field">
    <%= f.label :age, '年齢' %><br />
-   <%= f.number_field :age , :class => "input-box"%>
+   <%= f.number_field :age , :class => "input-box", :value => 0, in: 0...150 %>
   </div>
 
   <div class="field">

@@ -73,7 +73,7 @@ class UserController < ApplicationController
       sirabasu_check_ok = Checkuser.where(checklist_id: sirabasu_check.id).where(kanrisya_id: @kanrisya.id).where(check_ok: true)
       @sirabasu_check_ok = @sirabasu_check_ok + sirabasu_check_ok.count
      end
-     @sirabasu_check_ok_parcent[i] = ((@sirabasu_check_ok/(@sirabasu_check.count).to_f).round(2)*100).to_i
+     @sirabasu_check_ok_parcent[i] = ((@sirabasu_check_ok/(@sirabasu_check.count).to_f).round(2)*100).to_i rescue 0
      if @sirabasu_check_ok_parcent[i] != 100
        sirabasuuser = Sirabasuuser.where(kanrisya_id: @kanrisya.id).where(sirabasu_id: @sirabasu[i].id)
        sirabasuuser.update(sirabasu_ok: false)
@@ -113,7 +113,7 @@ class UserController < ApplicationController
 
   def company_up
     @company = Company.find(params[:id])
-    if @company.update(cname: params[:cname],cid: params[:cid], cname_sub: params[:cname_sub], pas: params[:pas], copy: params[:copy])
+    if @company.update(cname: params[:cname],cid: params[:cid], cname_sub: params[:cname_sub], password: params[:password], copy: params[:copy])
       redirect_to "/ojt_top/top"
     else
       logger.debug @company.errors.inspect
