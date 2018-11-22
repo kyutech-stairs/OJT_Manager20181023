@@ -11,11 +11,13 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery_ujs
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
 //= require_tree .
 //= require nested_form_fields
+//= require jquery_nested_form
 
 $(document).on('turbolinks:load',function() {
     autosize($('textarea'));
