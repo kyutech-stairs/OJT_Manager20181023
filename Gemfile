@@ -74,4 +74,6 @@ end
 
 group :production do
   gem 'pg', "~> 0.21.0"
+  gem 'nested_form_fields'
+  gem 'jquery-rails'
 end
