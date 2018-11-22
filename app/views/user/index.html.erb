@@ -1,6 +1,6 @@
 <div class="first-box">
   <div class="content-box">
-    <h1>ユーザ一覧</h1>
+    <h1>スタッフ</h1>
 
     <%=form_tag({ controller: 'user', action: 'index' },{ method: "get"}) do %>
       <%= text_field_tag(:name, '', class: 'input-box') %>
@@ -27,54 +27,69 @@
     <% elsif params[:commit] == "検索"then %>
       <p>検索結果　その検索条件での該当者はいませんでした</p>
     <% end %>
-
-    <div class="lists">
-      <p>管理者</p>
-      <table>
-        <tbody>
-          <% @kanrisya.each do |kanrisya| %>
-          <% if kanrisya.cid == current_kanrisya.cid %>
-            <% if kanrisya.admin == true %>
-          <tr>
-            <td>
-              <% if kanrisya.image? %>
-                  <%= image_tag kanrisya.image.url, :size =>'150x150' %>
-              <% end %>
-                  <%=link_to kanrisya.name ,user_path(kanrisya)%>
-            </td>
-          </tr>
-          <% end %>
+    <div class="top-storage">
+      <p>ADMIN</p>
+      <div class="top-card">
+        <% @kanrisya.each do |kanrisya| %>
+        <% if kanrisya.cid == current_kanrisya.cid %>
+        <% if kanrisya.admin == true %>
+        <%=link_to user_path(kanrisya) do%>
+        <div class="top-card__box">
+          <div class="top-card__staff-flex">
+            <div class="top-card__photo">
+              <%= image_tag kanrisya.image.url %>
+            </div>
+            <div class="top-card__set">
+              <div class="top-card__staff-name">
+                <%=kanrisya.name %>
+              </div>
+              <div class="top-card__belongs">
+                <%=kanrisya.belong %>
+              </div>
+            </div>
+          </div>
+        </div>
         <% end %>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="lists">
-      <p>従業員</p>
-      <table>
-        <tbody>
-          <% @kanrisya.each do |kanrisya| %>
-          <% if kanrisya.cid == current_kanrisya.cid %>
-            <% if kanrisya.admin == false %>
-          <tr>
-            <td>
-              <% if kanrisya.image? %>
-              <%= image_tag kanrisya.image.url, :size =>'150x150' %>
-              <% end %>
-                  <%=link_to kanrisya.name ,user_path(kanrisya)%>
-            </td>
-          </tr>
-          <% end %>
         <% end %>
-          <% end %>
-        </tbody>
-      </table>
+        <% end %>
+        <% end %>
+      </div>
     </div>
-
-    <% if current_kanrisya.admin == true %>
-      <p><%= link_to '新しい社員登録', '/user/new' %></p>
-    <% end %>
-
+    <div class="top-storage">
+      <p>USER</p>
+      <div class="top-card">
+        <% @kanrisya.each do |kanrisya| %>
+        <% if kanrisya.cid == current_kanrisya.cid %>
+        <% if kanrisya.admin == false %>
+        <%=link_to user_path(kanrisya) do%>
+        <div class="top-card__box">
+          <div class="top-card__staff-flex">
+            <div class="top-card__photo">
+              <%= image_tag kanrisya.image.url %>
+            </div>
+            <div class="top-card__set">
+              <div class="top-card__staff-name">
+                <%=kanrisya.name %>
+              </div>
+              <div class="top-card__belongs">
+                <%=kanrisya.belong %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% end %>
+        <% end %>
+        <% end %>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>
+
+<% if current_kanrisya.admin == true %>
+<p><%= link_to '新しい社員登録', '/user/new' %></p>
+<% end %>
+
+<p>
+  <%= link_to 'Back', '/ojt_top/top' %>
+</p>

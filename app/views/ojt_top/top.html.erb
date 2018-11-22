@@ -26,14 +26,13 @@
           <div class="top-card__flex">
             <div class="top-card__photo">
               <% if  @user[checkuser.id].image.present?%>
-              <%= image_tag @user[checkuser.id].image.url, :size =>'90x90' %>
+                <%= image_tag @user[checkuser.id].image.url%>
               <% end %>
             </div>
             <div class="top-card__graph">
               <p>
                 <%= @check_parcent[checkuser.id] %>%</p>
               <% if @user_sign[checkuser.id] == true %>
-              ！
               <%end%>
             </div>
           </div>
@@ -56,7 +55,7 @@
     </div>
     <div class="top-storage">
       <div class="top-card">
-
+        
       </div>
     </div>
     <% else %>

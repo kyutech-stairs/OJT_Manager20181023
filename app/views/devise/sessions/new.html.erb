@@ -4,17 +4,17 @@
 <h2>by Kawano Keita</h2>
 </div>
 <div class=first-layer>
-  <h1>ログインする</h1>
+  <!-- <h1>ログインする</h1> -->
 
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", :class=> "input-box" %>
+    <!-- <%= f.label :email %><br /> -->
+    <%= f.email_field :email, :placeholder => "メールアドレス",  autofocus: true, autocomplete: "email", :class=> "input-box" %>
   </div>
 
   <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off", :class=> "input-box" %>
+    <!-- <%= f.label :password %><br /> -->
+    <%= f.password_field :password, :placeholder => "パスワード",autocomplete: "off", :class=> "input-box" %>
   </div>
 
   <% if devise_mapping.rememberable? -%>
