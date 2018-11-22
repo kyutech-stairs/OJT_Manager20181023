@@ -17,6 +17,6 @@
 //= require turbolinks
 //= require_tree .
 
-$(document).on('turbolinks:load',function() {
-    autosize($('textarea'));
-});
+//$(document).on('turbolinks:load',function() {
+  //  autosize($('textarea'));
+//});
