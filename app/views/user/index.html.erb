@@ -1,6 +1,6 @@
 <div class="first-box">
   <div class="content-box">
-    <h1>従業員一覧</h1>
+    <h1>ユーザ一覧</h1>
 
     <%=form_tag({ controller: 'user', action: 'index' },{ method: "get"}) do %>
       <%= text_field_tag(:name, '', class: 'input-box') %>
@@ -78,7 +78,3 @@
 
   </div>
 </div>
-
-<p>
-  <%= link_to 'Back', '/ojt_top/top' %>
-</p>

@@ -63,6 +63,8 @@
           <tr>
             <td>
               <%= sirabasu.number %>.
+              </td>
+              <td>
               <%=link_to sirabasu.name, checklists_checkuser_path(:sirabasu_id => sirabasu.id,:kanrisya_id => @kanrisya.id)%>
             </td>
             <td>
@@ -94,7 +96,7 @@
       <i class='material-icons'>edit</i>編集
     </div>
     <% end %>
-    <%= link_to user_path(@kanrisya), :method => :delete do %>
+    <%= link_to user_path(@kanrisya), :method => :delete, data: {confirm: "削除しますか？"} do %>
     <div class="weak-button">
       <i class="material-icons">delete</i>削除
     </div>
@@ -104,6 +106,6 @@
     あなたの会社の社員ではありません。
     <% end %>
     <br>
-    <%= link_to 'ユーザ一覧へ', "/user/index" %>
+    <%#= link_to 'ユーザ一覧へ', "/user/index" %>
   </div>
 </div>

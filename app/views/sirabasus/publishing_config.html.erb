@@ -8,12 +8,14 @@
       <%= @now.number %>.
       <%= @now.name %>
     </h2>
+    <!--
     <p>チェックを入れたシラバスがすべて完了すると、このシラバスは利用可能になります</p>
-
+-->
     <%# 各シラバスを表示%>
     <% @sirabasu.each do |s| %>
     <% unless s.number == @now.number %>
     <%= hidden_field_tag 'sirabasu_id[]' %>
+    <!--設定されていなければ、レコードがない-->
     <% if @conf[@now.id].find_by(required_sirabasu: s.id).nil? %>
     <%= check_box_tag 'sirabasu_id[]', s.id, checked = false %>
     <% else %>
@@ -24,7 +26,7 @@
     <% end %>
     <% end %>
     <%= submit_tag '公開設定を保存'%>
-    <%= link_to 'シラバス一覧に戻る', sirabasus_path %>
+    <%#= link_to 'シラバス一覧に戻る', sirabasus_path %>
   </div>
 </div>
 <% end %>

@@ -66,12 +66,26 @@
     はありません<br>
     <% else %>
     <br>
-    <% @sirabasu.each do |sira| %>
-    <%= sira.number %>
-    <%= link_to sira.name, sirabasu_path(sira.number) %>
-    <%= @updated[sira.id].in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S") %>
-    <%= @percent[sira.id] %><br>
-    <% end %>
+    <table>
+      <tbody>
+        <% @sirabasu.each do |sira| %>
+        <tr>
+          <td>
+            <%= sira.number %>.
+          </td>
+          <td>
+            <%= link_to sira.name, sirabasu_path(sira.number) %>
+          </td>
+          <td>
+            <%= @percent[sira.id] %>
+          </td>
+          <td>
+            <%= @updated[sira.id].in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S") %>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
     <% end %>
     <% end %>
   </div>
