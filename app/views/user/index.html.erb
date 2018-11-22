@@ -25,24 +25,31 @@
       <p>検索結果　その検索条件での該当者はいませんでした</p>
     <% end %>
 
-    <div class="lists">
+    <div class="top-storage">
       <p>ADMIN</p>
-      <table>
-        <tbody>
+      <div class="top-card">
           <% @kanrisya.each do |kanrisya| %>
           <% if kanrisya.cid == current_kanrisya.cid %>
-            <% if kanrisya.admin == true %>
-          <tr>
-            <td>
-                  <%=link_to kanrisya.name ,user_path(kanrisya)%>
-            </td>
-          </tr>
+          <% if kanrisya.admin == true %>
+
+          <div class="top-card__box">
+            <div class="top-card__flex">
+              <div class="top-card__photo">
+
+              </div>
+              <div class="top-card__name">
+
+              <div class="top-card__belongs">
+
+              </div>
+            </div>
           <% end %>
-        <% end %>
           <% end %>
-        </tbody>
-      </table>
+          <% end %>
+        </div>
+      </div>
     </div>
+
 
     <div class="lists">
       <p>USER</p>
@@ -69,6 +76,9 @@
 
   </div>
 </div>
+
+
+
 
 <!--
 <% if current_kanrisya.admin == true %>
