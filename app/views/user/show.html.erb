@@ -56,8 +56,8 @@
           <tr>
             <td class='number'><%= sirabasu.number %>. </td>
             <td><%=link_to sirabasu.name, checklists_checkuser_path(:sirabasu_id => sirabasu.id,:kanrisya_id => @kanrisya.id)%></td>
-            <td><%= @sirabasu_check_ok_parcent[sirabasu.number-1] %> %</td>
-            <td><% if @sirabasuuser[sirabasu.id].sirabasu_ok == true%>完了！<% end %></td>
+            <td class="ojt-comp"><%= @sirabasu_check_ok_parcent[sirabasu.number-1] %> %</td>
+            <td class="ojt-comp"><% if @sirabasuuser[sirabasu.id].sirabasu_ok == true%>完了！<% end %></td>
           </tr>
         <% end %>
       </tbody>
@@ -69,7 +69,7 @@
     <p>あなたの会社の社員ではありません。</p>
   <% end %>
 
-    
+
     <div class="options">
       <% if current_kanrisya.admin == true %>
       <%= link_to edit_user_path(@kanrisya) do %>
