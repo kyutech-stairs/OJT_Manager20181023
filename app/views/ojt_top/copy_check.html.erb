@@ -1,13 +1,15 @@
 <div class="first-box">
   <div class="content-box">
 
-   <h4>シラバスのコピーを行うことができます</h4>
+   <h4>"<%= @company.cname %>"のシラバスのコピーを行うことができます</h4>
     <p>コピーを行う場合は教えられた4桁のパスワードを入力してください</p>
     <%=form_tag({ controller: 'ojt_top', action: 'copy' },{ method: "post"}) do %>
-    <p><%= text_field_tag :password, "", maxlength:4 ,:class=> "input-box" %></p>
+    <p><%= text_field_tag :pas, "", maxlength:4 ,:class=> "input-box" %></p>
+    <%= hidden_field_tag :id, @company.id %>
+    <%= hidden_field_tag :cid, @company.cid %>
     <p><%= submit_tag '登録', :class=> "link-button"%></p>
     <% end %>
-    <p><%= link_to "トップへ戻る", "/ojt_top/top"%></p>
+    <p><%= link_to "コピーはせずトップへ戻る", "/ojt_top/top"%></p>
 
  </div>
 </div>

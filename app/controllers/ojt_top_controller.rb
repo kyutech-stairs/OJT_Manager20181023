@@ -7,10 +7,16 @@ class OjtTopController < ApplicationController
   end
 
   def copy_check
+    @company = Company.find_by(id: params[:id])
   end
 
   def copy
-    redirect_to "/sirabasus"
+    @copy_from = Company.find(params[:id])
+    if params[:cid] == @copy_from.cid
+     redirect_to "/sirabasus"
+    else
+      redirect_to ojt_top_copy_check_path(id: @copy_from.id)
+    end
   end
 
   def top
