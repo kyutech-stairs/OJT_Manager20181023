@@ -61,26 +61,6 @@
                 保存
             <% end %>
         </div>
-        <!--
-        <div class="fields">
-            <%#= che.number_field :number ,:readonly => true, :value %>
-            <%= che.hidden_field :number , :value => "#{@checklist_num}"%>
-            <%= che.text_area :content, :class => "checklist" %>
-            <%= che.hidden_field :cid, value: current_kanrisya.cid %>
-            <%= che.hidden_field :userid, value: current_kanrisya.id %>
-            <%= che.remove_nested_fields_link(content_tag(:i,'delete',class:'material-icons'), role: 'button') %>
-        </div>
-        <%# end %>
-        <div class="field">
-            <%#= f.add_nested_fields_link :checklists, '追加', class: 'link-button', role: 'button'  %>
-        </div>
-        <div class="field">
-            <%#= button_tag :type=>'submit', :class=> "link-button" do %>
-                <i class='material-icons'>save</i>
-                保存
-            <%# end %>
-        </div>
-        -->
     </div>
 </div>
 <% end %>

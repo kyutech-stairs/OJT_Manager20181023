@@ -180,7 +180,8 @@ textarea {
     border: solid 1px;
     border-radius: 10px;
     border-color: #777777;
-    padding: 5px;
+    color: inherit;
+    padding: 0.5rem;
     width: 100%;
 
     &:focus {
@@ -433,6 +434,19 @@ textarea {
 
 .checklist {
     font-size: 2rem;
+    width: 90%;
+    height: 50px;
+}
+
+.check-flex {
+    display: flex;
+    margin: 1rem 0;
+    align-items: center;
+
+    i {
+        font-size: 32px;
+        color: #444444;;
+    }
 }
 
 .options {
