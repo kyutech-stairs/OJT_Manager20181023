@@ -301,7 +301,9 @@ textarea {
     }
 
     &__staff-flex {
-        display: flex;
+        @media screen and (max-width:960px) and (min-width:480px) {
+          display: flex;
+        }
     }
 
     &__flex {
@@ -319,6 +321,7 @@ textarea {
 
     &__set {
       margin: auto 1rem;
+      min-width: 100px;
     }
 
     &__photo img {
@@ -356,7 +359,6 @@ textarea {
       border-width: 1px 0px 0px 0px;
       border-style: solid;
       border-color: #777777;
-      min-width: 100px;
     }
 }
 
@@ -364,12 +366,28 @@ textarea {
     font-size: 2rem;
 }
 
+.options {
+    margin-top: 2rem;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: stretch;
+    align-items: stretch;
+}
+
 .plofile {
     display: flex;
     border-bottom: solid 1px #777777;
     align-items: center;
-
+    margin: 1rem;
+    padding: 1rem;
     img {
+        width: 200px;
+        height: 200px;
+        border-style: solid;
+        border-width: 1px;
+        border-color: #777777;
         border-radius: 50%;
     }
     h2 {
@@ -377,11 +395,44 @@ textarea {
     }
 }
 
+.plofile-info {
+    margin: auto;
+}
+
+.plofile-info-flex {
+    display: flex;
+    margin: auto;
+}
+
+.plofile-info-sub {
+    margin: 1rem 0;
+    opacity: 0.8;
+}
+
+.plofile-info-num-right{
+    margin-left: 2rem;
+}
+
+.plofile-info-mail-right{
+    margin-left: 2rem;
+}
+
+.plofile-info-ojt-right{
+    margin-left: 2rem;
+}
+
 .serch-box {
     border: solid 1px #777777;
     border-radius: 10px;
     padding: 0.5rem;
     font-size: 1.5rem;
+}
+
+.sirabasu-ojt {
+    margin: 1rem;
+    h3 {
+      margin: 0.5rem 0;
+    }
 }
 
 .actions {
