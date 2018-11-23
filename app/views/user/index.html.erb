@@ -4,26 +4,22 @@
 
     <%=form_tag({ controller: 'user', action: 'index' },{ method: "get"}) do %>
       <%= text_field_tag(:name, '', class: 'input-box') %>
-      <%= submit_tag '検索'%>
-      <%= link_to "詳細検索", "/user/search" %>
+      <%= submit_tag '検索', :class => 'link-button'%>
+      <%= link_to "詳細検索", "/user/search", :class => 'weak-button' %>
     <% end %>
-    <% if @user.present? || @user2.present? && params[:commit] == "検索" then %>
-      <div class="lists">
+    <% if (@user.present? || @user2.present?) && params[:commit] == "検索" then %>
         <p>検索結果</p>
-        <table>
         <% @user.each do |user| %>
-          <tr>
-            <td><p><%=link_to user.name ,user_path(user)%></p></td>
-          </tr>
-        </table>
-      </div>
+        <p><%=link_to user.name ,user_path(user)%></p>
     <% end %>
 
     <% if @i != 0 %>
       <% for num in 0..(@i-1) %>
+      
         <p>
         <%= link_to @user2[num].name, user_path(@user2[num]) %>
         </p>
+      
       <% end %>
       <p>以上 <%= @i %>名</p>
     <% else %>

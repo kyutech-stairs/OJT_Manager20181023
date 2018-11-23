@@ -42,16 +42,16 @@
           <p><%= @kanrisya.email %></p>
         </div>
         </div>
+        <% if @kanrisya.admin == false %>
         <div class="plofile-info-flex">
           <div class="plofile-info-ojt-left">
             <p>OJT完了率</p>
           </div>
           <div class="plofile-info-ojt-right">
-            <% if @kanrisya.admin == false %>
               <p><%= @check_parcent %>%</p>
-            <% end %>
           </div>
         </div>
+        <% end %>
       </div>
     </div>
   </div>
