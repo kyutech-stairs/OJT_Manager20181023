@@ -596,6 +596,7 @@ textarea {
 
 .profile-info {
     width: 100%;
+    padding: 1rem;
     @media screen and (min-width: 769px){
         width: auto;
         display: block;
@@ -623,10 +624,17 @@ textarea {
         vertical-align:  middle;
         flex-wrap: wrap;
         flex-direction: column;
-        &-note {
+        &--note {
             display: flex;
             vertical-align:  middle;
-            justify-content: space-between;
+            justify-content: flex-start;
+            @media screen and (min-width: 769px) {
+                justify-content: space-between;
+            }
+            &-title {
+              position: relative;
+              left: 2rem;
+            }
         }
     }
 

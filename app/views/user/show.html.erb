@@ -18,13 +18,13 @@
         <p class='profile-info__name'><%= @kanrisya.name %></p>
         <p class="profile-info__belong"><%= @kanrisya.belong %></p>
         <div class="profile-info__detail">
-          <div class="profile-info__detail-note">
+          <div class="profile-info__detail--note">
             <p>社員番号</p>
-            <p><%= @kanrisya.crew_number %></p>
+            <p class="profile-info__detail--note-title"><%= @kanrisya.crew_number %></p>
           </div>
-          <div class="profile-info__detail-note">
+          <div class="profile-info__detail--note">
             <p>E-mail</p>
-              <p><%= @kanrisya.email %></p>
+            <p class="profile-info__detail--note-title"><%= @kanrisya.email %></p>
           </div>
         </div>
       </div>
