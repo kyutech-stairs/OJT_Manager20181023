@@ -44,7 +44,9 @@
         <div class="top-card__box">
           <div class="top-card__staff-flex">
             <div class="top-card__photo">
+              <% if kanrisya.image? %>
               <%= image_tag kanrisya.image.url %>
+              <% end %>
             </div>
             <div class="top-card__set">
               <div class="top-card__staff-name">

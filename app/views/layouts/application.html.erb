@@ -48,7 +48,9 @@
               <label for="dropdown">
                 <input id='dropdown' type="checkbox">
                 <menu>
+                  <% if current_kanrisya.image?%>
                   <%= image_tag current_kanrisya.image.url %>
+                  <% end %>
                   <div class='user-links'>
                   <table>
                     <tr>

@@ -10,6 +10,7 @@ class Kanrisya < ApplicationRecord
   validates :crew_number, presence: true, length: { maximum: 15 }
   validates :sex, presence: true
   validates :belong, presence: true
+  validates :image, presence: true
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
