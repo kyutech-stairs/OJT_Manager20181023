@@ -6,7 +6,7 @@
     <div class="plofile">
       <div class='plofile-img'>
         <% if  @kanrisya.image.present?%>
-        <%= image_tag @kanrisya.image.url, :size =>'150x150' %>
+        <%= image_tag @kanrisya.image.url %>
         <% end %>
       </div>
       <% if @kanrisya.admin == false %>
@@ -14,29 +14,17 @@
         <%= @check_parcent %>
       </div>
       <% end %>
-      <div class="plofile-info">
-        <div class='plofile-name'>
-          <h1><%= @kanrisya.name %></h1>
-          <h3><%= @kanrisya.belong %></h3>
-        </div>
-        <div class="plofile-info-sub">
-          <div class="plofile-info-flex">
-            <div class="plofile-info-num-left">
-              <p>社員番号</p>
-            </div>
-            <div class="plofile-info-num-right">
-              <p><%= @kanrisya.crew_number %></p>
-              <% if @kanrisya.age.present? %>
-              <% end %>
-            </div>
+      <div class="profile-info">
+        <p class='profile-info__name'><%= @kanrisya.name %></p>
+        <p class="profile-info__belong"><%= @kanrisya.belong %></p>
+        <div class="profile-info__detail">
+          <div class="profile-info__detail-note">
+            <p>社員番号</p>
+            <p><%= @kanrisya.crew_number %></p>
           </div>
-          <div class="plofile-info-flex">
-            <div class="plofile-info-mail-left">
-              <p>E-mail</p>
-            </div>
-            <div class="plofile-info-mail-right">
-              <p><%= @kanrisya.email %></p>
-            </div>
+          <div class="profile-info__detail-note">
+            <p>E-mail</p>
+            <p><%= @kanrisya.email %></p>
           </div>
         </div>
       </div>
@@ -100,19 +88,20 @@ d3.selectAll(".plofile-info-ojt")
         var target = this;
         var percent = target.textContent;
         percent = Number(percent);
+        percent = Math.floor(percent);
         data[0].count = percent;
         var rest = 100 - percent;
         data[1].count = rest;
         var totalCount = 100; //this is static value
         this.innerHTML = "";
         var parentWidth = parent.clientWidth;
-        var width = parentWidth * 0.3,
-        height = parentWidth * 0.3,
-        radius = parentWidth * 0.12;
+        var width = parentWidth * 0.25,
+        height = parentWidth * 0.25,
+        radius = parentWidth * 0.075;
 
         var arc = d3.arc()
-            .outerRadius(radius - 10)
-            .innerRadius(parentWidth * 0.15);
+            .outerRadius(radius - 15)
+            .innerRadius(parentWidth * 0.08);
 
         var pie = d3.pie()
         .sort(null)

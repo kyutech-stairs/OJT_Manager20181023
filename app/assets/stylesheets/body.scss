@@ -562,22 +562,27 @@ textarea {
     width: 100%;
     // border-bottom: solid 1px #777777;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
     margin: 2rem 0;
     // padding: 1rem;
 
     img {
         border-radius: 50%;
+        width: 100%;
+
     }
 
     .plofile-img {
+        text-align:center;
         width: 30%;
         // height: 100%;
     }
     .plofile-info-ojt {
+        text-align:center;
         width: 30%;
     }
     .plofile-info {
+        margin: 0 auto;
         width: 30%;
     }
     h2 {
@@ -586,9 +591,32 @@ textarea {
 
 }
 
-// .plofile-info {
-//     margin: auto;
-// }
+.profile-info {
+
+    &__name {
+        font-size: 2rem;
+        font-weight: bold;
+    }
+    &__belong {
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+    &__detail {
+        font-size: 1rem;
+        // text-align: center;
+        display: flex;
+        vertical-align:  middle;
+        flex-wrap: wrap;
+        flex-direction: column;
+        &-note {
+            display: flex;
+            vertical-align:  middle;
+            justify-content: space-between;
+        }
+    }
+
+}
+
 
 .plofile-info-flex {
     display: flex;
