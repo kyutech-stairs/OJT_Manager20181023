@@ -11,16 +11,20 @@
             <table>
               <tbody>
                 <% @checklist.each do |checklist| %>
-                <tr>
-                  <td>
+                  <tr>
                     <% if @checkuser[checklist.number].check_ok == true %>
-                      <i class='material-icons'>check_box</i>
+                      <td class='select'>
+                        <i class='material-icons'>check_box</i>
+                        <%= checklist.content %>
+                      </td>
                     <% else %>
-                      <i class='material-icons'>check_box_outline_blank</i>
+                      <td class='none'>
+                        <i class='material-icons'>check_box_outline_blank</i>
+                        <%= checklist.content %>
+                      </td>
                     <% end %>
-                    <%= checklist.content %><% end %>
-                  </td>
-                </tr>
+                  </tr>
+                <% end %>
               </tbody>
             </table>
           </div>

@@ -380,8 +380,14 @@ textarea {
         padding: 0.7rem;
         font-weight: 500;
         vertical-align: baseline;
-        background-color: rgba($color: #777777, $alpha: 0.4);
         border-radius: 10px;
+    }
+
+    .none {
+        background-color: rgba($color: #777777, $alpha: 0.4);
+    }
+    .select {
+        background-color: rgba($color: #80a9eb, $alpha: 0.5);
     }
 
     i {
