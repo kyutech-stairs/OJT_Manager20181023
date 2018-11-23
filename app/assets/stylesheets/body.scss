@@ -482,7 +482,7 @@ textarea {
 
     &__set {
       margin: auto 1rem;
-      min-width: 100px;
+      min-width: 70px;
     }
 
     &__photo img {
@@ -507,7 +507,7 @@ textarea {
     }
 
     &__staff-name {
-      margin: auto 0 auto auto;
+      margin: auto 0 0.25rem auto;
 
     }
 
@@ -526,10 +526,6 @@ textarea {
       border-color: #777777;
       border-width: 1px;
     }
-}
-
-.recently-ojt {
-
 }
 
 .recently-menu {

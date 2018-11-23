@@ -20,7 +20,7 @@
     </div>-->
     <div class="plofile-info">
       <div class='plofile-name'>
-        <h2><%= @kanrisya.name %></h2>
+        <h1><%= @kanrisya.name %></h1>
         <h3><%= @kanrisya.belong %></h3>
       </div>
       <div class="plofile-info-sub">
@@ -68,12 +68,12 @@
             <td class="ojt-comp">
               <% if @sirabasuuser[sirabasu.id].sirabasu_ok == true%>
                 <div class="shounin">
-                  <p>承認</p>
+                  <p>完了</p>
                 </div>
               <% end %>
               <% if @sirabasuuser[sirabasu.id].sirabasu_ok == false%>
                 <div class="non-shounin">
-                  <p>承認</p>
+                  <p>完了</p>
                 </div>
               <% end %>
             </td>
