@@ -13,7 +13,7 @@ class SirabasusController < ApplicationController
           else
             # 進捗を取得
             tmp = get_percent(s)
-            @stat_list.push("#{tmp.fetch(2)}% " + "(#{tmp.fetch(0)}/" + "#{tmp.fetch(1)})")
+            @stat_list.push("#{tmp.fetch(2)}% ")
           end
         else
           @stat_list.push("利用不可")

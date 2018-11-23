@@ -57,7 +57,7 @@ body {
         top: 6px;
       }
     }
-    
+
 }
 
 .icon-links {
@@ -318,6 +318,9 @@ textarea {
             position: relative;
             top: 6px;
         }
+        p {
+            padding: 1rem;
+        }
     }
 
     .user-top-menu {
@@ -336,10 +339,13 @@ textarea {
     .shounin {
         padding: 0 1rem;
         p {
+            font-weight: 400;
+            font-size: 1.5rem;
             text-align:center;
             border-style: solid;
-            border-width: 5px;
+            border-width: 2px;
             border-color: darken(#8bc34a, 15%);
+            color: darken(#8bc34a, 15%);
             border-radius: 10px;
         }
     }
@@ -348,9 +354,10 @@ textarea {
         padding: 0 1rem;
         color: #fff;
         p {
+            font-weight: 400;
             text-align:center;
             border-style: solid;
-            border-width: 5px;
+            border-width: 2px;
             border-color: #fff;
             border-radius: 10px;
         }
