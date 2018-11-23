@@ -25,12 +25,14 @@
     </div>
 
     <% if current_kanrisya.admin == true %>
+      <div class="top-regist">
       <%= link_to new_sirabasu_path, class:'link-button' do %>
         <div>
           <i class='material-icons'>add</i>
           新規作成
         </div>
       <% end %>
+    </div>  
     <% end %>
 
     <!-- <p><%= link_to 'トップへ', '/ojt_top/top' %></p> -->
