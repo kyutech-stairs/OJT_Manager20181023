@@ -15,7 +15,15 @@
               <td class='icon'><%= link_to(content_tag(:i,'delete',class:'material-icons'), sirabasu_path(sirabasu.number), :method => :delete, data: {confirm: "削除しますか？"}) %></td>
               <td class='icon'><%= link_to(content_tag(:i,'settings',class:'material-icons'), publishing_config_path(sirabasu.number)) %></td>
             <% else %>
-              <td><%= @stat_list[i] %></td>
+              <td class="ojt-comp">
+                <% if @stat_list[i] != "完了"%>
+                <p><%= @stat_list[i] %></p>
+                <% else %>
+                <div class="shounin">
+                  <p>完了</p>
+                </div>
+                <% end %>
+              </td>
             <% end %>
           </tr>
           <% i += 1 %>
