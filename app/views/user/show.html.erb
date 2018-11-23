@@ -1,111 +1,148 @@
 <div class="first-box">
   <div class="content-box">
     <h1>プロフィール</h1>
+    <% i = 1 %>
     <% if @kanrisya.cid == current_kanrisya.cid %>
-
     <div class="plofile">
       <div class='plofile-img'>
         <% if  @kanrisya.image.present?%>
-        <%= image_tag @kanrisya.image.url, :size =>'150x150' %>
+        <%= image_tag @kanrisya.image.url %>
         <% end %>
       </div>
-      <div class='plofile-name'>
-        <h2>
-          <%= @kanrisya.name %>
-        </h2>
-        <h3>
-          <%= @kanrisya.admin ? '管理者' : '従業員' %>
-        </h3>
+      <% if @kanrisya.admin == false %>
+      <div class="plofile-info-ojt" id="graph">
+        <%= @check_parcent %>
+      </div>
+      <% end %>
+      <div class="profile-info">
+        <p class='profile-info__name'><%= @kanrisya.name %></p>
+        <p class="profile-info__belong"><%= @kanrisya.belong %></p>
+        <div class="profile-info__detail">
+          <div class="profile-info__detail--note">
+            <p>社員番号</p>
+            <p class="profile-info__detail--note-title"><%= @kanrisya.crew_number %></p>
+          </div>
+          <div class="profile-info__detail--note">
+            <p>E-mail</p>
+            <p class="profile-info__detail--note-title"><%= @kanrisya.email %></p>
+          </div>
+        </div>
       </div>
     </div>
-
-    <div>
-      <p>社員番号:
-        <%= @kanrisya.crew_number %>
-      </p>
-      <% if @kanrisya.age.present? %>
-      <p>年齢:
-        <%= @kanrisya.age %>
-      </p>
-      <% end %>
-      <p>
-        性別:
-        <%= @kanrisya.sex %>
-      </p>
-      <p>所属:
-        <%= @kanrisya.belong %>
-      </p>
-      <p>メールアドレス
-        <%= @kanrisya.email %>
-      </p>
-      <!--
-      <p>管理権限
-        <% if @kanrisya.admin==true %>あり
-        <% else %>なし
-        <%end%>
-      </p>
-      -->
-      <% if @kanrisya.admin == false %>
-      <!--
-      <p>総チェック数
-        <%= @check_ok_count %>
-      </p>
-      -->
-      <p>総チェック割合
-        <%= @check_parcent %>% (
-        <%= @check_ok_count %>/
-        <%= @check_count %>)
-      </p>
-      <h4>シラバスごとの進捗</h4>
+    <% if @kanrisya.admin == false %>
+    <div class="lists">
+      <p>シラバスの進捗</p>
       <table>
         <tbody>
           <% @sirabasu.each do |sirabasu| %>
-          <tr>
-            <td>
-              <%= sirabasu.number %>.
-              </td>
-              <td>
-              <%=link_to sirabasu.name, checklists_checkuser_path(:sirabasu_id => sirabasu.id,:kanrisya_id => @kanrisya.id)%>
-            </td>
-            <td>
-              <%= @sirabasu_check_ok_parcent[sirabasu.number-1] %>% (
-              <%= @sirabasu_check_ok[sirabasu.number-1] %>/
-              <%= @sirabasu_check_count[sirabasu.number-1] %>
-              )
-            </td>
-            <td>
-            <!-- 完了 or 未承認 or 取組中 -->
-              <% if @sirabasuuser[sirabasu.id].sirabasu_ok == true%>
-              完了！ (承認日時: 
-              <%= @sirabasuuser[sirabasu.id].updated_at.in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S") %>
-              )
-              <% elsif @sirabasu_check_ok_parcent[sirabasu.number-1] == 100 %>
-              未承認
+            <tr>
+              <td class='number'><%= sirabasu.number %>. </td>
+              <td><%=link_to sirabasu.name, checklists_checkuser_path(:sirabasu_id => sirabasu.id,:kanrisya_id => @kanrisya.id)%></td>
+              <td class="ojt-comp"><p><%= @sirabasu_check_ok_parcent[sirabasu.number-1] %> %</p> </td>
+              <td class="ojt-comp">
+                <% if @sirabasuuser[sirabasu.id].sirabasu_ok == true%>
+                  <div class="shounin">
+                    <p>完了</p>
+                  </div>
+                  <% end %>
+                  <% if @sirabasuuser[sirabasu.id].sirabasu_ok == false%>
+                  <% end %>
+                </td>
+              </tr>
               <% end %>
-            </td>
-          </tr>
+            </tbody>
+          </table>
+        </div>
+        <% end %>
+        <% else %>
+        <p>あなたの会社の社員ではありません。</p>
+        <% end %>
+        <div class="options">
+          <% if current_kanrisya.admin == true %>
+          <%= link_to edit_user_path(@kanrisya) do %>
+          <div class="weak-button">
+            <i class='material-icons'>edit</i>編集
+          </div>
           <% end %>
-        </tbody>
-      </table>
-      <% end %>
+          <%= link_to user_path(@kanrisya), :method => :delete do %>
+          <div class="weak-button">
+            <i class="material-icons">delete</i>削除
+          </div>
+          <% end %>
+          <% end %>
+        </div>
+      </div>
     </div>
-
-    <% if current_kanrisya.admin == true %>
-    <%= link_to edit_user_path(@kanrisya) do %>
-    <div class="weak-button">
-      <i class='material-icons'>edit</i>編集
-    </div>
-    <% end %>
-    <%= link_to user_path(@kanrisya), :method => :delete, data: {confirm: "削除しますか？"} do %>
-    <div class="weak-button">
-      <i class="material-icons">delete</i>削除
-    </div>
-    <% end %>
-    <% end %>
-    <% else %>
-    あなたの会社の社員ではありません。
-    <% end %>
-    <br>
-    <%#= link_to 'ユーザ一覧へ', "/user/index" %>
   </div>
 </div>
+<script>
+var graph = document.getElementById("graph");
+var parent = graph.parentNode;
+
+d3.selectAll(".plofile-info-ojt")
+        .each(function(d, i) {
+            var data = [
+        {count: 23, color: '#8bc34a'},
+        {count: 77, color: '#424242'},
+        ];
+        var target = this;
+        var percent = target.textContent;
+        percent = Number(percent);
+        percent = Math.floor(percent);
+        data[0].count = percent;
+        var rest = 100 - percent;
+        data[1].count = rest;
+        var totalCount = 100; //this is static value
+        this.innerHTML = "";
+        var parentWidth = parent.clientWidth;
+        var width = parentWidth * 0.25,
+        height = parentWidth * 0.25,
+        radius = parentWidth * 0.075,
+        adjustOuterRadius = 15,
+        adjustInnerRadius = 0.08;
+
+        var screenWidth = window.innerWidth;
+        if (screenWidth < 769) {
+          // ipad 縦画面
+          width = parentWidth * 0.3;
+          height = parentWidth * 0.3;
+          radius = parentWidth * 0.14;
+          adjustOuterRadius = 0;
+          adjustInnerRadius = 0.1;
+        } else if (screenWidth < 1025) {
+          //ipad 横画面
+        }
+        var arc = d3.arc()
+            .outerRadius(radius - adjustOuterRadius)
+            .innerRadius(parentWidth * adjustInnerRadius);
+
+        var pie = d3.pie()
+        .sort(null)
+        .value(function(d) {
+            return d.count;
+        });
+
+        var svg = d3.select(this).append("svg")
+            .attr("width", width)
+            .attr("height", height)
+            .append("g")
+            .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+        var g = svg.selectAll(".arc")
+        .data(pie(data))
+        .enter().append("g");
+
+        g.append("path")
+        .attr("d", arc)
+        .style("fill", function(d,i) {
+            return d.data.color;
+            });
+
+        g.append("text")
+        .attr("text-anchor", "middle")
+            .attr('font-size', '2rem')
+            .attr('y', 8)
+        .text(percent + " %");
+    })
+
+</script>

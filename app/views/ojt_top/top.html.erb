@@ -1,92 +1,193 @@
 <div class="first-box">
   <div class="content-box">
-    <h1>トップページ </h1>
+    <!-- 管理者のみ表示 -->
     <% if current_kanrisya.admin == true %>
-    <% if @company.present? %>
-    <h3>
-      <%= @company.cname %>
-      <%= @company.cname_sub %>
-    </h3>
-    <p>
-      <%= link_to "設定", user_hei2_path %>
-    </p>
-    <% else %>
-    <p>
-      <%= link_to "会社名登録", user_hei_path %>
-    </p>
-    <% end %>
-    <!---<p> ログインユーザー<%= link_to current_kanrisya.name,user_path(current_kanrisya) %></p>--->
-    <div class="top-storage">
-      <p>直近のチェックリスト完了者</p>
-      <div class="top-card">
-        <% @checkuser.each do |checkuser| %>
-        <% if @user[checkuser.id].cid == current_kanrisya.cid &&  @user[checkuser.id].check_time.present?%>
-        <%= link_to user_path(@user[checkuser.id]) do %>
-        <div class="top-card__box">
-          <div class="top-card__flex">
-            <div class="top-card__photo">
-              <% if  @user[checkuser.id].image.present?%>
-              <%= image_tag @user[checkuser.id].image.url, :size =>'90x90' %>
-              <% end %>
-            </div>
-            <div class="top-card__graph">
-              <p>
-                <%= @check_parcent[checkuser.id] %>%</p>
-              <% if @user_sign[checkuser.id] == true %>
-              ！
-              <%end%>
-            </div>
-          </div>
-          <div class="top-card__name">
-            <p>
-              <%= @user[checkuser.id].name %>
-            </p>
-            <!--<p><%=link_to @user[checkuser.id].name, user_path(@user[checkuser.id])%></p>-->
-          </div>
-          <div class="top-card__belongs">
-            <p>
-              <%= @user[checkuser.id].belong %>
-            </p>
-          </div>
-        </div>
-        <% end %>
-        <% end %>
-        <% end %>
+    <div class="flex">
+      <% if @company.present? %>
+        <h1>
+          <%= @company.cname %>
+          <%= @company.cname_sub %>
+        </h1>
+        <p>
+          <%= link_to "設定", user_hei2_path, :class => 'weak-button' %>
+        </p>
+      <% else %>
+        <p>
+          <%= link_to "会社名登録", user_hei_path, :class => 'weak-button' %>
+        </p>
+      <% end %>
       </div>
-    </div>
-    <div class="top-storage">
-      <div class="top-card">
 
+      <div class="top-storage">
+        <p>直近のチェックリスト完了者</p>
+        <div class="top-card">
+          <% i = 1 %>
+          <% @checkuser.each do |checkuser| %>
+            <% i = i+1 %>
+            <% if @user[checkuser.id].cid == current_kanrisya.cid &&  @user[checkuser.id].check_time.present?%>
+            <%= link_to user_path(@user[checkuser.id]) do %>
+              <div class="top-card__box">
+                <div class="top-card__flex">
+                  <div class="top-card__photo">
+                    <% if  @user[checkuser.id].image.present?%>
+                      <%= image_tag @user[checkuser.id].image.url%>
+                    <% end %>
+                  </div>
+                  <div class="top-card__graph" id=i>
+                    <%= @check_parcent[checkuser.id] %>
+                    <% if @user_sign[checkuser.id] == true %>
+                    <%end%>
+                  </div>
+                </div>
+                <div class="top-card__name">
+                  <p>
+                    <%= @user[checkuser.id].name %>
+                  </p>
+                  <!--<p><%=link_to @user[checkuser.id].name, user_path(@user[checkuser.id])%></p>-->
+                </div>
+                <div class="top-card__belongs">
+                  <p>
+                    <%= @user[checkuser.id].belong %>
+                  </p>
+                </div>
+              </div>
+            <% end %>
+            <% end %>
+            <% end %>
+        </div>
       </div>
-    </div>
     <% else %>
-    <!--従業員のみに表示-->
-    あなたが最近取り組んでいるシラバス
-    <% if @sirabasu.empty? %>
-    はありません<br>
-    <% else %>
-    <br>
-    <table>
-      <tbody>
-        <% @sirabasu.each do |sira| %>
-        <tr>
-          <td>
-            <%= sira.number %>.
-          </td>
-          <td>
-            <%= link_to sira.name, sirabasu_path(sira.number) %>
-          </td>
-          <td>
-            <%= @percent[sira.id] %>
-          </td>
-          <td>
-            <%= @updated[sira.id].in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S") %>
-          </td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
-    <% end %>
-    <% end %>
+      <!--従業員のみに表示-->
+      <% if @company.present? %>
+        <h1>
+          <%= @company.cname %>
+          <%= @company.cname_sub %>
+        </h1>
+      <% end %>
+      <div class="top-storage">
+        あなたが最近取り組んでいるシラバス
+        <% if @sirabasu.empty? %>
+        はありません<br>
+        <% else %>
+        <br>
+        <div class="lists">
+          <table>
+            <tbody>
+              <% @sirabasu.each do |sira| %>
+              <tr>
+                <td class="user-top-others">
+                  <%= sira.number %>.
+                </td>
+                <td class="user-top-menu">
+                  <%= link_to sira.name, sirabasu_path(sira.number) %>
+                </td>
+                <td class="user-top-others">
+                  <p><%= @percent[sira.id] %></p>
+                </td>
+                <td class="user-top-time">
+                  <p><%= @updated[sira.id].in_time_zone('Tokyo').strftime("%Y-%m-%d") %></p>
+                </td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <% end %>
+      <div class="top-storage">
+        <p>直近のチェックリスト完了者</p>
+        <div class="top-card">
+          <% i = 1 %>
+          <% @checkuser.each do |checkuser| %>
+            <% i = i+1 %>
+            <% if @user[checkuser.id].cid == current_kanrisya.cid &&  @user[checkuser.id].check_time.present?%>
+            <%= link_to user_path(@user[checkuser.id]) do %>
+              <div class="top-card__box">
+                <div class="top-card__flex">
+                  <div class="top-card__photo">
+                    <% if  @user[checkuser.id].image.present?%>
+                      <%= image_tag @user[checkuser.id].image.url%>
+                    <% end %>
+                  </div>
+                  <div class="top-card__graph" id=i>
+                    <%= @check_parcent[checkuser.id] %>
+                    <% if @user_sign[checkuser.id] == true %>
+                    <%end%>
+                  </div>
+                </div>
+                <div class="top-card__name">
+                  <p>
+                    <%= @user[checkuser.id].name %>
+                  </p>
+                  <!--<p><%=link_to @user[checkuser.id].name, user_path(@user[checkuser.id])%></p>-->
+                </div>
+                <div class="top-card__belongs">
+                  <p>
+                    <%= @user[checkuser.id].belong %>
+                  </p>
+                </div>
+              </div>
+            <% end %>
+            <% end %>
+            <% end %>
+        </div>
+      </div>
   </div>
 </div>
+<% end %>
+<script>
+console.log("hello world");
+
+d3.selectAll(".top-card__graph")
+        .each(function(d, i) {
+            var data = [
+        {count: 23, color: '#8bc34a'},
+        {count: 77, color: '#424242'},
+        ];
+        var target = this;
+        var percent = target.textContent;
+        percent = Number(percent);
+        data[0].count = percent;
+        var rest = 100 - percent;
+        data[1].count = rest;
+        var totalCount = 100; //this is static value
+        this.innerHTML = "";
+        var width = 72,
+        height = 72,
+        radius = 30;
+
+        var arc = d3.arc()
+            .outerRadius(radius - 7)
+            .innerRadius(33);
+
+        var pie = d3.pie()
+        .sort(null)
+        .value(function(d) {
+            console.log(d);
+            return d.count;
+        });
+
+        var svg = d3.select(this).append("svg")
+            .attr("width", width)
+            .attr("height", height)
+            .append("g")
+            .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+        var g = svg.selectAll(".arc")
+        .data(pie(data))
+        .enter().append("g");
+
+        g.append("path")
+        .attr("d", arc)
+        .style("fill", function(d,i) {
+            return d.data.color;
+            });
+
+        g.append("text")
+        .attr("text-anchor", "middle")
+            .attr('font-size', '16px')
+            .attr('y', 8)
+        .text(percent + " %");
+    })
+
+</script>

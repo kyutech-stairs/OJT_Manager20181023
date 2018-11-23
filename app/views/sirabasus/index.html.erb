@@ -1,6 +1,6 @@
 <div class="first-box">
   <div class="content-box">
-    <h1>シラバス一覧</h1>
+    <h1>シラバスページ</h1>
 
     <div class="lists">
       <table>
@@ -15,7 +15,15 @@
               <td class='icon'><%= link_to(content_tag(:i,'delete',class:'material-icons'), sirabasu_path(sirabasu.number), :method => :delete, data: {confirm: "削除しますか？"}) %></td>
               <td class='icon'><%= link_to(content_tag(:i,'settings',class:'material-icons'), publishing_config_path(sirabasu.number)) %></td>
             <% else %>
-              <td><%= @stat_list[i] %></td>
+              <td class="ojt-comp">
+                <% if @stat_list[i] != "完了"%>
+                <p><%= @stat_list[i] %></p>
+                <% else %>
+                <div class="shounin">
+                  <p>完了</p>
+                </div>
+                <% end %>
+              </td>
             <% end %>
           </tr>
           <% i += 1 %>
@@ -25,12 +33,16 @@
     </div>
 
     <% if current_kanrisya.admin == true %>
+      <div class="top-regist">
       <%= link_to new_sirabasu_path, class:'link-button' do %>
         <div>
           <i class='material-icons'>add</i>
           新規作成
         </div>
       <% end %>
+    </div>
     <% end %>
+
+    <!-- <p><%= link_to 'トップへ', '/ojt_top/top' %></p> -->
   </div>
 </div>

@@ -1,9 +1,11 @@
 <div class="nested-fields">
     <div class="fields">
         <%= f.hidden_field :number, required: true, :value => "#{@checklist_num}" %>
-        <%= f.text_area :content, :class => "checklist" %>
+        <div class="flex delete">
+            <%= f.text_area :content, :class => "checklist" %>
+            <%= link_to_remove_association(content_tag(:i,'delete',class:'material-icons'), f) %>
+        </div>
         <%= f.hidden_field :cid, value: current_kanrisya.cid %>
         <%= f.hidden_field :userid, value: current_kanrisya.id %>
-        <%= link_to_remove_association "削除", f %>
     </div>
 </div>

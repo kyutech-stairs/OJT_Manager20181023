@@ -1,18 +1,17 @@
 <div class="first-box">
   <div class="content-box">
 
- <h1>
-  会社名登録
- </h1>
- <%=form_tag({ controller: 'user', action: 'company_save' },{ method: "post"}) do %>
- <p>会社名を入力してください(必須)</p>
- <%= text_field_tag :cname,"", :class=> "input-box" %>
- <p>支店名がある場合は入力してください</p>
- <%= text_field_tag :cname_sub,"", :class=> "input-box" %>
- <%= hidden_field_tag :cid, current_kanrisya.cid %>
+    <h1>会社名登録</h1>
+    <%=form_tag({ controller: 'user', action: 'company_save' },{ method: "post"}) do %>
+      <p>会社名を入力してください(必須)</p>
+      <%= text_field_tag :cname,"", :class=> "input-box" %>
+      <p>支店名がある場合は入力してください</p>
+      <%= text_field_tag :cname_sub,"", :class=> "input-box" %>
+      <%= hidden_field_tag :cid, current_kanrisya.cid %>
 
- <p><%= submit_tag '登録', :class=> "link-button"%></p>
- <% end %>
-
+      <div class="top-regist">
+        <%= submit_tag '登録', :class=> "link-button"%>
+      </div>
+    <% end %>
   </div>
 </div>

@@ -12,9 +12,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,500,700,900|Roboto:400,500,700,900&amp;subset=japanese" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="http://d3js.org/d3.v4.min.js" charset="utf-8"></script>
   </head>
   <body>
-    <header>
+    <header class="header">
       <div class="header-logo">
         <%= image_tag('/assets/logo.svg') %>
         <h1>Manager</h1>
@@ -23,12 +24,64 @@
         <% if kanrisya_signed_in? %>
           <div class="header-link">
             <div class="header-link-left">
-              <p><%= link_to 'ホーム', '/ojt_top/top' %></p>
-              <p><%= link_to 'シラバス一覧', '/sirabasus/' %></p>
-              <p><%= link_to 'ユーザ一覧', '/user/index' %></p>
+              <%=link_to '/ojt_top/top' do%>
+              <div class="icon-links">
+                <i class="material-icons">home</i>
+                HOME
+              </div>
+              <% end %>
+              <%=link_to '/sirabasus/' do%>
+              <div class="icon-links">
+                <i class="material-icons">list</i>
+                SYLLABUS
+              </div>
+              <% end %>
+              <%=link_to '/user/index' do%>
+              <div class="icon-links">
+                <i class="material-icons">account_box</i>
+                STAFF
+              </div>
+              <% end %>
             </div>
             <div class="header-link-right">
-              <%= link_to('ログアウト', destroy_kanrisya_session_path, :method => :delete) %>
+              <!--<%= link_to('ログアウト', destroy_kanrisya_session_path, :method => :delete) %>-->
+              <label for="dropdown">
+                <input id='dropdown' type="checkbox">
+                <menu>
+                  <%= image_tag current_kanrisya.image.url %>
+                  <div class='user-links'>
+                  <table>
+                    <tr>
+                    <td>
+                      <%= link_to user_path(current_kanrisya) do %>
+                      <div class="icon-links">
+                        <i class='material-icons'>face</i>
+                        プロフィール
+                      </div>
+                      <% end %>
+                    </td>
+                    </tr>
+                    <tr>
+                    <td>
+                      <%= link_to(destroy_kanrisya_session_path, :method => :delete) do %>
+                      <div class="icon-links">
+                        <i class="material-icons">reply</i>
+                          LOGOUT
+                      </div>
+                      <% end %>
+                    </td>
+                    </tr>
+                  </table>
+                  </div>
+                </menu>
+                <div class="overlay"></div>
+              </label>
+              <!--<%= link_to(destroy_kanrisya_session_path, :method => :delete) do %>
+              <div class="icon-links">
+                <i class="material-icons">reply</i>
+                LOGOUT
+              </div>
+              <% end %>-->
             </div>
           </div>
         <% end %>
@@ -40,6 +93,6 @@
       <!---<div class="footer-logo">OJT Manager</div>
       <div class="footer-link"></div> --->
     </footer>
-    <!--<script src="https://d3js.org/d3.v5.min.js"></script>-->
+    <!-- <script src="https://d3js.org/d3.v5.min.js"></script> -->
   </body>
 </html>

@@ -1,8 +1,9 @@
 <div class="first-box">
   <div class="content-box">
 
-    <h3>従業員詳細検索</h3>
-    条件を選択してください
+    <h1>従業員詳細検索</h1>
+    <h2>条件を選択してください</h2>
+
     <%=form_tag({ controller: 'user', action: 'index' },{ method: "get"}) do %>
     <p>
     <%= select_tag(:sirabasu, options_for_select(@sirabasu_choise, class: 'select_action'))%>のシラバスが
@@ -16,8 +17,7 @@
     <%= select_tag(:sex, options_for_select([["",""],["男性","男性"],["女性","女性"]] ))%>
     の人
     </p>
-    <p><%= submit_tag '検索'%></p>
+    <%= submit_tag '検索', :class=> 'link-button search'%>
     <% end %>
-
   </div>
 </div>
