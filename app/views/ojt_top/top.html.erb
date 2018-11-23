@@ -18,6 +18,7 @@
       <div class="top-storage">
         <p>直近のチェックリスト完了者</p>
         <div class="top-card">
+          <% i = 1 %>
           <% @checkuser.each do |checkuser| %>
             <% if @user[checkuser.id].cid == current_kanrisya.cid &&  @user[checkuser.id].check_time.present?%>
             <%= link_to user_path(@user[checkuser.id]) do %>
@@ -29,7 +30,7 @@
                   <% end %>
                 </div>
                 <div class="top-card__graph">
-                  <p><%= @check_parcent[checkuser.id] %>%</p>
+                  <p><%= @check_parcent[checkuser.id] %></p>
                   <% if @user_sign[checkuser.id] == true %>
                   <%end%>
                 </div>
@@ -92,6 +93,7 @@
       <div class="top-storage">
         <p>直近のチェックリスト完了者</p>
         <div class="top-card">
+          <% i = 1 %>
           <% @checkuser.each do |checkuser| %>
             <% if @user[checkuser.id].cid == current_kanrisya.cid &&  @user[checkuser.id].check_time.present?%>
             <%= link_to user_path(@user[checkuser.id]) do %>
@@ -104,7 +106,8 @@
                 </div>
                 <div class="top-card__graph">
                   <p id=i>
-
+                    <%= i %>
+                    <% i = i+1 %>
                   </p>
                   <% if @user_sign[checkuser.id] == true %>
                   <%end%>
