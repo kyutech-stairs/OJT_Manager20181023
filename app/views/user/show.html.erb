@@ -9,6 +9,11 @@
         <%= image_tag @kanrisya.image.url, :size =>'150x150' %>
         <% end %>
       </div>
+      <% if @kanrisya.admin == false %>
+      <div class="plofile-info-ojt" id="graph">
+        <%= @check_parcent %>
+      </div>
+      <% end %>
       <div class="plofile-info">
         <div class='plofile-name'>
           <h1><%= @kanrisya.name %></h1>
@@ -33,11 +38,6 @@
               <p><%= @kanrisya.email %></p>
             </div>
           </div>
-          <% if @kanrisya.admin == false %>
-          <div class="plofile-info-ojt" id=i>
-            <%= @check_parcent %>
-          </div>
-          <% end %>
         </div>
       </div>
     </div>
@@ -58,9 +58,6 @@
                   </div>
                   <% end %>
                   <% if @sirabasuuser[sirabasu.id].sirabasu_ok == false%>
-                  <div class="non-shounin">
-                    <p>完了</p>
-                  </div>
                   <% end %>
                 </td>
               </tr>
@@ -91,7 +88,8 @@
   </div>
 </div>
 <script>
-console.log("hello world");
+var graph = document.getElementById("graph");
+var parent = graph.parentNode;
 
 d3.selectAll(".plofile-info-ojt")
         .each(function(d, i) {
@@ -107,18 +105,18 @@ d3.selectAll(".plofile-info-ojt")
         data[1].count = rest;
         var totalCount = 100; //this is static value
         this.innerHTML = "";
-        var width = 100,
-        height = 100,
-        radius = 35;
+        var parentWidth = parent.clientWidth;
+        var width = parentWidth * 0.3,
+        height = parentWidth * 0.3,
+        radius = parentWidth * 0.12;
 
         var arc = d3.arc()
-            .outerRadius(radius - 4)
-            .innerRadius(46);
+            .outerRadius(radius - 10)
+            .innerRadius(parentWidth * 0.15);
 
         var pie = d3.pie()
         .sort(null)
         .value(function(d) {
-            console.log(d);
             return d.count;
         });
 
@@ -140,9 +138,9 @@ d3.selectAll(".plofile-info-ojt")
 
         g.append("text")
         .attr("text-anchor", "middle")
-            .attr('font-size', '20px')
+            .attr('font-size', '2rem')
             .attr('y', 8)
-        .text(percent + "%");
+        .text(percent + " %");
     })
 
 </script>

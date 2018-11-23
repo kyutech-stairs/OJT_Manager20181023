@@ -149,13 +149,13 @@ d3.selectAll(".top-card__graph")
         data[1].count = rest;
         var totalCount = 100; //this is static value
         this.innerHTML = "";
-        var width = 100,
-        height = 100,
-        radius = 35;
+        var width = 77,
+        height = 77,
+        radius = 30;
 
         var arc = d3.arc()
             .outerRadius(radius - 4)
-            .innerRadius(46);
+            .innerRadius(38);
 
         var pie = d3.pie()
         .sort(null)
@@ -182,9 +182,9 @@ d3.selectAll(".top-card__graph")
 
         g.append("text")
         .attr("text-anchor", "middle")
-            .attr('font-size', '20px')
+            .attr('font-size', '16px')
             .attr('y', 8)
-        .text(percent + "%");
+        .text(percent + " %");
     })
 
 </script>
