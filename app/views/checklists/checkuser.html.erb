@@ -14,12 +14,12 @@
                   <tr>
                     <% if @checkuser[checklist.number].check_ok == true %>
                       <td class='select'>
-                        <i class='material-icons'>check_box</i>
+                        <i class='material-icons'>check</i>
                         <%= checklist.content %>
                       </td>
                     <% else %>
                       <td class='none'>
-                        <i class='material-icons'>check_box_outline_blank</i>
+                        <i class='material-icons'>remove</i>
                         <%= checklist.content %>
                       </td>
                     <% end %>
