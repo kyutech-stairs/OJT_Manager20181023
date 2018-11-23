@@ -132,3 +132,59 @@
   </div>
 </div>
 <% end %>
+<script>
+console.log("hello world");
+
+d3.selectAll(".top-card__graph")
+        .each(function(d, i) {
+            var data = [
+        {count: 23, color: '#8bc34a'},
+        {count: 77, color: '#424242'},
+        ];
+        var target = this;
+        var percent = target.textContent;
+        percent = Number(percent);
+        data[0].count = percent;
+        var rest = 100 - percent;
+        data[1].count = rest;
+        var totalCount = 100; //this is static value
+        this.innerHTML = "";
+        var width = 100,
+        height = 100,
+        radius = 35;
+
+        var arc = d3.arc()
+            .outerRadius(radius - 4)
+            .innerRadius(46);
+
+        var pie = d3.pie()
+        .sort(null)
+        .value(function(d) {
+            console.log(d);
+            return d.count;
+        });
+
+        var svg = d3.select(this).append("svg")
+            .attr("width", width)
+            .attr("height", height)
+            .append("g")
+            .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+        var g = svg.selectAll(".arc")
+        .data(pie(data))
+        .enter().append("g");
+
+        g.append("path")
+        .attr("d", arc)
+        .style("fill", function(d,i) {
+            return d.data.color;
+            });
+
+        g.append("text")
+        .attr("text-anchor", "middle")
+            .attr('font-size', '20px')
+            .attr('y', 8)
+        .text(percent + "%");
+    })
+
+</script>
