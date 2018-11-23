@@ -64,13 +64,17 @@
           <tr>
             <td class='number'><%= sirabasu.number %>. </td>
             <td><%=link_to sirabasu.name, checklists_checkuser_path(:sirabasu_id => sirabasu.id,:kanrisya_id => @kanrisya.id)%></td>
-            <td class="ojt-comp"><%= @sirabasu_check_ok_parcent[sirabasu.number-1] %> %</td>
+            <td class="ojt-comp"><p><%= @sirabasu_check_ok_parcent[sirabasu.number-1] %> %</p> </td>
             <td class="ojt-comp">
               <% if @sirabasuuser[sirabasu.id].sirabasu_ok == true%>
-                <i class='material-icons'>check_box</i>
+                <div class="shounin">
+                  <p>承認</p>
+                </div>
               <% end %>
               <% if @sirabasuuser[sirabasu.id].sirabasu_ok == false%>
-                <i class='material-icons'>check_box_outline_blank</i>
+                <div class="non-shounin">
+                  <p>承認</p>
+                </div>
               <% end %>
             </td>
           </tr>
