@@ -9,7 +9,7 @@
         <%= image_tag @kanrisya.image.url, :size =>'150x150' %>
         <% end %>
       </div>
-      <div class='plofile-name'>
+      <!--<div class='plofile-name'>
         <h2>
           <%= @kanrisya.name %>
         </h2>
@@ -17,10 +17,10 @@
           <%= @kanrisya.admin ? '管理者' : '従業員' %>
         </h3>
       </div>
-    </div>
+    </div>-->
     <div class="plofile-info">
       <div class='plofile-name'>
-        <h2><%= @kanrisya.name %></h2>
+        <h1><%= @kanrisya.name %></h1>
         <h3><%= @kanrisya.belong %></h3>
       </div>
       <div class="plofile-info-sub">
@@ -42,19 +42,19 @@
           <p><%= @kanrisya.email %></p>
         </div>
         </div>
+        <% if @kanrisya.admin == false %>
         <div class="plofile-info-flex">
           <div class="plofile-info-ojt-left">
             <p>OJT完了率</p>
           </div>
           <div class="plofile-info-ojt-right">
-            <% if @kanrisya.admin == false %>
               <p><%= @check_parcent %>%</p>
-            <% end %>
           </div>
         </div>
+        <% end %>
       </div>
     </div>
-
+  </div>
   <% if @kanrisya.admin == false %>
   <div class="lists">
     <p>シラバスの進捗</p>
@@ -64,13 +64,17 @@
           <tr>
             <td class='number'><%= sirabasu.number %>. </td>
             <td><%=link_to sirabasu.name, checklists_checkuser_path(:sirabasu_id => sirabasu.id,:kanrisya_id => @kanrisya.id)%></td>
-            <td class="ojt-comp"><%= @sirabasu_check_ok_parcent[sirabasu.number-1] %> %</td>
+            <td class="ojt-comp"><p><%= @sirabasu_check_ok_parcent[sirabasu.number-1] %> %</p> </td>
             <td class="ojt-comp">
               <% if @sirabasuuser[sirabasu.id].sirabasu_ok == true%>
-                <i class='material-icons'>check_box</i>
+                <div class="shounin">
+                  <p>完了</p>
+                </div>
               <% end %>
               <% if @sirabasuuser[sirabasu.id].sirabasu_ok == false%>
-                <i class='material-icons'>check_box_outline_blank</i>
+                <div class="non-shounin">
+                  <p>完了</p>
+                </div>
               <% end %>
             </td>
           </tr>

@@ -14,7 +14,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>
   <body>
-    <header>
+    <header class="header">
       <div class="header-logo">
         <%= image_tag('/assets/logo.svg') %>
         <h1>Manager</h1>
@@ -47,7 +47,7 @@
               <label for="dropdown">
                 <input id='dropdown' type="checkbox">
                 <menu>
-                  <%= image_tag current_kanrisya.image.url, :size=>'50x50' %>
+                  <%= image_tag current_kanrisya.image.url %>
                   <div class='user-links'>
                   <table>
                     <tr>
@@ -92,6 +92,6 @@
       <!---<div class="footer-logo">OJT Manager</div>
       <div class="footer-link"></div> --->
     </footer>
-    <!--<script src="https://d3js.org/d3.v5.min.js"></script>-->
+    <!-- <script src="https://d3js.org/d3.v5.min.js"></script> -->
   </body>
 </html>

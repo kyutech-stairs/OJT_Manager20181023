@@ -68,8 +68,8 @@ class OjtTopController < ApplicationController
   end
 
   def top
-    if current_kanrisya.admin == true
-      @company = Company.find_by(cid: current_kanrisya.cid)
+    @company = Company.find_by(cid: current_kanrisya.cid)
+    
       @checkuser = Kanrisya.limit(6).order("check_time DESC") # updated_timeの降順で60件取得
       @user = []
       @user_sign = []
@@ -99,15 +99,15 @@ class OjtTopController < ApplicationController
           sirabasuuser = @user[checkuser.id].sirabasuusers.all
           @check_parcent[checkuser.id] = ((check.count/(check_all.count).to_f).round(2)*100).to_i rescue 0
       end
-    else
+    if current_kanrisya.admin == false
       @sirabasu = []
       @updated = []
-      @checkuser = []
+      @checkuser2 = []
       @percent = []
       # 各シラバスで、最新のチェックリスト更新をひとつ取得する
-      @checkuser = current_kanrisya.checkusers.order(updated_at: :DESC)
+      @checkuser2 = current_kanrisya.checkusers.order(updated_at: :DESC)
       # 最近更新したチェックリストを降順に取得
-      @checkuser.each do |che|
+      @checkuser2.each do |che|
         s = Sirabasu.find(che.checklist.sirabasu_id)
         insert_ok = true
         # そのシラバスは取組中（0%でなく、100%でもない）ですか？
