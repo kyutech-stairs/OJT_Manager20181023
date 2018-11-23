@@ -1,102 +1,148 @@
 <div class="first-box">
   <div class="content-box">
-  <h1>プロフィール</h1>
-  <% if @kanrisya.cid == current_kanrisya.cid %>
-
-  <div class="plofile">
-    <div class='plofile-img'>
-      <% if  @kanrisya.image.present?%>
+    <h1>プロフィール</h1>
+    <% i = 1 %>
+    <% if @kanrisya.cid == current_kanrisya.cid %>
+    <div class="plofile">
+      <div class='plofile-img'>
+        <% if  @kanrisya.image.present?%>
         <%= image_tag @kanrisya.image.url, :size =>'150x150' %>
         <% end %>
       </div>
-    <div class="plofile-info">
-      <div class='plofile-name'>
-        <h1><%= @kanrisya.name %></h1>
-        <h3><%= @kanrisya.belong %></h3>
+      <div class="plofile-info">
+        <div class='plofile-name'>
+          <h1><%= @kanrisya.name %></h1>
+          <h3><%= @kanrisya.belong %></h3>
+        </div>
+        <div class="plofile-info-sub">
+          <div class="plofile-info-flex">
+            <div class="plofile-info-num-left">
+              <p>社員番号</p>
+            </div>
+            <div class="plofile-info-num-right">
+              <p><%= @kanrisya.crew_number %></p>
+              <% if @kanrisya.age.present? %>
+              <% end %>
+            </div>
+          </div>
+          <div class="plofile-info-flex">
+            <div class="plofile-info-mail-left">
+              <p>E-mail</p>
+            </div>
+            <div class="plofile-info-mail-right">
+              <p><%= @kanrisya.email %></p>
+            </div>
+          </div>
+          <% if @kanrisya.admin == false %>
+          <div class="plofile-info-ojt" id=i>
+            <%= @check_parcent %>
+          </div>
+          <% end %>
+        </div>
       </div>
-      <div class="plofile-info-sub">
-        <div class="plofile-info-flex">
-          <div class="plofile-info-num-left">
-            <p>社員番号</p>
-          </div>
-          <div class="plofile-info-num-right">
-            <p><%= @kanrisya.crew_number %></p>
-            <% if @kanrisya.age.present? %>
-            <% end %>
-          </div>
-        </div>
-        <div class="plofile-info-flex">
-        <div class="plofile-info-mail-left">
-          <p>E-mail</p>
-        </div>
-        <div class="plofile-info-mail-right">
-          <p><%= @kanrisya.email %></p>
-        </div>
-        </div>
-        <% if @kanrisya.admin == false %>
-        <div class="plofile-info-flex">
-          <div class="plofile-info-ojt-left">
-            <p>OJT完了率</p>
-          </div>
-          <div class="plofile-info-ojt-right">
-              <p><%= @check_parcent %>%</p>
-          </div>
+    </div>
+    <% if @kanrisya.admin == false %>
+    <div class="lists">
+      <p>シラバスの進捗</p>
+      <table>
+        <tbody>
+          <% @sirabasu.each do |sirabasu| %>
+            <tr>
+              <td class='number'><%= sirabasu.number %>. </td>
+              <td><%=link_to sirabasu.name, checklists_checkuser_path(:sirabasu_id => sirabasu.id,:kanrisya_id => @kanrisya.id)%></td>
+              <td class="ojt-comp"><p><%= @sirabasu_check_ok_parcent[sirabasu.number-1] %> %</p> </td>
+              <td class="ojt-comp">
+                <% if @sirabasuuser[sirabasu.id].sirabasu_ok == true%>
+                  <div class="shounin">
+                    <p>完了</p>
+                  </div>
+                  <% end %>
+                  <% if @sirabasuuser[sirabasu.id].sirabasu_ok == false%>
+                  <div class="non-shounin">
+                    <p>完了</p>
+                  </div>
+                  <% end %>
+                </td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
         </div>
         <% end %>
+        <% else %>
+        <p>あなたの会社の社員ではありません。</p>
+        <% end %>
+        <div class="options">
+          <% if current_kanrisya.admin == true %>
+          <%= link_to edit_user_path(@kanrisya) do %>
+          <div class="weak-button">
+            <i class='material-icons'>edit</i>編集
+          </div>
+          <% end %>
+          <%= link_to user_path(@kanrisya), :method => :delete do %>
+          <div class="weak-button">
+            <i class="material-icons">delete</i>削除
+          </div>
+          <% end %>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
-  <% if @kanrisya.admin == false %>
-  <div class="lists">
-    <p>シラバスの進捗</p>
-    <table>
-      <tbody>
-        <% @sirabasu.each do |sirabasu| %>
-          <tr>
-            <td class='number'><%= sirabasu.number %>. </td>
-            <td><%=link_to sirabasu.name, checklists_checkuser_path(:sirabasu_id => sirabasu.id,:kanrisya_id => @kanrisya.id)%></td>
-            <td class="ojt-comp"><p><%= @sirabasu_check_ok_parcent[sirabasu.number-1] %> %</p> </td>
-            <td class="ojt-comp">
-              <% if @sirabasuuser[sirabasu.id].sirabasu_ok == true%>
-                <div class="shounin">
-                  <p>完了</p>
-                </div>
-              <% end %>
-              <% if @sirabasuuser[sirabasu.id].sirabasu_ok == false%>
-                <div class="non-shounin">
-                  <p>完了</p>
-                </div>
-              <% end %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
-  <% end %>
-
-  <% else %>
-    <p>あなたの会社の社員ではありません。</p>
-  <% end %>
-
-
-    <div class="options">
-      <% if current_kanrisya.admin == true %>
-      <%= link_to edit_user_path(@kanrisya) do %>
-      <div class="weak-button">
-        <i class='material-icons'>edit</i>編集
-      </div>
-      <% end %>
-      <%= link_to user_path(@kanrisya), :method => :delete do %>
-      <div class="weak-button">
-        <i class="material-icons">delete</i>削除
-      </div>
-      <% end %>
-     <% end %>
-    </div>
-  </div>
 </div>
+<script>
+console.log("hello world");
 
-<!-- <%= link_to '一覧へ', "/user/index" %> -->
-  </div>
-</div>
+d3.selectAll(".plofile-info-ojt")
+        .each(function(d, i) {
+            var data = [
+        {count: 23, color: '#8bc34a'},
+        {count: 77, color: '#424242'},
+        ];
+        var target = this;
+        var percent = target.textContent;
+        percent = Number(percent);
+        data[0].count = percent;
+        var rest = 100 - percent;
+        data[1].count = rest;
+        var totalCount = 100; //this is static value
+        this.innerHTML = "";
+        var width = 100,
+        height = 100,
+        radius = 35;
+
+        var arc = d3.arc()
+            .outerRadius(radius - 4)
+            .innerRadius(46);
+
+        var pie = d3.pie()
+        .sort(null)
+        .value(function(d) {
+            console.log(d);
+            return d.count;
+        });
+
+        var svg = d3.select(this).append("svg")
+            .attr("width", width)
+            .attr("height", height)
+            .append("g")
+            .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+        var g = svg.selectAll(".arc")
+        .data(pie(data))
+        .enter().append("g");
+
+        g.append("path")
+        .attr("d", arc)
+        .style("fill", function(d,i) {
+            return d.data.color;
+            });
+
+        g.append("text")
+        .attr("text-anchor", "middle")
+            .attr('font-size', '20px')
+            .attr('y', 8)
+        .text(percent + "%");
+    })
+
+</script>

@@ -96,6 +96,7 @@
         <div class="top-card">
           <% i = 1 %>
           <% @checkuser.each do |checkuser| %>
+            <% i = i+1 %>
             <% if @user[checkuser.id].cid == current_kanrisya.cid &&  @user[checkuser.id].check_time.present?%>
             <%= link_to user_path(@user[checkuser.id]) do %>
               <div class="top-card__box">
@@ -106,8 +107,7 @@
                     <% end %>
                   </div>
                   <div class="top-card__graph" id=i>
-                      <%= i %>
-                      <% i = i+1 %>
+                    <%= @check_parcent[checkuser.id] %>
                     <% if @user_sign[checkuser.id] == true %>
                     <%end%>
                   </div>
