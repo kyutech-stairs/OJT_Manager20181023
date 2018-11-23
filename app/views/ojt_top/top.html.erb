@@ -149,13 +149,13 @@ d3.selectAll(".top-card__graph")
         data[1].count = rest;
         var totalCount = 100; //this is static value
         this.innerHTML = "";
-        var width = 77,
-        height = 77,
+        var width = 72,
+        height = 72,
         radius = 30;
 
         var arc = d3.arc()
-            .outerRadius(radius - 4)
-            .innerRadius(38);
+            .outerRadius(radius - 7)
+            .innerRadius(33);
 
         var pie = d3.pie()
         .sort(null)
