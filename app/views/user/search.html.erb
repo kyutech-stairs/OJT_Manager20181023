@@ -17,12 +17,7 @@
     <%= select_tag(:sex, options_for_select([["",""],["男性","男性"],["女性","女性"]] ))%>
     の人
     </p>
-    <p><%= submit_tag '検索'%></p>
-    <div class="field">
-      <%= button_tag :type => 'submit', :class=> 'link-button' do %>
-      <i class='material-icons'>search</i>
-      検索
-    </div>
+    <%= submit_tag '検索', :class=> 'link-button search'%>
     <% end %>
     <% end %>
   </div>

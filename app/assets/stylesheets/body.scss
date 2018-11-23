@@ -57,6 +57,7 @@ header {
       position: relative;
       top: 6px;
     }
+    
 }
 
 .icon-links {
@@ -333,7 +334,7 @@ textarea {
         padding: 0.7rem;
         font-weight: 500;
         vertical-align: baseline;
-        background-color: rgba($color: #283593, $alpha: 0.4);
+        background-color: rgba($color: #777777, $alpha: 0.4);
         border-radius: 10px;
     }
 
@@ -581,7 +582,7 @@ textarea {
     margin-left: 2rem;
 }
 
-.serch-box {
+.search-box {
     border: solid 1px #777777;
     border-radius: 10px;
     padding: 0.5rem;
@@ -619,7 +620,7 @@ textarea {
     }
 
     input[type=checkbox]:checked + .checkbox-user {
-        background-color: rgba($color: #283593, $alpha: 0.5);
+        background-color: rgba($color: #80a9eb, $alpha: 0.5);
     }
 
     .checkbox-user:before {
