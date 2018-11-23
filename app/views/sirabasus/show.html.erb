@@ -10,14 +10,18 @@
       <%= simple_format(@sirabasu.content) %>
     </div>
 
-    <% if @sirabasu.image?%>
-    <% i = 1 %>
-    <% @sirabasu.image.each do |image|%>
-    <%=image_tag image.url , :size =>'130x130'%>画像
-    <%= i%>
-    <% i = i + 1 %>
-    <% end %>
-    <% end %>
+    <div class="syllabus-image">
+      <% if @sirabasu.image?%>
+        <% i = 1 %>
+        <% @sirabasu.image.each do |image|%>
+          <div>
+            <%=image_tag image.url %>
+            <p>画像<%= i%></p>
+          </div>
+          <% i = i + 1 %>
+        <% end %>
+      <% end %>
+    </div>
   </div>
 
   <div class="content-box">

@@ -2,19 +2,22 @@
   <div class="content-box">
     <!-- 管理者のみ表示 -->
     <% if current_kanrisya.admin == true %>
+    <div class="flex">
       <% if @company.present? %>
         <h1>
           <%= @company.cname %>
           <%= @company.cname_sub %>
         </h1>
         <p>
-          <%= link_to "設定", user_hei2_path %>
+          <%= link_to "設定", user_hei2_path, :class => 'weak-button' %>
         </p>
       <% else %>
         <p>
-          <%= link_to "会社名登録", user_hei_path %>
+          <%= link_to "会社名登録", user_hei_path, :class => 'weak-button' %>
         </p>
       <% end %>
+      </div>
+
       <div class="top-storage">
         <p>直近のチェックリスト完了者</p>
         <div class="top-card">
