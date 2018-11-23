@@ -24,7 +24,7 @@
           </div>
           <div class="profile-info__detail-note">
             <p>E-mail</p>
-            <p><%= @kanrisya.email %></p>
+              <p><%= @kanrisya.email %></p>
           </div>
         </div>
       </div>
@@ -97,11 +97,24 @@ d3.selectAll(".plofile-info-ojt")
         var parentWidth = parent.clientWidth;
         var width = parentWidth * 0.25,
         height = parentWidth * 0.25,
-        radius = parentWidth * 0.075;
+        radius = parentWidth * 0.075,
+        adjustOuterRadius = 15,
+        adjustInnerRadius = 0.08;
 
+        var screenWidth = window.innerWidth;
+        if (screenWidth < 769) {
+          // ipad 縦画面
+          width = parentWidth * 0.3;
+          height = parentWidth * 0.3;
+          radius = parentWidth * 0.14;
+          adjustOuterRadius = 0;
+          adjustInnerRadius = 0.1;
+        } else if (screenWidth < 1025) {
+          //ipad 横画面
+        }
         var arc = d3.arc()
-            .outerRadius(radius - 15)
-            .innerRadius(parentWidth * 0.08);
+            .outerRadius(radius - adjustOuterRadius)
+            .innerRadius(parentWidth * adjustInnerRadius);
 
         var pie = d3.pie()
         .sort(null)

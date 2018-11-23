@@ -565,7 +565,7 @@ textarea {
     justify-content: center;
     margin: 2rem 0;
     // padding: 1rem;
-
+    flex-wrap: wrap;
     img {
         border-radius: 50%;
         width: 100%;
@@ -579,7 +579,10 @@ textarea {
     }
     .plofile-info-ojt {
         text-align:center;
-        width: 30%;
+        width: 50%;
+        @media screen and (min-width: 769px) {
+          width: 30%;
+        }
     }
     .plofile-info {
         margin: 0 auto;
@@ -592,18 +595,30 @@ textarea {
 }
 
 .profile-info {
-
+    width: 100%;
+    @media screen and (min-width: 769px){
+        width: auto;
+        display: block;
+    }
     &__name {
         font-size: 2rem;
         font-weight: bold;
+
+        @media screen and (min-width: 769px) {
+          width: auto;
+        }
     }
     &__belong {
         font-size: 1.2rem;
         font-weight: bold;
+
+        @media screen and (min-width: 769px) {
+          width: auto;
+          text-align: left;
+        }
     }
     &__detail {
         font-size: 1rem;
-        // text-align: center;
         display: flex;
         vertical-align:  middle;
         flex-wrap: wrap;
