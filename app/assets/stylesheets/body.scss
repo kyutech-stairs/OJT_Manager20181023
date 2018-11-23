@@ -323,7 +323,7 @@ textarea {
             top: 6px;
         }
         p {
-            padding: 1rem;
+            padding: 0.5rem 1rem;
         }
     }
 
@@ -350,19 +350,6 @@ textarea {
             border-width: 2px;
             border-color: darken(#8bc34a, 15%);
             color: darken(#8bc34a, 15%);
-            border-radius: 10px;
-        }
-    }
-
-    .non-shounin {
-        padding: 0 1rem;
-        color: #fff;
-        p {
-            font-weight: 400;
-            text-align:center;
-            border-style: solid;
-            border-width: 2px;
-            border-color: #fff;
             border-radius: 10px;
         }
     }
@@ -516,11 +503,11 @@ textarea {
     }
 
     &__photo img {
-      width: 70px;
-      height: 70px;
-      border-style: solid;
-      border-width: 1px;
-      border-color: #777777;
+      width: 75px;
+      height: 75px;
+      // border-style: solid;
+      // border-width: 1px;
+      // border-color: #777777;
       border-radius: 50%;
     }
 
@@ -582,26 +569,88 @@ textarea {
 
 .plofile {
     display: flex;
+    box-sizing: border-box;
+    width: 100%;
     // border-bottom: solid 1px #777777;
     align-items: center;
-    margin: 2rem;
-    padding: 1rem;
+    justify-content: center;
+    margin: 2rem 0;
+    // padding: 1rem;
+    flex-wrap: wrap;
     img {
-        width: 200px;
-        height: 200px;
-        border-style: solid;
-        border-width: 1px;
-        border-color: #777777;
         border-radius: 50%;
+        width: 100%;
+
+    }
+
+    .plofile-img {
+        text-align:center;
+        width: 30%;
+        // height: 100%;
+    }
+    .plofile-info-ojt {
+        text-align:center;
+        width: 50%;
+        @media screen and (min-width: 769px) {
+          width: 30%;
+        }
+    }
+    .plofile-info {
+        margin: 0 auto;
+        width: 30%;
     }
     h2 {
         font-size: 2rem;
     }
+
 }
 
-.plofile-info {
-    margin: auto;
+.profile-info {
+    width: 100%;
+    padding: 1rem;
+    @media screen and (min-width: 769px){
+        width: auto;
+        display: block;
+    }
+    &__name {
+        font-size: 2rem;
+        font-weight: bold;
+
+        @media screen and (min-width: 769px) {
+          width: auto;
+        }
+    }
+    &__belong {
+        font-size: 1.2rem;
+        font-weight: bold;
+
+        @media screen and (min-width: 769px) {
+          width: auto;
+          text-align: left;
+        }
+    }
+    &__detail {
+        font-size: 1rem;
+        display: flex;
+        vertical-align:  middle;
+        flex-wrap: wrap;
+        flex-direction: column;
+        &--note {
+            display: flex;
+            vertical-align:  middle;
+            justify-content: flex-start;
+            @media screen and (min-width: 769px) {
+                justify-content: space-between;
+            }
+            &-title {
+              position: relative;
+              left: 2rem;
+            }
+        }
+    }
+
 }
+
 
 .plofile-info-flex {
     display: flex;
@@ -621,9 +670,9 @@ textarea {
     margin-left: 2rem;
 }
 
-.plofile-info-ojt-right{
-    margin-left: 2rem;
-}
+// .plofile-info-ojt{
+//     margin-left: 2rem;
+// }
 
 .search-box {
     border: solid 1px #777777;

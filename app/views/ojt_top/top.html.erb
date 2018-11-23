@@ -99,6 +99,7 @@
         <div class="top-card">
           <% i = 1 %>
           <% @checkuser.each do |checkuser| %>
+            <% i = i+1 %>
             <% if @user[checkuser.id].cid == current_kanrisya.cid &&  @user[checkuser.id].check_time.present?%>
             <%= link_to user_path(@user[checkuser.id]) do %>
               <div class="top-card__box">
@@ -109,8 +110,7 @@
                     <% end %>
                   </div>
                   <div class="top-card__graph" id=i>
-                      <%= i %>
-                      <% i = i+1 %>
+                    <%= @check_parcent[checkuser.id] %>
                     <% if @user_sign[checkuser.id] == true %>
                     <%end%>
                   </div>
@@ -135,3 +135,59 @@
   </div>
 </div>
 <% end %>
+<script>
+console.log("hello world");
+
+d3.selectAll(".top-card__graph")
+        .each(function(d, i) {
+            var data = [
+        {count: 23, color: '#8bc34a'},
+        {count: 77, color: '#424242'},
+        ];
+        var target = this;
+        var percent = target.textContent;
+        percent = Number(percent);
+        data[0].count = percent;
+        var rest = 100 - percent;
+        data[1].count = rest;
+        var totalCount = 100; //this is static value
+        this.innerHTML = "";
+        var width = 77,
+        height = 77,
+        radius = 30;
+
+        var arc = d3.arc()
+            .outerRadius(radius - 4)
+            .innerRadius(38);
+
+        var pie = d3.pie()
+        .sort(null)
+        .value(function(d) {
+            console.log(d);
+            return d.count;
+        });
+
+        var svg = d3.select(this).append("svg")
+            .attr("width", width)
+            .attr("height", height)
+            .append("g")
+            .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+        var g = svg.selectAll(".arc")
+        .data(pie(data))
+        .enter().append("g");
+
+        g.append("path")
+        .attr("d", arc)
+        .style("fill", function(d,i) {
+            return d.data.color;
+            });
+
+        g.append("text")
+        .attr("text-anchor", "middle")
+            .attr('font-size', '16px')
+            .attr('y', 8)
+        .text(percent + " %");
+    })
+
+</script>
