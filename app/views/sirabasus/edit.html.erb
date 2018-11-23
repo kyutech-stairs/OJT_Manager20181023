@@ -40,7 +40,7 @@
             </div>
         </div>
 
-        <div class="field">
+        <div class="top-regist">
             <%= button_tag :type => 'submit', :class=>'link-button' do %>
             <i class='material-icons'>save</i>
             保存
@@ -57,7 +57,7 @@
         <%= render 'checklist_fields', f: builder %>
 
         <% end %>
-        <div class="field">
+        <div class="top-regist">
             <%= link_to_add_association "追加", f, :checklists, class: 'link-button' %><br />
             
             <%= button_tag :type=>'submit', :class=> "link-button" do %>
@@ -68,5 +68,3 @@
     </div>
 </div>
 <% end %>
-
-<!-- <%= link_to 'シラバス一覧へ', sirabasus_path %> -->

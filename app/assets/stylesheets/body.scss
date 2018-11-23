@@ -109,7 +109,7 @@ body {
         top: 60px;
         right: 0;
         padding: 0.5rem 1rem;
-        width: 15vw;
+        width: 10vw;
         min-width: 200px;
         background: #ffffff;
         border-radius: 10px;
@@ -188,7 +188,7 @@ textarea {
 }
 
 .text-area {
-    min-height: 25vh;
+    min-height: 15vh;
 }
 
 .login-menu {
@@ -262,6 +262,10 @@ textarea {
         table-layout: fixed;
         font-size: 1.8rem;
         width: 100%;
+    }
+
+    .mini {
+        font-size: 1rem;
     }
 
     td {
@@ -563,7 +567,7 @@ textarea {
 
 .checklist {
     font-size: 2rem;
-    margin: 2vh 0;
+    margin: 1vh 0;
 }
 
 .options {
@@ -711,7 +715,7 @@ textarea {
 
 .confir-check {
     margin: 1rem 0;
-    padding: 1rem;
+    padding: 0 1rem;
     border-width: 1px 0 0 0;
     border-style: solid;
     border-color: #777777;

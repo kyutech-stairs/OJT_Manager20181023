@@ -70,7 +70,7 @@ class SirabasusController < ApplicationController
       @sirabasu = Sirabasu.new
       # @sirabasu.images.build
       @new_num = Sirabasu.where(cid: current_kanrisya.cid).count + 1
-
+      @checklist_num = 1
     else
       redirect_to '/user/not'
     end
@@ -79,6 +79,7 @@ class SirabasusController < ApplicationController
   def create
     @sirabasu = Sirabasu.new(sirabasu_params)
     @new_num = Sirabasu.where(cid: current_kanrisya.cid).count + 1
+    @checklist_num = 1
     if @sirabasu.save
       #シラバス中間テーブルへの保存開始
       kanrisya = Kanrisya.where(cid: @sirabasu.cid).where(admin: false)
@@ -90,7 +91,7 @@ class SirabasusController < ApplicationController
       @sirabasuuser.save
       end
       #中間テーブルへの保存ここまで
-      redirect_to edit_sirabasu_path(@sirabasu.number)
+      redirect_to sirabasus_path
     else
       render 'new'
     end

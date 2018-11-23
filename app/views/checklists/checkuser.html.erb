@@ -29,20 +29,20 @@
             </table>
           </div>
           <%=form_tag({ controller: 'sirabasus', action: 'sirabasu_complete' },{ method: "post"}) do %>
-          <% if current_kanrisya.admin == true || @s.sirabasu_ok ==true %>
-           <% if @sirabasuuser.sirabasu_ok == false && @check_parcent == 100%>
-            <%= hidden_field_tag :BBBB, @kanrisya.id %>
-            <%= hidden_field_tag :id, @sirabasuuser.id %>
-            <%= button_tag :type=>'submit', :class=> "link-button" do%>
-              <i class='material-icons'>thumb_up_alt</i>
-              OJT完了
+            <% if current_kanrisya.admin == true || @s.sirabasu_ok ==true %>
+              <% if @sirabasuuser.sirabasu_ok == false && @check_parcent == 100%>
+                <%= hidden_field_tag :BBBB, @kanrisya.id %>
+                <%= hidden_field_tag :id, @sirabasuuser.id %>
+                <%= button_tag :type=>'submit', :class=> "link-button" do%>
+                  <i class='material-icons'>thumb_up_alt</i>
+                  OJT完了
+                <% end %>
+              <% end %>
+            <% else %>
+              <% if @sirabasuuser.sirabasu_ok == false && @check_parcent == 100%>
+                <p>このシラバスのOJT完了サインを貰ってください</p>
+              <% end %>
             <% end %>
-           <% end %>
-          <% else %>
-           <% if @sirabasuuser.sirabasu_ok == false && @check_parcent == 100%>
-            <p>このシラバスのOJT完了サインを貰ってください</p>
-           <% end %>
-          <% end %>
           <% end %>
       </div>
     </div>

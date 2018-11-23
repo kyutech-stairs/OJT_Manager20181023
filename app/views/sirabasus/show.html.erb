@@ -53,12 +53,14 @@
     </div>
     
     <% if current_kanrisya.admin == true %>
-    <%= link_to edit_sirabasu_path(@sirabasu.number), class:'link-button' do %>
-      <div>
-        <i class='material-icons'>edit</i>
-        編集
+      <div class="top-regist">
+        <%= link_to edit_sirabasu_path(@sirabasu.number), class:'link-button' do %>
+          <div>
+            <i class='material-icons'>edit</i>
+            編集
+          </div>
+        <% end %>
       </div>
-    <% end %>
     <% else %>
     <%= hidden_field_tag :AAAA, @sirabasu.number %>
     <%= submit_tag 'チェックの更新', :class=> "link-button"%>
@@ -89,5 +91,4 @@
       </tbody>
     </table>
     <% end %>
-    <%= link_to 'シラバス一覧へ戻る', sirabasus_path %>
 </div>
