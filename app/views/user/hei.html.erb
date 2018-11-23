@@ -1,34 +1,18 @@
-<h1>
- ログインユーザー情報
-</h1>
+<div class="first-box">
+  <div class="content-box">
 
-<p>
-  名前 <%=current_kanrisya.name%>
-</p>
+ <h1>
+  会社名登録
+ </h1>
+ <%=form_tag({ controller: 'user', action: 'company_save' },{ method: "post"}) do %>
+ <p>会社名を入力してください(必須)</p>
+ <%= text_field_tag :cname,"", :class=> "input-box" %>
+ <p>支店名がある場合は入力してください</p>
+ <%= text_field_tag :cname_sub,"", :class=> "input-box" %>
+ <%= hidden_field_tag :cid, current_kanrisya.cid %>
 
-<p>
-  社員番号 <%=current_kanrisya.crew_number%>
-</p>
+ <p><%= submit_tag '登録', :class=> "link-button"%></p>
+ <% end %>
 
-<p>
-  年齢 <%=current_kanrisya.age%>
-</p>
-
-<p>
-  性別 <%=current_kanrisya.sex%>
-</p>
-
-<p>
-  メール <%=current_kanrisya.email%>
-</p>
-<p>
-  管理権限 <%=current_kanrisya.admin%>
-</p>
-
-<p>
-  <%= link_to 'アカウントの編集', edit_kanrisya_registration_path %>
-</p>
-
-<p>
-  <%= link_to 'Back', '/ojt_top/top' %>
-</p>
+  </div>
+</div>

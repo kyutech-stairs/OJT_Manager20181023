@@ -1,67 +1,95 @@
 <div class="first-box">
   <div class="content-box">
-    <h1>従業員一覧</h1>
+    <h1>スタッフ</h1>
 
-<%=form_tag({ controller: 'user', action: 'index' },{ method: "get"}) do %>
- <%= text_field_tag :name%>
- <%= submit_tag '検索'%> <%= link_to "詳細検索", "/user/search" %>
-<% end %>
-<% if @user.present? %>
-検索結果　
-<% @user.each do |user| %>
-<p><%=link_to user.name ,user_path(user)%></p>
-<% end %>
-<% else %>
-<% end %>
-
-    <div class="lists">
-      <p>ADMIN</p>
-      <table>
-        <tbody>
-          <% @kanrisya.each do |kanrisya| %>
-          <% if kanrisya.cid == current_kanrisya.cid %>
-            <% if kanrisya.admin == true %>
-          <tr>
-            <td>
-                  <%=link_to kanrisya.name ,user_path(kanrisya)%>
-            </td>
-          </tr>
-          <% end %>
-        <% end %>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="lists">
-      <p>USER</p>
-      <table>
-        <tbody>
-          <% @kanrisya.each do |kanrisya| %>
-          <% if kanrisya.cid == current_kanrisya.cid %>
-            <% if kanrisya.admin == false %>
-          <tr>
-            <td>
-                  <%=link_to kanrisya.name ,user_path(kanrisya)%>
-            </td>
-          </tr>
-          <% end %>
-        <% end %>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-
-    <% if current_kanrisya.admin == true %>
-      <p><%= link_to '新しい社員登録', '/user/new' %></p>
+    <%=form_tag({ controller: 'user', action: 'index' },{ method: "get"}) do %>
+      <%= text_field_tag(:name, '', class: 'input-box') %>
+      <%= submit_tag '検索', :class => 'link-button'%>
+      <%= link_to "詳細検索", "/user/search", :class => 'weak-button' %>
+    <% end %>
+    <% if (@user.present? || @user2.present?) && params[:commit] == "検索" then %>
+        <p>検索結果</p>
+        <% @user.each do |user| %>
+        <p><%=link_to user.name ,user_path(user)%></p>
     <% end %>
 
+    <% if @i != 0 %>
+      <% for num in 0..(@i-1) %>
+      
+        <p>
+        <%= link_to @user2[num].name, user_path(@user2[num]) %>
+        </p>
+      
+      <% end %>
+      <p>以上 <%= @i %>名</p>
+    <% else %>
+      <p>以上 <%= @user.count %>名</p>
+    <% end %>
+    <% elsif params[:commit] == "検索"then %>
+      <p>検索結果　その検索条件での該当者はいませんでした</p>
+    <% end %>
+    <div class="top-storage">
+      <p>ADMIN</p>
+      <div class="top-card">
+        <% @kanrisya.each do |kanrisya| %>
+        <% if kanrisya.cid == current_kanrisya.cid %>
+        <% if kanrisya.admin == true %>
+        <%=link_to user_path(kanrisya) do%>
+        <div class="top-card__box">
+          <div class="top-card__staff-flex">
+            <div class="top-card__photo">
+              <%= image_tag kanrisya.image.url %>
+            </div>
+            <div class="top-card__set">
+              <div class="top-card__staff-name">
+                <%=kanrisya.name %>
+              </div>
+              <div class="top-card__belongs">
+                <%=kanrisya.belong %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% end %>
+        <% end %>
+        <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class="top-storage">
+      <p>USER</p>
+      <div class="top-card">
+        <% @kanrisya.each do |kanrisya| %>
+        <% if kanrisya.cid == current_kanrisya.cid %>
+        <% if kanrisya.admin == false %>
+        <%=link_to user_path(kanrisya) do%>
+        <div class="top-card__box">
+          <div class="top-card__staff-flex">
+            <div class="top-card__photo">
+              <%= image_tag kanrisya.image.url %>
+            </div>
+            <div class="top-card__set">
+              <div class="top-card__staff-name">
+                <%=kanrisya.name %>
+              </div>
+              <div class="top-card__belongs">
+                <%=kanrisya.belong %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% end %>
+        <% end %>
+        <% end %>
+        <% end %>
+      </div>
+    </div>
+    <% if current_kanrisya.admin == true %>
+      <div class="top-regist"><%= link_to '新しい社員登録','/user/new',class:'link-button'%>
+      </div>
+    <% end %>
   </div>
 </div>
-
-<% if current_kanrisya.admin == true %>
-<p><%= link_to '新しい社員登録', '/user/new' %></p>
-<% end %>
 
 <p>
   <%= link_to 'Back', '/ojt_top/top' %>

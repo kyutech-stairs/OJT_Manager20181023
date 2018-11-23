@@ -13,6 +13,7 @@ class CheckusersController < ApplicationController
       end
     end
     end
+    flash[:checkuser_update] = "チェックリストを更新しました"
     redirect_to sirabasu_path(params[:AAAA])
   end
 

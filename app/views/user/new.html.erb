@@ -21,7 +21,7 @@
 
     <div class="field">
       <p><%= f.label :age, '年齢' %><br />
-      <%= f.number_field :age, :class=> "input-box" %></p>
+      <%= f.number_field :age, :class=> "input-box", :value => 0, in: 0...150 %></p>
     </div>
 
     <div class="field">
@@ -65,4 +65,4 @@
 
   </div>
 </div>
-<%= link_to 'Back', "/user/index" %>
+<!-- <%= link_to 'Back', "/user/index" %> -->

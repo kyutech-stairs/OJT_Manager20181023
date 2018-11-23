@@ -14,7 +14,7 @@ class ChecklistsController < ApplicationController
       i = i + 1
     end
    end
-     @check_parcent = ((i/@checklist.count.to_f).round(2)*100).to_i
+     @check_parcent = ((i/@checklist.count.to_f).round(2)*100).to_i rescue 0
      @s = Sirabasuuser.find_by(sirabasu_id: @sirabasu.id,kanrisya_id: current_kanrisya.id)
   end
 
@@ -35,6 +35,8 @@ class ChecklistsController < ApplicationController
     @checklist = sirabasu.checklists.new(checklist_params)
     # @new_num = Checklist.count + 1
     @new_num = sirabasu.checklists.count + 1
+    sirabasuuser = sirabasu.sirabasuusers.all
+    sirabasuuser.update(sirabasu_ok: false)
     if @checklist.save
       #中間テーブルへの保存開始
       kanrisya = Kanrisya.where(cid: @checklist.cid).where(admin: false)

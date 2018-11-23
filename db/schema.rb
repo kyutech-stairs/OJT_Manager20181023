@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_20_092541) do
+ActiveRecord::Schema.define(version: 2018_11_22_140212) do
 
   create_table "checklists", force: :cascade do |t|
     t.integer "number"
@@ -31,16 +31,15 @@ ActiveRecord::Schema.define(version: 2018_11_20_092541) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "crews", force: :cascade do |t|
-    t.string "name"
-    t.string "email"
-    t.integer "age"
-    t.string "sex"
+  create_table "companies", force: :cascade do |t|
+    t.string "cname"
+    t.integer "cid"
+    t.integer "password"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "crew_number"
-    t.string "image"
-    t.string "password_digest"
+    t.string "cname_sub"
+    t.boolean "copy", default: false, null: false
+    t.integer "pas"
   end
 
   create_table "images", force: :cascade do |t|
@@ -80,16 +79,6 @@ ActiveRecord::Schema.define(version: 2018_11_20_092541) do
   create_table "publishing_configs", force: :cascade do |t|
     t.integer "sirabasu_id"
     t.integer "required_sirabasu"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "sessions", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "sessionsses", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

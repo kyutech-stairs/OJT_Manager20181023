@@ -1,6 +1,24 @@
-従業員詳細検索
-<p>名前</p>
-<%=form_tag({ controller: 'user', action: 'index' },{ method: "get"}) do %>
-<%= text_field_tag :name%>
-<%= submit_tag '検索'%>
-<% end %>
+<div class="first-box">
+  <div class="content-box">
+
+    <h1>従業員詳細検索</h1>
+    <h2>条件を選択してください</h2>
+
+    <%=form_tag({ controller: 'user', action: 'index' },{ method: "get"}) do %>
+    <p>
+    <%= select_tag(:sirabasu, options_for_select(@sirabasu_choise, class: 'select_action'))%>のシラバスが
+    <%= select_tag(:ok, options_for_select([["",""],["OJT終了",true],["OJT未終了",false]] ))%>の人
+    </p>
+    <p>
+    <%= select_tag(:belong, options_for_select([["",""],["正社員","正社員"],["派遣社員","派遣社員"],["パート","パート"],["アルバイト","アルバイト"]] ))%>
+    の人
+    </p>
+    <p>
+    <%= select_tag(:sex, options_for_select([["",""],["男性","男性"],["女性","女性"]] ))%>
+    の人
+    </p>
+    <%= submit_tag '検索', :class=> 'link-button search'%>
+    <% end %>
+    <% end %>
+  </div>
+</div>

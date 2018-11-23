@@ -2,55 +2,101 @@
   <div class="content-box">
   <h1>プロフィール</h1>
   <% if @kanrisya.cid == current_kanrisya.cid %>
-  
+
   <div class="plofile">
     <div class='plofile-img'>
       <% if  @kanrisya.image.present?%>
         <%= image_tag @kanrisya.image.url, :size =>'150x150' %>
-      <% end %>
+        <% end %>
+      </div>
+    <div class="plofile-info">
+      <div class='plofile-name'>
+        <h1><%= @kanrisya.name %></h1>
+        <h3><%= @kanrisya.belong %></h3>
+      </div>
+      <div class="plofile-info-sub">
+        <div class="plofile-info-flex">
+          <div class="plofile-info-num-left">
+            <p>社員番号</p>
+          </div>
+          <div class="plofile-info-num-right">
+            <p><%= @kanrisya.crew_number %></p>
+            <% if @kanrisya.age.present? %>
+            <% end %>
+          </div>
+        </div>
+        <div class="plofile-info-flex">
+        <div class="plofile-info-mail-left">
+          <p>E-mail</p>
+        </div>
+        <div class="plofile-info-mail-right">
+          <p><%= @kanrisya.email %></p>
+        </div>
+        </div>
+        <% if @kanrisya.admin == false %>
+        <div class="plofile-info-flex">
+          <div class="plofile-info-ojt-left">
+            <p>OJT完了率</p>
+          </div>
+          <div class="plofile-info-ojt-right">
+              <p><%= @check_parcent %>%</p>
+          </div>
+        </div>
+        <% end %>
+      </div>
     </div>
-    <div class='plofile-name'>
-      <h2><%= @kanrisya.name %></h2>
-      <h3><%= @kanrisya.belong %></h3>
-    </div>
- </div>
-
-  <div>
-  <p>社員番号:<%= @kanrisya.crew_number %></p>
-  <% if @kanrisya.age.present? %>
-    <p>年齢:<%= @kanrisya.age %></p>
-  <% end %>
-  <p><%= @kanrisya.sex %></p>
-  <p>所属:<%= @kanrisya.belong %></p>
-  <p>メールアドレス <%= @kanrisya.email %></p>
-  <p>管理権限 <%= @kanrisya.admin %></p>
+  </div>
   <% if @kanrisya.admin == false %>
-  <p>総チェック数 <%= @check_ok_count %></p>
-  <p>総チェック割合 <%= @check_parcent %>%</p>
-  <h4>シラバスごとの進捗</h4>
-  <% @sirabasu.each do |sirabasu| %>
-   <p><%= sirabasu.number %> <%=link_to sirabasu.name, checklists_checkuser_path(:sirabasu_id => sirabasu.id,:kanrisya_id => @kanrisya.id)%> <%= @sirabasu_check_ok_parcent[sirabasu.number-1] %>%
-    <% if @sirabasuuser[sirabasu.id].sirabasu_ok == true%>OJT完了！<% end %></p>
+  <div class="lists">
+    <p>シラバスの進捗</p>
+    <table>
+      <tbody>
+        <% @sirabasu.each do |sirabasu| %>
+          <tr>
+            <td class='number'><%= sirabasu.number %>. </td>
+            <td><%=link_to sirabasu.name, checklists_checkuser_path(:sirabasu_id => sirabasu.id,:kanrisya_id => @kanrisya.id)%></td>
+            <td class="ojt-comp"><p><%= @sirabasu_check_ok_parcent[sirabasu.number-1] %> %</p> </td>
+            <td class="ojt-comp">
+              <% if @sirabasuuser[sirabasu.id].sirabasu_ok == true%>
+                <div class="shounin">
+                  <p>完了</p>
+                </div>
+              <% end %>
+              <% if @sirabasuuser[sirabasu.id].sirabasu_ok == false%>
+                <div class="non-shounin">
+                  <p>完了</p>
+                </div>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
   <% end %>
-  <% end %>
- </div>
 
- <% if current_kanrisya.admin == true %>
-  <%= link_to edit_user_path(@kanrisya) do %>
-    <div class="weak-button">
-      <i class='material-icons'>edit</i>編集
-    </div>
+  <% else %>
+    <p>あなたの会社の社員ではありません。</p>
   <% end %>
-  <%= link_to user_path(@kanrisya), :method => :delete do %>
-    <div class="weak-button">
-      <i class="material-icons">delete</i>削除
-    </div>
-  <% end %>
- <% end %>
-<% else %>
-あなたの会社の社員ではありません。
-<% end %>
 
-<%= link_to '一覧へ', "/user/index" %>
+
+    <div class="options">
+      <% if current_kanrisya.admin == true %>
+      <%= link_to edit_user_path(@kanrisya) do %>
+      <div class="weak-button">
+        <i class='material-icons'>edit</i>編集
+      </div>
+      <% end %>
+      <%= link_to user_path(@kanrisya), :method => :delete do %>
+      <div class="weak-button">
+        <i class="material-icons">delete</i>削除
+      </div>
+      <% end %>
+     <% end %>
+    </div>
+  </div>
+</div>
+
+<!-- <%= link_to '一覧へ', "/user/index" %> -->
   </div>
 </div>

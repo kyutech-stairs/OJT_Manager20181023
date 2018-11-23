@@ -1,35 +1,48 @@
 <div class="first-box">
   <div class="content-box">
-    <h1>シラバス</h1>
+    <h1>シラバスページ</h1>
 
     <div class="lists">
-      <p>一覧</p>
       <table>
         <tbody>
+          <% i = 0 %>
           <% @sirabasu.each do |sirabasu| %>
           <tr>
-            <td><%= sirabasu.number %>. </td>
+            <td class='number'><%= sirabasu.number %>. </td>
             <td><%= link_to sirabasu.name, sirabasu_path(sirabasu.number) %></td>
             <% if current_kanrisya.admin == true %>
-              <td><%= link_to(content_tag(:i,'edit',class:'material-icons'), edit_sirabasu_path(sirabasu.number)) %></td>
-              <td><%= link_to(content_tag(:i,'delete',class:'material-icons'), sirabasu_path(sirabasu.number), :method => :delete) %></td>
-              <td><%= link_to(content_tag(:i,'settings',class:'material-icons'), publishing_config_path(sirabasu.number)) %></td>
+              <td class='icon'><%= link_to(content_tag(:i,'edit',class:'material-icons'), edit_sirabasu_path(sirabasu.number)) %></td>
+              <td class='icon'><%= link_to(content_tag(:i,'delete',class:'material-icons'), sirabasu_path(sirabasu.number), :method => :delete, data: {confirm: "削除しますか？"}) %></td>
+              <td class='icon'><%= link_to(content_tag(:i,'settings',class:'material-icons'), publishing_config_path(sirabasu.number)) %></td>
+            <% else %>
+              <td class="ojt-comp">
+                <% if @stat_list[i] != "完了"%>
+                <p><%= @stat_list[i] %></p>
+                <% else %>
+                <div class="shounin">
+                  <p>完了</p>
+                </div>
+                <% end %>
+              </td>
             <% end %>
           </tr>
+          <% i += 1 %>
           <% end %>
         </tbody>
       </table>
     </div>
 
     <% if current_kanrisya.admin == true %>
+      <div class="top-regist">
       <%= link_to new_sirabasu_path, class:'link-button' do %>
         <div>
           <i class='material-icons'>add</i>
           新規作成
         </div>
       <% end %>
+    </div>
     <% end %>
 
-    <p><%= link_to 'トップへ', '/ojt_top/top' %></p>
+    <!-- <p><%= link_to 'トップへ', '/ojt_top/top' %></p> -->
   </div>
 </div>
